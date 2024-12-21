@@ -25,10 +25,10 @@ function Background({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <>
+    <div className="h-full">
       {children}
       <FlickeringGrid
-        className="flex z-0 absolute inset-0 size-full overflow-hidden"
+        className="flex z-0 absolute inset-0 size-full overflow-hidden pointer-events-none"
         squareSize={50}
         gridGap={5}
         color="#6B72ff"
@@ -37,7 +37,7 @@ function Background({ children }: { children: React.ReactNode }) {
         width={windowWidth}
         height={windowHeight}
       />
-    </>
+    </div>
   );
 }
 
@@ -47,8 +47,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="h-full">
+      <body className="h-full">
         <Background>{children}</Background>
       </body>
     </html>
