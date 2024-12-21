@@ -10,9 +10,8 @@ function Background({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const updateWidthHeight = () => {
-      setWindowWidth(window.innerWidth);
-      setWindowHeight(window.innerHeight);
-      console.log(window.innerWidth);
+      setWindowWidth(window.outerWidth);
+      setWindowHeight(window.outerHeight);
     };
 
     updateWidthHeight(); // Initial update
@@ -25,7 +24,7 @@ function Background({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <div className="h-full">
+    <div>
       {children}
       <FlickeringGrid
         className="flex z-0 absolute inset-0 size-full overflow-hidden pointer-events-none"
@@ -33,7 +32,7 @@ function Background({ children }: { children: React.ReactNode }) {
         gridGap={5}
         color="#6B72ff"
         maxOpacity={0.2}
-        flickerChance={0.5}
+        flickerChance={0.1}
         width={windowWidth}
         height={windowHeight}
       />
@@ -47,8 +46,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className="h-full">
+    <html lang="en">
+      <body>
         <Background>{children}</Background>
       </body>
     </html>
