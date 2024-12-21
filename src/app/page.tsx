@@ -32,21 +32,19 @@ export default function Page() {
   };
 
   return (
-    <div className="animationClass">
-      <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-        <header className="relative z-15 flex items-center top-0 m-2 w-screen justify-center">
-          <Navbar
-            activeTabIndex={activeTabIndex}
-            setActiveTabIndex={handleTabChange}
-          />
-        </header>
-        <main className="relative z-10 p-1 w-full overflow-y-auto overflow-x-hidden h-full">
-          <div className={`content ${animationClass}`}>
-            {activeTabIndex === 0 && <Home />}
-            {activeTabIndex === 1 && <Projects />}
-          </div>
-        </main>
-      </div>
+    <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
+      <header className="relative z-15 flex items-center top-0 m-2 w-screen justify-center">
+        <Navbar
+          activeTabIndex={activeTabIndex}
+          setActiveTabIndex={handleTabChange}
+        />
+      </header>
+      <main className="relative z-10 p-1 w-full overflow-y-auto overflow-x-hidden h-full">
+        <div className={`content ${animationClass}`}>
+          {activeTabIndex === 0 && <Home />}
+          {activeTabIndex === 1 && <Projects />}
+        </div>
+      </main>
     </div>
   );
 }
