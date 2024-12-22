@@ -27,11 +27,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <p className="dark:text-gray-100 text-gray-800 mt-2 text-center">
             {description}
           </p>
-          <div className="mt-4 flex-row justify-center space-x-2">
+          <div className="mt-4 flex flex-wrap justify-center space-x-2">
             {tags.map((tag, index) => (
               <span
                 key={index}
-                className="bg-gray-800 text-gray-200 dark:bg-gray-200 dark:text-gray-800 px-3 py-1 rounded-full text-sm"
+                className="bg-gray-800 text-gray-200 dark:bg-gray-200 dark:text-gray-800 px-3 py-1 rounded-full text-sm m-1"
               >
                 {tag}
               </span>
