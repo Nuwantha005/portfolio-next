@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ProjectCard from "@/components/projects/ProjectCard";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+//import { Link } from "next-view-transitions";
 import Link from "next/link";
 
 const Projects: React.FC = () => {

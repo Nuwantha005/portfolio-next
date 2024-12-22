@@ -1,5 +1,6 @@
 import React from "react";
 import FloatingSection from "../ui/FloatingSection";
+import { motion } from "framer-motion";
 
 interface ProjectCardProps {
   image: string;
@@ -18,12 +19,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <div className="project-card transition-transform duration-300 ease-in-out transform hover:scale-105">
       <FloatingSection>
         <div className="flex flex-col items-center">
-          <img
+          <motion.p
+            layoutId={name + "_title"}
+            className="text-lg font-semibold text-center"
+          >
+            {name}
+          </motion.p>
+          <motion.img
+            layoutId={name + "_img"}
             src={image}
             alt={name}
             className="w-full object-cover rounded-lg dark:bg-gray-800/50 bg-gray-200/50  p-2 shadow-md"
           />
-          <h3 className="text-lg font-semibold mt-4">{name}</h3>
+
           <p className="dark:text-gray-100 text-gray-800 mt-2 text-center">
             {description}
           </p>
