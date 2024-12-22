@@ -1,12 +1,74 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import FloatingSection from "@/components/ui/FloatingSection";
 import ThemeToggle from "@/components/navbar/ThemeToggle";
 import Topic from "@/components/ui/Topic";
 import { useTransitionRouter } from "next-view-transitions";
+import LightGallery from "lightgallery/react";
+import lgZoom from "lightgallery/plugins/zoom";
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import fjGallery from "flickr-justified-gallery";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import "@/app/projects/galleryStyle.css";
+import ImageDoc from "@/components/ui/ImageDoc";
+
+interface Images {
+  id: number;
+  loc: string;
+  name: string;
+  thumb: string;
+}
 
 function Project_CommunicationSoftware() {
+  const [images, setImages] = useState<Images[]>([]);
+
+  useEffect(() => {
+    fetch("/Images/Projects/Project_CommunicationSoftware/images.json")
+      .then((res) => res.text())
+      .then((text) => {
+        try {
+          const data = JSON.parse(text);
+          setImages(data);
+        } catch (err) {
+          console.error("Failed to parse JSON:", err);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const lightGallery = useRef<any>(null);
+  interface LightGalleryDetail {
+    instance: LightGalleryInstance;
+  }
+  interface LightGalleryInstance {
+    openGallery: (index: number) => void;
+  }
+
+  interface LightGalleryDetail {
+    instance: LightGalleryInstance;
+  }
+  const onInit = useCallback((detail: LightGalleryDetail) => {
+    if (detail) {
+      lightGallery.current = detail.instance;
+    }
+  }, []);
+
+  useEffect(() => {
+    fjGallery(document.querySelectorAll(".fj-gallery"), {
+      itemSelector: ".fj-gallery-item",
+      rowHeight: 180,
+      maxRowsCount: 2,
+      lastRow: "start",
+      gutter: 2,
+      rowHeightTolerance: 0.1,
+      calculateItemsHeight: false,
+    });
+  }, []);
+
+  const onOpen = (index: number): void => {
+    lightGallery.current.openGallery(index);
+  };
   const router = useTransitionRouter();
   return (
     <div>
@@ -15,7 +77,7 @@ function Project_CommunicationSoftware() {
           <div className="flex flex-row gap-4 items-center justify-between ml-2 w-full">
             <button
               onClick={() => {
-                router.back();
+                window.history.back();
               }}
               className="text-lg"
             >
@@ -52,6 +114,8 @@ function Project_CommunicationSoftware() {
                   <h1 className="text-2xl mb-4">Overview</h1>
                   <motion.img
                     layoutId="Communication Software_img"
+                    style={{ cursor: "pointer" }}
+                    onClick={() => onOpen(images[0].id)}
                     src="/Images/Projects/Communication_SOftware_HomePage.PNG"
                     alt="Landing Menu"
                     className="basis-1/2"
@@ -73,11 +137,7 @@ function Project_CommunicationSoftware() {
                 <FloatingSection>
                   <h1 className="text-2xl mb-4">Project Structure</h1>
                   <div className="flex flex-col gap-8 justify-center">
-                    {/* <Image
-                      loc="./Images/Projects/Communication_SOftware_ProjectTree.PNG"
-                      name="Project Tree"
-                      className="basis-1/2 "
-                    /> */}
+                    <ImageDoc image={images[1]} onOpen={onOpen} />
                   </div>
                 </FloatingSection>
               </div>
@@ -86,10 +146,7 @@ function Project_CommunicationSoftware() {
               <div className="grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
                 <div className="xl:col-span-1 2xl:col-span-1">
                   <h1 className="text-2xl mb-4">Database Structure</h1>
-                  {/* <Image
-                    loc=".\Images\Projects\CommunicationEER.PNG"
-                    name="EER Diagram"
-                  /> */}
+                  <ImageDoc image={images[2]} onOpen={onOpen} />
                 </div>
                 <p className="m-4 p-5 text-center lg:text-left lg:basis-1/2">
                   Database contains tables to store on sales, products,
@@ -107,10 +164,7 @@ function Project_CommunicationSoftware() {
               <div className="grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
                 <div className="xl:col-span-1 2xl:col-span-1">
                   <h1 className="text-2xl mb-4">Chart Generation</h1>
-                  {/* <Image
-                    loc=".\Images\Projects\Communication_SOftware_Chart.PNG"
-                    name="Chart Window"
-                  /> */}
+                  <ImageDoc image={images[3]} onOpen={onOpen} />
                 </div>
                 <p className="m-4 p-5 text-center lg:text-left lg:basis-1/2">
                   Charts section in the program can generate 2D and 3D charts
@@ -143,10 +197,7 @@ function Project_CommunicationSoftware() {
                   <h1 className="text-2xl mb-4">
                     Printable Reports Generation
                   </h1>
-                  {/* <Image
-                    loc=".\Images\Projects\Communication_Software_Jasper_Report.png"
-                    name="Sales Chart"
-                  /> */}
+                  <ImageDoc image={images[4]} onOpen={onOpen} />
                 </div>
                 <p className="m-4 p-5 text-center lg:text-left lg:basis-1/2">
                   For several tables, data can be exported to a report, and
@@ -170,10 +221,7 @@ function Project_CommunicationSoftware() {
               <div className="grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
                 <div className="xl:col-span-1 2xl:col-span-1">
                   <h1 className="text-2xl mb-4">Barcode and QR Generation</h1>
-                  {/* <Image
-                    loc=".\Images\Projects\Communication_SOftware_BarCode_AndQR_Code.PNG"
-                    name="Generated Barcodes"
-                  /> */}
+                  <ImageDoc image={images[5]} onOpen={onOpen} />
                 </div>
                 <p className="m-4 p-5 text-center lg:text-left lg:basis-1/2">
                   If necessary, barcodes and QR codes for each product can be
@@ -193,10 +241,7 @@ function Project_CommunicationSoftware() {
                   <h1 className="text-2xl mb-4">
                     Data Viewing, Filtering and Editing
                   </h1>
-                  {/* <Image
-                    loc=".\Images\Projects\Communication_SOftware_Windows.PNG"
-                    name="Viewing Data"
-                  /> */}
+                  <ImageDoc image={images[6]} onOpen={onOpen} />
                 </div>
                 <p className="m-4 p-5 text-center md:text-left md:basis-1/2">
                   All types of data that were entered, such as sales, inventory,
@@ -208,6 +253,32 @@ function Project_CommunicationSoftware() {
                   sales amount, and discount provided. Data can also be ascended
                   or descended according to these column values.
                 </p>
+              </div>
+            </FloatingSection>
+            <Topic topicName="Images" />
+            <FloatingSection>
+              <LightGallery
+                onInit={onInit}
+                elementClassNames={"gallery fj-gallery"}
+                dynamic={true}
+                hash={false}
+                rotate={false}
+                plugins={[lgZoom, lgThumbnail]}
+                dynamicEl={images.map((image) => ({
+                  src: image.loc,
+                  thumb: image.thumb,
+                }))}
+              ></LightGallery>
+              <div className="">
+                <ResponsiveMasonry
+                  columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+                >
+                  <Masonry gutter="10px">
+                    {images.map((image, index) => (
+                      <ImageDoc key={index} image={image} onOpen={onOpen} />
+                    ))}
+                  </Masonry>
+                </ResponsiveMasonry>
               </div>
             </FloatingSection>
           </div>
