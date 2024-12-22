@@ -4,14 +4,21 @@ import { motion } from "framer-motion";
 import FloatingSection from "@/components/ui/FloatingSection";
 import ThemeToggle from "@/components/navbar/ThemeToggle";
 import Topic from "@/components/ui/Topic";
+import { useTransitionRouter } from "next-view-transitions";
 
 function Project_CommunicationSoftware() {
+  const router = useTransitionRouter();
   return (
     <div>
       <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
         <header className="relative z-15 flex flex-row items-center top-0 m-2 w-screen justify-center">
           <div className="flex flex-row gap-4 items-center justify-between ml-2 w-full">
-            <button onClick={() => window.history.back()} className="text-lg">
+            <button
+              onClick={() => {
+                router.back();
+              }}
+              className="text-lg"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

@@ -4,6 +4,8 @@ import "./globals.css";
 import FlickeringGrid from "@/components/ui/flickering-grid";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { ViewTransitions } from "next-view-transitions";
 
 function Background({ children }: { children: React.ReactNode }) {
   const [windowWidth, setWindowWidth] = useState(0);
@@ -47,12 +49,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <AnimatePresence mode="wait">
-          <Background>{children}</Background>
-        </AnimatePresence>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={
+                typeof window !== "undefined" ? window.location.pathname : ""
+              }
+              className="content"
+            >
+              <Background>{children}</Background>
+            </motion.div>
+          </AnimatePresence>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }
