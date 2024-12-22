@@ -71,6 +71,17 @@ body {
   }
 }
 
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+
 /* Sliding to the left */
 .slide-out-left {
   animation: slideOutLeft 0.2s forwards;
