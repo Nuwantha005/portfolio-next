@@ -19,13 +19,15 @@ export const SlidingTabBar: React.FC<SlidingTabBarProps> = ({
   setActiveTabIndex_,
 }) => {
   const tabsRef = useRef<HTMLButtonElement[] | null[]>([]);
-  const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
+  const [activeTabIndex, setActiveTabIndex] = useState<number>(() => {
+    const savedTabIndex = localStorage.getItem("activeTabIndex");
+    return savedTabIndex ? parseInt(savedTabIndex, 10) : 0;
+  });
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState<number>(0);
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState<number>(0);
 
   useEffect(() => {
     if (activeTabIndex === null) return;
-    // ...existing code...
     const currentTab = tabsRef.current[activeTabIndex];
     setTabUnderlineLeft(currentTab?.offsetLeft ?? 0);
     setTabUnderlineWidth(currentTab?.clientWidth ?? 0);
@@ -33,7 +35,6 @@ export const SlidingTabBar: React.FC<SlidingTabBarProps> = ({
   }, [activeTabIndex, setActiveTabIndex_]);
 
   return (
-    // ...existing code...
     <div className="flew-row relative mx-auto flex h-12 rounded-3xl border border-slate-700/40 bg-gray-600 dark:border-white/40 dark:bg-slate-200 px-2 backdrop-blur-md">
       <span
         className="absolute bottom-0 top-0 -z-10 flex overflow-hidden rounded-3xl py-2 transition-all duration-300"

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ProjectCard from "@/components/projects/ProjectCard";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import Link from "next/link";
 
 const Projects: React.FC = () => {
   interface Project {
@@ -15,7 +16,7 @@ const Projects: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    fetch("/jason/projectDetails.json")
+    fetch("/json/projectDetails.json")
       .then((res) => res.text())
       .then((text) => {
         try {
@@ -84,13 +85,15 @@ const Projects: React.FC = () => {
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 2, 900: 3 }}>
           <Masonry gutter="30px">
             {filteredProjects.map((project, index) => (
-              <ProjectCard
-                key={index}
-                image={project.image}
-                name={project.name}
-                description={project.description}
-                tags={project.tags}
-              />
+              <Link href={project.link} key={index}>
+                <ProjectCard
+                  key={index}
+                  image={project.image}
+                  name={project.name}
+                  description={project.description}
+                  tags={project.tags}
+                />
+              </Link>
             ))}
           </Masonry>
         </ResponsiveMasonry>

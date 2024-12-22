@@ -1,19 +1,21 @@
 "use client";
 
-// export const metadata = {
-//   title: "Portfolio",
-//   description: "My Personnel Portfolio Website",
-// };
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/navbar/Navbar";
 import Home from "./Home";
 import Projects from "./Projects";
 import "./globals.css";
 
 export default function Page() {
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [activeTabIndex, setActiveTabIndex] = useState<number>(() => {
+    const savedTabIndex = localStorage.getItem("activeTabIndex");
+    return savedTabIndex ? parseInt(savedTabIndex, 10) : 0;
+  });
   const [animationClass, setAnimationClass] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("activeTabIndex", activeTabIndex.toString());
+  }, [activeTabIndex]);
 
   const handleTabChange = (index: number) => {
     if (index > activeTabIndex) {
