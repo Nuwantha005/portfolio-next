@@ -10,7 +10,7 @@ function About() {
     <div className="flex flex-col sm:flex-row gap-4 justify-between justify-items-stretch content-center ">
       <FloatingSection>
       <Image
-          src="/Images/Profile.jpg"
+          src="./Images/Profile.jpg"
           alt="Profile"
           width={288} // Adjust the width as needed
           height={288} // Adjust the height as needed

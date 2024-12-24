@@ -19,7 +19,7 @@ const Projects: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    fetch("/json/projectDetails.json")
+    fetch("./json/projectDetails.json")
       .then((res) => res.text())
       .then((text) => {
         try {
