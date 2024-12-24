@@ -11,10 +11,11 @@ const nextConfig = {
   output: "export",
   images: {
     unoptimized: true,
+    loader: "akamai",
+    path: "/",
   },
 };
 
 module.exports = nextConfig;
-
 
 export default nextConfig;
