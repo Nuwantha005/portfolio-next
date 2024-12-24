@@ -35,7 +35,7 @@ function Project_CommunicationSoftware() {
   // Fetch images
   useEffect(() => {
     if (typeof window !== "undefined") {
-      fetch("./Images/Projects/Project_CommunicationSoftware/images.json")
+      fetch("/Images/Projects/Project_CommunicationSoftware/images.json")
         .then((res) => res.json())
         .then((data) => {
           setImages(data);
@@ -122,7 +122,7 @@ function Project_CommunicationSoftware() {
                     layoutId="Communication Software_img"
                     style={{ cursor: "pointer" }}
                     onClick={() => onOpen(images[0].id)}
-                    src="/Images/Projects/Communication_SOftware_HomePage.PNG"
+                    src="./Images/Projects/Communication_SOftware_HomePage.PNG"
                     alt="Landing Menu"
                     className="basis-1/2"
                   />
