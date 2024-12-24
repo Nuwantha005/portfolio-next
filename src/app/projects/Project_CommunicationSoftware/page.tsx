@@ -35,7 +35,7 @@ function Project_CommunicationSoftware() {
   // Fetch images
   useEffect(() => {
     if (typeof window !== "undefined") {
-      fetch("/Images/Projects/Project_CommunicationSoftware/images.json")
+      fetch("./Images/Projects/Project_CommunicationSoftware/images.json")
         .then((res) => res.json())
         .then((data) => {
           setImages(data);
