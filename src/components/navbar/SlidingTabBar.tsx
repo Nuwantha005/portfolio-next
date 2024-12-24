@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
 
 interface TabItem {
@@ -20,7 +22,10 @@ export const SlidingTabBar: React.FC<SlidingTabBarProps> = ({
 }) => {
   const tabsRef = useRef<HTMLButtonElement[] | null[]>([]);
   const [activeTabIndex, setActiveTabIndex] = useState<number>(() => {
-    const savedTabIndex = localStorage.getItem("activeTabIndex");
+    let savedTabIndex: string | null = null;
+    if (typeof window !== "undefined") {
+      savedTabIndex = localStorage.getItem("activeTabIndex");
+    }
     return savedTabIndex ? parseInt(savedTabIndex, 10) : 0;
   });
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState<number>(0);

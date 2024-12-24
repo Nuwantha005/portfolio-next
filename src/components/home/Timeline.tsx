@@ -158,7 +158,7 @@ function TimeLine() {
           <div className="timeline-end mb-10 ">
             <time className="font-mono italic">2026</time>
             <div className="text-lg font-black">Graduation</div>
-            I'm expected to graduate around April 2026 accodring to current
+            I&apos;m expected to graduate around April 2026 accodring to current
             academic plans for upcoming years.
           </div>
         </li>

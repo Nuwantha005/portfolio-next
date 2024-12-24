@@ -1,8 +1,13 @@
+"use client";
+
 import { useState, useEffect } from "react";
 
 const ThemeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    const savedTheme = localStorage.getItem("theme");
+    let savedTheme: string | null = "dark";
+    if (typeof window !== "undefined") {
+      savedTheme = localStorage.getItem("theme");
+    }
     return savedTheme ? savedTheme === "dark" : false;
   });
 

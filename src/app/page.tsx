@@ -8,7 +8,10 @@ import "./globals.css";
 
 export default function Page() {
   const [activeTabIndex, setActiveTabIndex] = useState<number>(() => {
-    const savedTabIndex = localStorage.getItem("activeTabIndex");
+    let savedTabIndex: string | null = null;
+    if (typeof window !== "undefined") {
+      savedTabIndex = localStorage.getItem("activeTabIndex");
+    }
     return savedTabIndex ? parseInt(savedTabIndex, 10) : 0;
   });
   const [animationClass, setAnimationClass] = useState("");

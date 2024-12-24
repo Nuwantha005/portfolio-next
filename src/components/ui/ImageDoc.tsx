@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface ImageDocProps {
@@ -24,7 +25,7 @@ const ImageDoc: React.FC<ImageDocProps> = ({ image, onOpen }) => {
       data-index={image.id}
       data-src={image.loc}
     >
-      <img alt={image.name} className="img-responsive" src={image.thumb} />
+      <Image alt={image.name} className="img-responsive" src={image.thumb} width={400} height={400}/>
       <h3 className="caption text-center">{image.name}</h3>
     </a>
   );

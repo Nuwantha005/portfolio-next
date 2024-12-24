@@ -1,14 +1,14 @@
 "use client";
+
 import React, { useEffect, useRef, useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import FloatingSection from "@/components/ui/FloatingSection";
 import ThemeToggle from "@/components/navbar/ThemeToggle";
 import Topic from "@/components/ui/Topic";
-import { useTransitionRouter } from "next-view-transitions";
 import LightGallery from "lightgallery/react";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
-import fjGallery from "flickr-justified-gallery";
+//import fjGallery from "flickr-justified-gallery";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import "@/app/projects/galleryStyle.css";
 import ImageDoc from "@/components/ui/ImageDoc";
@@ -22,22 +22,9 @@ interface Images {
 
 function Project_CommunicationSoftware() {
   const [images, setImages] = useState<Images[]>([]);
+  const lightGallery = useRef<LightGalleryInstance | null>(null);
 
-  useEffect(() => {
-    fetch("/Images/Projects/Project_CommunicationSoftware/images.json")
-      .then((res) => res.text())
-      .then((text) => {
-        try {
-          const data = JSON.parse(text);
-          setImages(data);
-        } catch (err) {
-          console.error("Failed to parse JSON:", err);
-        }
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
-  const lightGallery = useRef<any>(null);
+  // LightGallery instance interface
   interface LightGalleryDetail {
     instance: LightGalleryInstance;
   }
@@ -45,31 +32,50 @@ function Project_CommunicationSoftware() {
     openGallery: (index: number) => void;
   }
 
-  interface LightGalleryDetail {
-    instance: LightGalleryInstance;
-  }
+  // Fetch images
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      fetch("/Images/Projects/Project_CommunicationSoftware/images.json")
+        .then((res) => res.json())
+        .then((data) => {
+          setImages(data);
+        })
+        .catch((err) => console.error("Failed to fetch images:", err));
+    }
+  }, []);
+
+  // Initialize LightGallery
   const onInit = useCallback((detail: LightGalleryDetail) => {
     if (detail) {
       lightGallery.current = detail.instance;
     }
   }, []);
 
+  // Initialize fjGallery
   useEffect(() => {
-    fjGallery(document.querySelectorAll(".fj-gallery"), {
-      itemSelector: ".fj-gallery-item",
-      rowHeight: 180,
-      maxRowsCount: 2,
-      lastRow: "start",
-      gutter: 2,
-      rowHeightTolerance: 0.1,
-      calculateItemsHeight: false,
-    });
+    if (typeof window !== "undefined") {
+      const elements = document.querySelectorAll(".fj-gallery");
+      if (elements.length > 0) {
+        import("flickr-justified-gallery").then((fjGallery) => {
+          fjGallery.default(elements, {
+            itemSelector: ".fj-gallery-item",
+            rowHeight: 180,
+            maxRowsCount: 2,
+            lastRow: "start",
+            gutter: 2,
+            rowHeightTolerance: 0.1,
+            calculateItemsHeight: false,
+          });
+        });
+      }
+    }
   }, []);
+  
 
+  // Open LightGallery
   const onOpen = (index: number): void => {
-    lightGallery.current.openGallery(index);
+    lightGallery.current?.openGallery(index);
   };
-  const router = useTransitionRouter();
   return (
     <div>
       <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
@@ -127,7 +133,7 @@ function Project_CommunicationSoftware() {
                     Project assignment subject for our group changed later, and
                     this was never presented. I wrote it entirely using Java and
                     my SQL knowledge was used because MySQL was used as the
-                    database. The UI was designed using NetBeans IDE's
+                    database. The UI was designed using NetBeans IDEs
                     drag-and-drop UI designer. The MySQL workbench was used to
                     manage the database.
                   </p>

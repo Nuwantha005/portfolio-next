@@ -7,7 +7,7 @@ function Skills() {
     <FloatingSection>
       <h1 className="text-bold text-3xl">Skills</h1>
       <p className="m-4">
-        This section list down some of software and technologies I'm familiar
+        This section list down some of software and technologies I&apos;m familiar
         with. They are the ones used for my projects I have listed in the other
         tab.
       </p>

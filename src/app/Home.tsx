@@ -1,6 +1,7 @@
+"use client";
+
 import About from "@/components/home/About";
 import Skills from "@/components/home/Skills";
-import SocialDock from "@/components/home/SocialDock";
 import TimeLine from "@/components/home/Timeline";
 import FloatingSection from "@/components/ui/FloatingSection";
 import React from "react";

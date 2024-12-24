@@ -3,13 +3,17 @@ import { MdLocationPin } from "react-icons/md";
 import { HiOutlineMail } from "react-icons/hi";
 import SocialDock from "./SocialDock";
 import FloatingSection from "../ui/FloatingSection";
+import Image from "next/image";
 
 function About() {
   return (
     <div className="flex flex-col sm:flex-row gap-4 justify-between justify-items-stretch content-center ">
       <FloatingSection>
-        <img
-          src="./Images/Profile.jpg"
+      <Image
+          src="/Images/Profile.jpg"
+          alt="Profile"
+          width={288} // Adjust the width as needed
+          height={288} // Adjust the height as needed
           className="rounded-full aspect-square max-w-72 justify-self-center"
         />
       </FloatingSection>
@@ -18,7 +22,7 @@ function About() {
           <h1 className="text-bold text-3xl">About</h1>
 
           <p className="mt-4 text-sm sm:text-md">
-            Hello, my name is Nuwantha Kumara. I'm a mechanical engineering
+            Hello, my name is Nuwantha Kumara. I&apos;m a mechanical engineering
             undergraduate in University of Moratuwa.
           </p>
           <section className="mt-4 flex flex-row gap-2 content-center align-center max-h-20 grow">

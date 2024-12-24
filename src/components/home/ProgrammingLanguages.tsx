@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useEffect, useRef } from "react";
 
 const ProgrammingLanguages = () => {
@@ -58,7 +59,7 @@ const ProgrammingLanguages = () => {
             >
               {imageArray.map((item, index) => (
                 <li key={index} className="flex flex-col items-center">
-                  <img width={64} height={64} src={item.src} alt={item.alt} />
+                  <Image width={64} height={64} src={item.src} alt={item.alt} />
                   <span className="mt-2 text-white">{item.alt}</span>
                 </li>
               ))}
