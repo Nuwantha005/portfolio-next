@@ -2,26 +2,26 @@
   {
     "id": 0,
     "name": "Application Home",
-    "loc": "./Images/Projects/Project_CommunicationSoftware/Communication_SOftware_HomePage.PNG",
-    "thumb": "./Images/Projects/Project_CommunicationSoftware/Communication_SOftware_HomePage.PNG"
+    "loc": "/Images/Projects/Project_CommunicationSoftware/Communication_SOftware_HomePage.PNG",
+    "thumb": "/Images/Projects/Project_CommunicationSoftware/Communication_SOftware_HomePage.PNG"
   },
   {
     "id": 1,
     "name": "Project Tree",
-    "loc": "./Images/Projects/Project_CommunicationSoftware/Communication_SOftware_ProjectTree.PNG",
-    "thumb": "./Images/Projects/Project_CommunicationSoftware/Communication_SOftware_ProjectTree.PNG"
+    "loc": "/Images/Projects/Project_CommunicationSoftware/Communication_SOftware_ProjectTree.PNG",
+    "thumb": "/Images/Projects/Project_CommunicationSoftware/Communication_SOftware_ProjectTree.PNG"
   },
   {
     "id": 2,
     "name": "EER Diagram for Database",
-    "loc": "./Images/Projects/Project_CommunicationSoftware/CommunicationEER.PNG",
-    "thumb": "./Images/Projects/Project_CommunicationSoftware/CommunicationEER.PNG"
+    "loc": "/Images/Projects/Project_CommunicationSoftware/CommunicationEER.PNG",
+    "thumb": "/Images/Projects/Project_CommunicationSoftware/CommunicationEER.PNG"
   },
   {
     "id": 3,
     "name": "3D Chart Generated",
-    "loc": "./Images/Projects/Project_CommunicationSoftware/Communication_SOftware_Chart.PNG",
-    "thumb": "./Images/Projects/Project_CommunicationSoftware/Communication_SOftware_Chart.PNG"
+    "loc": "/Images/Projects/Project_CommunicationSoftware/Communication_SOftware_Chart.PNG",
+    "thumb": "/Images/Projects/Project_CommunicationSoftware/Communication_SOftware_Chart.PNG"
   },
   {
     "id": 4,
@@ -38,7 +38,7 @@
   {
     "id": 6,
     "name": "Data Exploring",
-    "loc": "./Images/Projects/Project_CommunicationSoftware/Communication_SOftware_Windows.PNG",
-    "thumb": "./Images/Projects/Project_CommunicationSoftware/Communication_SOftware_Windows.PNG"
+    "loc": "/Images/Projects/Project_CommunicationSoftware/Communication_SOftware_Windows.PNG",
+    "thumb": "/Images/Projects/Project_CommunicationSoftware/Communication_SOftware_Windows.PNG"
   }
 ]

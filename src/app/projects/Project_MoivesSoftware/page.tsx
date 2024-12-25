@@ -1,60 +1,78 @@
 "use client";
 
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import ThemeToggle from "@/components/navbar/ThemeToggle";
 import FloatingSection from "@/components/ui/FloatingSection";
 import "@/app/projects/galleryStyle.css";
+import LGComponent, { LGRef } from "@/components/ui/LGComponent";
+import ProjectTitleBar from "@/components/ui/ProjectTitleBar";
+import Topic from "@/components/ui/Topic";
+
+interface Images {
+  id: number;
+  loc: string;
+  name: string;
+  thumb: string;
+}
 
 function Project_MoviesSoftware() {
-  
+  const lgRef = useRef<LGRef>(null);
+  const [images, setImages] = useState<Images[]>([]);
+  const handleOpen = (index: number) => {
+    lgRef.current?.openGallery(index);
+  };
+  // Fetch images
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      fetch(
+        "/Images/Projects/Project_Movies_and_TV_Series_Software/images.json"
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          setImages(data);
+        })
+        .catch((err) => console.error("Failed to fetch images:", err));
+    }
+  }, []);
   return (
     <div>
       <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-        <header className="relative z-15 flex flex-row items-center top-0 m-2 w-screen justify-center">
-          <div className="flex flex-row gap-4 items-center justify-between ml-2 w-full">
-            <button
-              onClick={() => {
-                window.history.back();
-              }}
-              className="text-lg"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-            </button>
-            <motion.p
-              layoutId="Communication Software_title"
-              className="text-4xl"
-            >
-              Movies and Series Management Software
-            </motion.p>
-            <ThemeToggle />
-          </div>
-        </header>
+        <ProjectTitleBar title="Movies and Series Management Software" />
         {/* Floating Tiles Content */}
         <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
           <div className="relative z-10 p-10 space-y-6">
-            <div className="flex flex-col sm:flex-row gap-4 items-stretch">
-              <div className="basis-3/4">
-                <FloatingSection>
-                  <div className="App">
-                    
-                  </div>
-                </FloatingSection>
+            <FloatingSection>
+              <h1 className="text-2xl mb-4">Overview</h1>
+              <motion.img
+                layoutId="Movies and Series Management Software_img"
+                style={{
+                  cursor: "pointer",
+                  border: "4px solid gray",
+                  borderRadius: "8px",
+                }}
+                onClick={() => handleOpen(images[0].id)}
+                src="/Images/Projects/movies_and_tv_series_Software_Window.PNG"
+                alt="Landing Menu"
+                className="border-gray-800 dark:border-gray-200"
+              />
+              <p className="p-4 m-4 text-center lg:text-left lg:basis-1/2">
+                This program was created as the final project for my course at
+                the ATARI city campus. It was a group project; however, it was
+                done all by myself as a test for my own skills. Project
+                assignment subject for our group changed later, and this was
+                never presented. I wrote it entirely using Java and my SQL
+                knowledge was used because MySQL was used as the database. The
+                UI was designed using NetBeans IDEs drag-and-drop UI designer.
+                The MySQL workbench was used to manage the database.
+              </p>
+            </FloatingSection>
+            <Topic topicName="Gallery" />
+            <FloatingSection>
+              <div className="">
+                <LGComponent ref={lgRef} images={images} />
               </div>
-            </div>
+            </FloatingSection>
           </div>
         </main>
       </div>

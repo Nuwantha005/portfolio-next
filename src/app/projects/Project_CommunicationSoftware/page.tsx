@@ -12,6 +12,7 @@ import lgThumbnail from "lightgallery/plugins/thumbnail";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import "@/app/projects/galleryStyle.css";
 import ImageDoc from "@/components/ui/ImageDoc";
+import Head from "next/head";
 
 interface Images {
   id: number;
@@ -77,6 +78,12 @@ function Project_CommunicationSoftware() {
   };
   return (
     <div>
+      <Head>
+        <title>Communication Software Project</title>
+        <meta name="description" content="This is my portfolio website." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
         <header className="relative z-15 flex flex-row items-center top-0 m-2 w-screen justify-center">
           <div className="flex flex-row gap-4 items-center justify-between ml-2 w-full">
@@ -119,11 +126,15 @@ function Project_CommunicationSoftware() {
                   <h1 className="text-2xl mb-4">Overview</h1>
                   <motion.img
                     layoutId="Communication Software_img"
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      cursor: "pointer",
+                      border: "4px solid gray",
+                      borderRadius: "8px",
+                    }}
                     onClick={() => onOpen(images[0].id)}
                     src="/Images/Projects/Communication_SOftware_HomePage.PNG"
                     alt="Landing Menu"
-                    className="basis-1/2"
+                    className="basis-1/2 border-gray-800 dark:border-gray-200"
                   />
                   <p className="p-4 m-4 text-center lg:text-left lg:basis-1/2">
                     This program was created as the final project for my course
@@ -267,14 +278,17 @@ function Project_CommunicationSoftware() {
                 elementClassNames={"gallery fj-gallery"}
                 dynamic={true}
                 hash={false}
-                rotate={false}
+                rotate={true}
                 plugins={[lgZoom, lgThumbnail]}
                 dynamicEl={images.map((image) => ({
                   src: image.loc,
                   thumb: image.thumb,
                 }))}
+                zoomFromOrigin={true}
+                rotateLeft={true}
+                rotateRight={true}
               ></LightGallery>
-              <div className="">
+              <div>
                 <ResponsiveMasonry
                   columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
                 >
