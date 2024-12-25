@@ -2,7 +2,6 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import ThemeToggle from "@/components/navbar/ThemeToggle";
 import FloatingSection from "@/components/ui/FloatingSection";
 import "@/app/projects/galleryStyle.css";
 import LGComponent, { LGRef } from "@/components/ui/LGComponent";

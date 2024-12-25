@@ -31,7 +31,9 @@ export interface LGRef {
 }
 
 const LGComponent = forwardRef<LGRef, LGProps>(({ images }, ref) => {
-  const galleryRef = useRef<any>(null);
+  const galleryRef = useRef<{ openGallery: (index: number) => void } | null>(
+    null
+  );
 
   // Expose a method to open the gallery
   useImperativeHandle(ref, () => ({
@@ -41,11 +43,14 @@ const LGComponent = forwardRef<LGRef, LGProps>(({ images }, ref) => {
   }));
 
   // Initialize LightGallery
-  const onInit = useCallback((detail: any) => {
-    if (detail) {
-      galleryRef.current = detail.instance;
-    }
-  }, []);
+  const onInit = useCallback(
+    (detail: { instance: { openGallery: (index: number) => void } }) => {
+      if (detail) {
+        galleryRef.current = detail.instance;
+      }
+    },
+    []
+  );
 
   // Initialize fjGallery
   useEffect(() => {
@@ -99,5 +104,7 @@ const LGComponent = forwardRef<LGRef, LGProps>(({ images }, ref) => {
     </div>
   );
 });
+
+LGComponent.displayName = "LGComponent";
 
 export default LGComponent;
