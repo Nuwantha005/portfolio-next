@@ -83,11 +83,14 @@ const LGComponent = forwardRef<LGRef, LGProps>(({ images }, ref) => {
         plugins={[lgZoom, lgThumbnail]}
         // elementClassNames={"gallery fj-gallery w-screen h-full flex-auto"}
         dynamic={true}
-        zoomFromOrigin={true}
         dynamicEl={images.map((image) => ({
+          alt: image.name,
           src: image.loc,
           thumb: image.thumb,
         }))}
+        animateThumb={true}
+        rotate={true}
+        flipVertical={true}
       >
         <div className="w-full h-full">
           <ResponsiveMasonry

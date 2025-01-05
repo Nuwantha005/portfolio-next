@@ -18,7 +18,7 @@
     "name": "Single DOF Vibration Simulation",
     "description": "Behaviour of a damped mass under different conditions were simulated in MATLAB. Later an interactive web application was built using p5js and react that allows real time adjustments to the system.",
     "tags": ["MATLAB", "P5js", "React", "CSS", "Live Demo", "Visualization"],
-    "link": "/single_DOF_Vibration_Simulation"
+    "link": "projects/project_single_dof_vibration"
   },
   {
     "image": "./Images/Projects/Mechatronics_Project_Thumbnail.png",
@@ -46,7 +46,7 @@
     "name": "Complex Transformations Mapping",
     "description": "Several programs with different styles were created to animate transformations done by any complex functions. They were animated using Cartesian and Polar coordinate systems, and two methods, points and lines on the plane were used to visualize the transformation.",
     "tags": ["Processing", "Visualization"],
-    "link": "/complex_mapping"
+    "link": "projects/project_complex_mapping"
   },
   {
     "image": "./Images/Projects/TSP_Bruteforce_Genetic_Comparison.png",

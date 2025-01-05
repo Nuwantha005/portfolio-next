@@ -24,7 +24,7 @@ function Project_MoviesSoftware() {
   // Fetch images
   useEffect(() => {
     if (typeof window !== "undefined") {
-      fetch("/projects/project_movies_and_tv_series_software/images.json")
+      fetch("/projects/project_single_dof_vibration/images.json")
         .then((res) => res.json())
         .then((data) => {
           setImages(data);
@@ -42,15 +42,15 @@ function Project_MoviesSoftware() {
             <FloatingSection>
               <h1 className="text-2xl mb-4">Overview</h1>
               <motion.img
-                layoutId="Movies and Series Management Software_img"
+                layoutId="Single DOF Vibration Simulation_img"
                 style={{
                   cursor: "pointer",
                   border: "4px solid gray",
                   borderRadius: "8px",
                 }}
                 onClick={() => handleOpen(images[0].id)}
-                src="/Images/Projects/movies_and_tv_series_Software_Window.PNG"
-                alt="Landing Menu"
+                src="/Images/Projects/Single_DOF_MATLAB.png"
+                alt="Single DOF Vibration Simulation"
                 className="border-gray-800 dark:border-gray-200"
               />
               <p className="p-4 m-4 text-center lg:text-left lg:basis-1/2">
