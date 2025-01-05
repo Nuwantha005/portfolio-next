@@ -8,34 +8,38 @@ import LGComponent, { LGRef } from "@/components/ui/LGComponent";
 import ProjectTitleBar from "@/components/ui/ProjectTitleBar";
 import Topic from "@/components/ui/Topic";
 
-interface Images {
+interface GalleryItem {
   id: number;
   loc: string;
   name: string;
   thumb: string;
+  type: "image" | "video";
+  poster?: string;
 }
 
-function Project_MoviesSoftware() {
+function Project_ComplexMapping() {
   const lgRef = useRef<LGRef>(null);
-  const [images, setImages] = useState<Images[]>([]);
+  const [items, setItems] = useState<GalleryItem[]>([]);
   const handleOpen = (index: number) => {
     lgRef.current?.openGallery(index);
   };
-  // Fetch images
+
+  // Fetch images and videos
   useEffect(() => {
     if (typeof window !== "undefined") {
-      fetch("/projects/project_single_dof_vibration/images.json")
+      fetch("/projects/project_complex_mapping_vibration/files.json")
         .then((res) => res.json())
         .then((data) => {
-          setImages(data);
+          setItems(data);
         })
-        .catch((err) => console.error("Failed to fetch images:", err));
+        .catch((err) => console.error("Failed to fetch items:", err));
     }
   }, []);
+
   return (
     <div>
       <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-        <ProjectTitleBar title="Movies and Series Management Software" />
+        <ProjectTitleBar title="Complex Mapping and Vibration" />
         {/* Floating Tiles Content */}
         <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
           <div className="relative z-10 p-10 space-y-6">
@@ -47,27 +51,24 @@ function Project_MoviesSoftware() {
                   cursor: "pointer",
                   border: "4px solid gray",
                   borderRadius: "8px",
+                  maxWidth: "50%", // Limit the width to 80% of the container
+                  height: "auto", // Maintain aspect ratio
                 }}
-                onClick={() => handleOpen(images[0].id)}
-                src="/Images/Projects/Complex_Mapping.png"
+                onClick={() => handleOpen(items[0].id)}
+                src="/projects/project_complex_mapping_vibration/images/Complex_Mapping.png"
                 alt="Landing Menu"
                 className="border-gray-800 dark:border-gray-200"
               />
               <p className="p-4 m-4 text-center lg:text-left lg:basis-1/2">
-                This program was created as the final project for my course at
-                the ATARI city campus. It was a group project; however, it was
-                done all by myself as a test for my own skills. Project
-                assignment subject for our group changed later, and this was
-                never presented. I wrote it entirely using Java and my SQL
-                knowledge was used because MySQL was used as the database. The
-                UI was designed using NetBeans IDEs drag-and-drop UI designer.
-                The MySQL workbench was used to manage the database.
+                This project explores complex mappings and vibrations through
+                various visual representations. It includes both images and
+                videos to illustrate different concepts and transformations.
               </p>
             </FloatingSection>
             <Topic topicName="Gallery" />
             <FloatingSection>
               <div className="">
-                <LGComponent ref={lgRef} images={images} />
+                <LGComponent ref={lgRef} items={items} />
               </div>
             </FloatingSection>
           </div>
@@ -77,4 +78,4 @@ function Project_MoviesSoftware() {
   );
 }
 
-export default Project_MoviesSoftware;
+export default Project_ComplexMapping;

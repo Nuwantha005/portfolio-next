@@ -8,28 +8,30 @@ import LGComponent, { LGRef } from "@/components/ui/LGComponent";
 import ProjectTitleBar from "@/components/ui/ProjectTitleBar";
 import Topic from "@/components/ui/Topic";
 
-interface Images {
+interface GalleryItem {
   id: number;
   loc: string;
   name: string;
   thumb: string;
+  type: "image" | "video";
+  poster?: string;
 }
 
 function Project_MoviesSoftware() {
   const lgRef = useRef<LGRef>(null);
-  const [images, setImages] = useState<Images[]>([]);
+  const [items, setItems] = useState<GalleryItem[]>([]);
   const handleOpen = (index: number) => {
     lgRef.current?.openGallery(index);
   };
-  // Fetch images
+  // Fetch items
   useEffect(() => {
     if (typeof window !== "undefined") {
-      fetch("/projects/project_single_dof_vibration/images.json")
+      fetch("/projects/project_single_dof_vibration/files.json")
         .then((res) => res.json())
         .then((data) => {
-          setImages(data);
+          setItems(data);
         })
-        .catch((err) => console.error("Failed to fetch images:", err));
+        .catch((err) => console.error("Failed to fetch items:", err));
     }
   }, []);
   return (
@@ -47,11 +49,13 @@ function Project_MoviesSoftware() {
                   cursor: "pointer",
                   border: "4px solid gray",
                   borderRadius: "8px",
+                  maxWidth: "50%", // Limit the width to 80% of the container
+                  height: "auto", // Maintain aspect ratio
                 }}
-                onClick={() => handleOpen(images[0].id)}
+                onClick={() => handleOpen(items[0].id)}
                 src="/Images/Projects/Single_DOF_MATLAB.png"
                 alt="Single DOF Vibration Simulation"
-                className="border-gray-800 dark:border-gray-200"
+                className="border-gray-800 dark:border-gray-200 "
               />
               <p className="p-4 m-4 text-center lg:text-left lg:basis-1/2">
                 This program was created as the final project for my course at
@@ -67,7 +71,7 @@ function Project_MoviesSoftware() {
             <Topic topicName="Gallery" />
             <FloatingSection>
               <div className="">
-                <LGComponent ref={lgRef} images={images} />
+                <LGComponent ref={lgRef} items={items} />
               </div>
             </FloatingSection>
           </div>
