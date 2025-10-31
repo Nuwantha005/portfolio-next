@@ -1,4 +1,4 @@
-"use clinet";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import ProjectCard from "@/components/projects/ProjectCard";

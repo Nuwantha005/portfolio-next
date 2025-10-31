@@ -9,7 +9,7 @@
   {
     "id": 1,
     "name": "Cartesian Dots Example 1",
-    "loc": "/projects/project_complex_mapping_vibration/videos/cartesian_dots_ex1.mkv",
+    "loc": "/projects/project_complex_mapping_vibration/videos/cartesian_dots_ex1.mp4",
     "thumb": "/projects/project_complex_mapping_vibration/images/cartesian_dots_ex1.png",
     "poster": "/projects/project_complex_mapping_vibration/images/cartesian_dots_ex1.png",
     "type": "video"
@@ -24,7 +24,7 @@
   {
     "id": 3,
     "name": "Cartesian Lines Example 2",
-    "loc": "/projects/project_complex_mapping_vibration/videos/cartesian_lines_ex2.mkv",
+    "loc": "/projects/project_complex_mapping_vibration/videos/cartesian_lines_ex2.mp4",
     "thumb": "/projects/project_complex_mapping_vibration/images/cartesian_lines_ex2.png",
     "poster": "/projects/project_complex_mapping_vibration/images/cartesian_lines_ex2.png",
     "type": "video"
@@ -95,7 +95,7 @@
   {
     "id": 13,
     "name": "Polar Dots Example 3",
-    "loc": "/projects/project_complex_mapping_vibration/videos/polar_dots_ex3.mkv",
+    "loc": "/projects/project_complex_mapping_vibration/videos/polar_dots_ex3.mp4",
     "thumb": "/projects/project_complex_mapping_vibration/images/polar_dots_ex3.png",
     "poster": "/projects/project_complex_mapping_vibration/images/polar_dots_ex3.png",
     "type": "video"
@@ -110,7 +110,7 @@
   {
     "id": 15,
     "name": "Polar Lines Example 4",
-    "loc": "/projects/project_complex_mapping_vibration/videos/polar_lines_ex4.mkv",
+    "loc": "/projects/project_complex_mapping_vibration/videos/polar_lines_ex4.mp4",
     "thumb": "/projects/project_complex_mapping_vibration/images/polar_lines_ex4.png",
     "poster": "/projects/project_complex_mapping_vibration/images/polar_lines_ex4.png",
     "type": "video"
@@ -118,7 +118,7 @@
   {
     "id": 16,
     "name": "Cartesian Dots Example 5",
-    "loc": "/projects/project_complex_mapping_vibration/videos/cartesian_dots_ex5.mkv",
+    "loc": "/projects/project_complex_mapping_vibration/videos/cartesian_dots_ex5.mp4",
     "thumb": "/projects/project_complex_mapping_vibration/images/cartesian_dots.png",
     "poster": "/projects/project_complex_mapping_vibration/images/cartesian_dots.png",
     "type": "video"
@@ -126,7 +126,7 @@
   {
     "id": 17,
     "name": "Cartesian Dots Example 6",
-    "loc": "/projects/project_complex_mapping_vibration/videos/cartesian_dots_ex6.mkv",
+    "loc": "/projects/project_complex_mapping_vibration/videos/cartesian_dots_ex6.mp4",
     "thumb": "/projects/project_complex_mapping_vibration/images/cartesian_dots.png",
     "poster": "/projects/project_complex_mapping_vibration/images/cartesian_dots.png",
     "type": "video"
@@ -134,7 +134,7 @@
   {
     "id": 18,
     "name": "Cartesian Dots Example 7",
-    "loc": "/projects/project_complex_mapping_vibration/videos/cartesian_dots_ex7.mkv",
+    "loc": "/projects/project_complex_mapping_vibration/videos/cartesian_dots_ex7.mp4",
     "thumb": "/projects/project_complex_mapping_vibration/images/cartesian_dots.png",
     "poster": "/projects/project_complex_mapping_vibration/images/cartesian_dots.png",
     "type": "video"

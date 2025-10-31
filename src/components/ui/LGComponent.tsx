@@ -7,16 +7,12 @@ import React, {
   useState,
 } from "react";
 import dynamic from "next/dynamic";
-import lgZoom from "lightgallery/plugins/zoom";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import lgVideo from "lightgallery/plugins/video";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import ImageDoc from "./ImageDoc";
 import VideoDock from "./VideoDock";
-// import "lightgallery/css/lightgallery.css";
-// import "lightgallery/css/lg-zoom.css";
-// import "lightgallery/css/lg-thumbnail.css";
-import videojs from "video.js";
+// LightGallery CSS is imported in galleryStyle.css
 
 const LightGallery = dynamic(() => import("lightgallery/react"), {
   ssr: false,
@@ -32,6 +28,7 @@ interface GalleryItem {
   name: string;
   thumb: string;
   type: "image" | "video";
+  poster?: string;
 }
 
 export interface LGRef {
@@ -57,7 +54,7 @@ const LGComponent = forwardRef<LGRef, LGProps>(({ items }, ref) => {
         galleryRef.current = detail.instance;
       }
     },
-    []
+    [items]
   );
 
   // Initialize fjGallery
@@ -77,33 +74,75 @@ const LGComponent = forwardRef<LGRef, LGProps>(({ items }, ref) => {
           });
         });
       }
+      
+      // Warn about unsupported video formats
+      const mkvVideos = items.filter(item => 
+        item.type === 'video' && item.loc.toLowerCase().endsWith('.mkv')
+      );
+      if (mkvVideos.length > 0) {
+        console.warn(
+          '⚠️ MKV video format detected! Browsers do not natively support MKV files.',
+          '\nVideos affected:', mkvVideos.map(v => v.name),
+          '\nPlease convert to MP4 format for full browser compatibility.',
+          '\nSee convert_videos.py script in the project folder.'
+        );
+      }
     }
-  }, []);
+  }, [items]);
 
   const handleOpen = (index: number) => {
     galleryRef.current?.openGallery(index);
   };
 
-  const dynamicEl = items.map((item) => {
+  // Create a mapping from item ID to gallery index
+  const idToIndexMap = new Map<number, number>();
+  items.forEach((item, index) => {
+    idToIndexMap.set(item.id, index);
+  });
+
+  // Wrapper function to convert ID to index before opening gallery
+  const handleOpenById = (id: number) => {
+    const index = idToIndexMap.get(id);
+    if (index !== undefined) {
+      handleOpen(index);
+    }
+  };
+
+  const dynamicEl: any[] = items.map((item) => {
     if (item.type === "video") {
+      // Detect video type from file extension
+      const extension = item.loc.split('.').pop()?.toLowerCase();
+      let videoType = 'video/mp4';
+      
+      // Map file extensions to MIME types
+      if (extension === 'mkv') {
+        videoType = 'video/x-matroska';
+      } else if (extension === 'webm') {
+        videoType = 'video/webm';
+      } else if (extension === 'ogg' || extension === 'ogv') {
+        videoType = 'video/ogg';
+      }
+      
       return {
         alt: item.name,
         thumb: item.thumb,
         subHtml: `<h4>${item.name}</h4>`,
-        poster: item.poster,
-        src: item.loc,
-        video: JSON.stringify({
+        poster: item.poster || item.thumb,
+        // For video.js, use this format
+        video: {
           source: [
             {
               src: item.loc,
-              type: "video/mp4",
+              type: videoType,
             },
           ],
           attributes: {
-            preload: true,
+            preload: 'auto',
             controls: true,
           },
-        }),
+        },
+        // Disable zoom for videos
+        disableZoom: true,
       };
     } else {
       return {
@@ -114,11 +153,12 @@ const LGComponent = forwardRef<LGRef, LGProps>(({ items }, ref) => {
       };
     }
   });
+  
   return (
     <div className="w-full h-full">
       <LightGallery
         onInit={onInit}
-        plugins={[lgZoom, lgThumbnail, lgVideo]}
+        plugins={[lgThumbnail, lgVideo]}
         dynamic={true}
         closable={true}
         thumbWidth={130}
@@ -128,9 +168,6 @@ const LGComponent = forwardRef<LGRef, LGProps>(({ items }, ref) => {
         appendSubHtmlTo={".lg-item"}
         dynamicEl={dynamicEl}
         animateThumb={true}
-        videojs={true}
-        iframe={true}
-        videojsOptions={{ muted: true }}
         elementClassNames={"inline-gallery-container"}
       >
         <div className="w-full h-full">
@@ -140,13 +177,13 @@ const LGComponent = forwardRef<LGRef, LGProps>(({ items }, ref) => {
             <Masonry gutter="10px" style={{ width: "100%", height: "100%" }}>
               {items
                 .filter((item) => item.type === "video")
-                .map((item, index) => (
-                  <VideoDock key={index} video={item} onOpen={handleOpen} />
+                .map((item) => (
+                  <VideoDock key={item.id} video={item} onOpen={handleOpenById} />
                 ))}
               {items
                 .filter((item) => item.type === "image")
-                .map((item, index) => (
-                  <ImageDoc key={index} image={item} onOpen={handleOpen} />
+                .map((item) => (
+                  <ImageDoc key={item.id} image={item} onOpen={handleOpenById} />
                 ))}
             </Masonry>
           </ResponsiveMasonry>
