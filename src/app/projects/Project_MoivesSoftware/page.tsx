@@ -13,6 +13,8 @@ interface Images {
   loc: string;
   name: string;
   thumb: string;
+  type: "image" | "video";
+  poster?: string;
 }
 
 function Project_MoviesSoftware() {
@@ -67,7 +69,7 @@ function Project_MoviesSoftware() {
             <Topic topicName="Gallery" />
             <FloatingSection>
               <div className="">
-                <LGComponent ref={lgRef} images={images} />
+                <LGComponent ref={lgRef} items={images} />
               </div>
             </FloatingSection>
           </div>

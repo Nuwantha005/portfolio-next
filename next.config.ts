@@ -9,7 +9,7 @@ import type { NextConfig } from "next";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "export",
-  distDir: "src/out",
+  distDir: "out",
   images: {
     unoptimized: true,
   },

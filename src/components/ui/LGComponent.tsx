@@ -4,7 +4,6 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useEffect,
-  useState,
 } from "react";
 import dynamic from "next/dynamic";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
@@ -54,7 +53,7 @@ const LGComponent = forwardRef<LGRef, LGProps>(({ items }, ref) => {
         galleryRef.current = detail.instance;
       }
     },
-    [items]
+    []
   );
 
   // Initialize fjGallery
@@ -108,6 +107,7 @@ const LGComponent = forwardRef<LGRef, LGProps>(({ items }, ref) => {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const dynamicEl: any[] = items.map((item) => {
     if (item.type === "video") {
       // Detect video type from file extension
