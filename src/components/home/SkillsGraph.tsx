@@ -122,11 +122,8 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       .scale(scale)
       .translate(-centerX, -centerY);
 
-    d3
-      .select(svgRef.current)
-      .transition()
-      .duration(600)
-      .call(zoomBehaviourRef.current.transform as any, transform);
+    const svgSelection = d3.select<SVGSVGElement, undefined>(svgRef.current);
+    zoomBehaviourRef.current.transform(svgSelection, transform);
   };
 
   useEffect(() => {
@@ -159,8 +156,8 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
 
     simulationRef.current?.stop();
 
-    const svg = d3.select(svgRef.current);
-    const g = d3.select(gRef.current);
+  const svg = d3.select<SVGSVGElement, undefined>(svgRef.current);
+  const g = d3.select<SVGGElement, undefined>(gRef.current);
 
     svg.attr("width", dimensions.width).attr("height", dimensions.height);
 
@@ -178,8 +175,8 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         g.attr("transform", event.transform.toString());
       });
 
-    svg.call(zoom as any);
-    zoom.transform(svg as any, existingTransform);
+  svg.call(zoom);
+  zoom.transform(svg, existingTransform);
     zoomBehaviourRef.current = zoom;
 
     const nodes: ForceNode[] = data.nodes.map((node) => ({ ...node }));
@@ -403,7 +400,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
     simulationRef.current = simulation;
 
     const dragBehaviour = d3
-      .drag<SVGGElement, ForceNode>()
+      .drag<SVGGElement, ForceNode, ForceNode>()
       .on("start", (event: D3DragEvent<SVGGElement, ForceNode, ForceNode>, d: ForceNode) => {
         if (!event.active) simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
@@ -419,7 +416,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         d.fy = null;
       });
 
-    nodeSelection.call(dragBehaviour as any);
+  nodeSelection.call(dragBehaviour);
 
     nodeSelection.on("mouseenter", function (
       event: PointerEvent,
