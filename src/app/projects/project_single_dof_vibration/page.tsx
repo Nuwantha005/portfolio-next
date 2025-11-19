@@ -87,7 +87,7 @@ function Project_SingleDOF() {
                 <div className="lg:w-1/2">
                   {items.length > 0 && (
                     <motion.img
-                      layoutId="hero_img"
+                      layoutId="Single DOF Vibration Simulation_img"
                       style={{
                         cursor: "pointer",
                         border: "4px solid gray",
@@ -96,7 +96,7 @@ function Project_SingleDOF() {
                         height: "auto",
                       }}
                       onClick={() => handleOpen(0)}
-                      src="/projects/project_single_dof_vibration/images/1_Hero.png"
+                      src="/Images/Projects/Single_DOF_MATLAB.png"
                       alt="Single DOF Vibration Simulation"
                       className="border-gray-800 dark:border-gray-200"
                     />
