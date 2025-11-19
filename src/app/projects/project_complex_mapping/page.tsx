@@ -20,7 +20,7 @@ interface GalleryItem {
 function Project_ComplexMapping() {
   const lgRef = useRef<LGRef>(null);
   const [items, setItems] = useState<GalleryItem[]>([]);
-  
+
   const handleOpen = (id: number) => {
     // Find the index of the item with the given ID
     const index = items.findIndex(item => item.id === id);
