@@ -19,7 +19,10 @@ function Navbar({
         {labelName[Number(activeTabIndex)]}
       </h1>
       <div className="justify-self-center">
-        <SlidingTabBar setActiveTabIndex_={setActiveTabIndex} />
+        <SlidingTabBar
+          activeTabIndex={activeTabIndex}
+          setActiveTabIndex={setActiveTabIndex}
+        />
       </div>
       <div className="justify-self-end">
         <ThemeToggle />

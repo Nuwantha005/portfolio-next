@@ -10,34 +10,26 @@ interface TabItem {
 const allTabs: TabItem[] = [
   { id: "home", name: "Home" },
   { id: "projects", name: "Projects" },
-  // ...existing code...
 ];
 
 interface SlidingTabBarProps {
-  setActiveTabIndex_: (index: number) => void;
+  activeTabIndex: number;
+  setActiveTabIndex: (index: number) => void;
 }
 
 export const SlidingTabBar: React.FC<SlidingTabBarProps> = ({
-  setActiveTabIndex_,
+  activeTabIndex,
+  setActiveTabIndex,
 }) => {
   const tabsRef = useRef<HTMLButtonElement[] | null[]>([]);
-  const [activeTabIndex, setActiveTabIndex] = useState<number>(() => {
-    let savedTabIndex: string | null = null;
-    if (typeof window !== "undefined") {
-      savedTabIndex = localStorage.getItem("activeTabIndex");
-    }
-    return savedTabIndex ? parseInt(savedTabIndex, 10) : 0;
-  });
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState<number>(0);
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState<number>(0);
 
   useEffect(() => {
-    if (activeTabIndex === null) return;
     const currentTab = tabsRef.current[activeTabIndex];
     setTabUnderlineLeft(currentTab?.offsetLeft ?? 0);
     setTabUnderlineWidth(currentTab?.clientWidth ?? 0);
-    setActiveTabIndex_(activeTabIndex);
-  }, [activeTabIndex, setActiveTabIndex_]);
+  }, [activeTabIndex]);
 
   return (
     <div className="flew-row relative mx-auto flex h-12 rounded-3xl border border-slate-700/40 bg-gray-600 dark:border-white/40 dark:bg-slate-200 px-2 backdrop-blur-md">
@@ -59,6 +51,8 @@ export const SlidingTabBar: React.FC<SlidingTabBarProps> = ({
               isActive ? `` : `hover:text-blue-400 dark:hover:text-blue-800`
             } my-auto cursor-pointer select-none rounded-full px-4 text-center font-bold text-black dark:text-blue-500`}
             onClick={() => setActiveTabIndex(index)}
+            aria-selected={isActive}
+            role="tab"
           >
             {tab.name}
           </button>

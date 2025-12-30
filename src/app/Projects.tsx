@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import ProjectCard from "@/components/projects/ProjectCard";
+import ProjectCardSkeleton from "@/components/projects/ProjectCardSkeleton";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-//import { Link } from "next-view-transitions";
 import Link from "next/link";
 
 const Projects: React.FC = () => {
@@ -17,6 +17,7 @@ const Projects: React.FC = () => {
 
   const [filters, setFilters] = useState<string[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("./json/projectDetails.json")
@@ -29,7 +30,8 @@ const Projects: React.FC = () => {
           console.error("Failed to parse JSON:", err);
         }
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => setIsLoading(false));
   }, []);
 
   const toggleFilter = (tag: string) => {
@@ -87,17 +89,56 @@ const Projects: React.FC = () => {
       <div className="">
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 2, 750: 2, 900: 3 }}>
           <Masonry gutter="30px">
-            {filteredProjects.map((project, index) => (
-              <Link href={project.link} key={index}>
-                <ProjectCard
-                  key={index}
-                  image={project.image}
-                  name={project.name}
-                  description={project.description}
-                  tags={project.tags}
-                />
-              </Link>
-            ))}
+            {isLoading
+              ? // Show skeleton loaders while loading
+                Array.from({ length: 6 }).map((_, index) => (
+                  <ProjectCardSkeleton key={`skeleton-${index}`} />
+                ))
+              : // Show actual projects
+                filteredProjects.map((project, index) => {
+                  const hasLink = Boolean(
+                    project.link && project.link.trim().length > 0
+                  );
+                  const isExternalLink = project.link?.startsWith("http");
+
+                  const cardContent = (
+                    <ProjectCard
+                      key={index}
+                      image={project.image}
+                      name={project.name}
+                      description={project.description}
+                      tags={project.tags}
+                      hasLink={hasLink}
+                    />
+                  );
+
+                  if (!hasLink) {
+                    return (
+                      <div key={index} className="cursor-default">
+                        {cardContent}
+                      </div>
+                    );
+                  }
+
+                  if (isExternalLink) {
+                    return (
+                      <a
+                        href={project.link}
+                        key={index}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {cardContent}
+                      </a>
+                    );
+                  }
+
+                  return (
+                    <Link href={project.link} key={index}>
+                      {cardContent}
+                    </Link>
+                  );
+                })}
           </Masonry>
         </ResponsiveMasonry>
       </div>

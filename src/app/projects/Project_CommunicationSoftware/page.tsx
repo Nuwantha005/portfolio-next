@@ -13,6 +13,7 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import "@/app/projects/galleryStyle.css";
 import ImageDoc from "@/components/ui/ImageDoc";
 import Head from "next/head";
+import Footer from "@/components/footer/Footer";
 
 interface Images {
   id: number;
@@ -301,6 +302,7 @@ function Project_CommunicationSoftware() {
               </div>
             </FloatingSection>
           </div>
+          <Footer />
         </main>
       </div>
     </div>

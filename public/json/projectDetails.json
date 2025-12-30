@@ -32,7 +32,7 @@
     "name": "Movies and Series Management Software",
     "description": "A software application to store details of movies that is built using JavaFX that stores data on a MySQL database. UI was designed using Sceneebuilder, and styles were added using CSS.",
     "tags": ["JavaFX", "MySQL", "CSS"],
-    "link": "projects/Project_MoivesSoftware"
+    "link": "projects/Project_MoviesSoftware"
   },
   {
     "image": "./Images/Projects/Fourier_Image_Example.png",

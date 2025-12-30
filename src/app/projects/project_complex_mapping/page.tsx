@@ -7,6 +7,7 @@ import "@/app/projects/galleryStyle.css";
 import LGComponent, { LGRef } from "@/components/ui/LGComponent";
 import ProjectTitleBar from "@/components/ui/ProjectTitleBar";
 import Topic from "@/components/ui/Topic";
+import Footer from "@/components/footer/Footer";
 
 interface GalleryItem {
   id: number;
@@ -77,6 +78,7 @@ function Project_ComplexMapping() {
               </div>
             </FloatingSection>
           </div>
+          <Footer />
         </main>
       </div>
     </div>

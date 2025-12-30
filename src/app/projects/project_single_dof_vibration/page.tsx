@@ -10,6 +10,7 @@ import Topic from "@/components/ui/Topic";
 import VideoDock from "@/components/ui/VideoDock";
 import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
+import Footer from "@/components/footer/Footer";
 
 interface GalleryItem {
   id: number;
@@ -222,6 +223,7 @@ function Project_SingleDOF() {
               </div>
             </FloatingSection>
           </div>
+          <Footer />
         </main>
       </div>
     </div>

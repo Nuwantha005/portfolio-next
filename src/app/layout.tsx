@@ -1,45 +1,57 @@
-"use client";
-
 import "./globals.css";
-import FlickeringGrid from "@/components/ui/flickering-grid";
-import { AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import type { Metadata, Viewport } from "next";
+import { BackgroundWrapper } from "@/components/ui/BackgroundWrapper";
 
-function Background({ children }: { children: React.ReactNode }) {
-  const [windowWidth, setWindowWidth] = useState(0);
-  const [windowHeight, setWindowHeight] = useState(0);
+export const metadata: Metadata = {
+  title: {
+    default: "Nuwantha Kumara - Portfolio",
+    template: "%s | Nuwantha Kumara",
+  },
+  description:
+    "Mechanical Engineering student with a passion for programming. Explore my projects in software development, simulations, CAD modeling, and data visualization.",
+  keywords: [
+    "Nuwantha Kumara",
+    "Portfolio",
+    "Mechanical Engineering",
+    "Software Developer",
+    "Java",
+    "Python",
+    "MATLAB",
+    "CAD",
+    "SolidWorks",
+    "React",
+    "Next.js",
+  ],
+  authors: [{ name: "Nuwantha Kumara" }],
+  creator: "Nuwantha Kumara",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Nuwantha Kumara Portfolio",
+    title: "Nuwantha Kumara - Portfolio",
+    description:
+      "Mechanical Engineering student with a passion for programming. Explore my projects in software development, simulations, and more.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Nuwantha Kumara - Portfolio",
+    description:
+      "Mechanical Engineering student with a passion for programming.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
-  useEffect(() => {
-    const updateWidthHeight = () => {
-      setWindowWidth(window.outerWidth);
-      setWindowHeight(window.outerHeight);
-    };
-
-    updateWidthHeight(); // Initial update
-    window.addEventListener("resize", updateWidthHeight);
-
-    // Cleanup function to remove the event listener
-    return () => {
-      window.removeEventListener("resize", updateWidthHeight);
-    };
-  }, []);
-
-  return (
-    <div>
-      {children}
-      <FlickeringGrid
-        className="flex z-0 absolute inset-0 size-full overflow-hidden pointer-events-none"
-        squareSize={50}
-        gridGap={5}
-        color="#6B72ff"
-        maxOpacity={0.2}
-        flickerChance={0.1}
-        width={windowWidth}
-        height={windowHeight}
-      />
-    </div>
-  );
-}
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+};
 
 export default function RootLayout({
   children,
@@ -47,15 +59,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <title>Nuwantha Kumara - Portfolio</title>
-        <meta name="description" content="This is my portfolio website." />
-      </head>
-      <body>
-        <AnimatePresence mode="wait">
-          <Background>{children}</Background>
-        </AnimatePresence>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
+        <BackgroundWrapper>
+          {children}
+        </BackgroundWrapper>
       </body>
     </html>
   );
