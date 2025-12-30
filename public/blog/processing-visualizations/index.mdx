@@ -1,0 +1,85 @@
+---
+title: "Building Interactive Visualizations with Processing"
+description: "Learn how to create stunning mathematical visualizations using Processing and p5.js, from Fourier transforms to complex function mappings."
+date: "2024-11-20"
+tags: ["Processing", "p5.js", "Visualization", "Creative Coding"]
+published: true
+---
+
+## Why Processing?
+
+Processing is a flexible software sketchbook and a language for learning how to code within the context of the visual arts. It's perfect for:
+
+- Quick prototyping of visual ideas
+- Mathematical visualizations
+- Interactive art installations
+- Educational demonstrations
+
+## Getting Started
+
+Here's a simple Processing sketch that draws a rotating circle:
+
+```java
+float angle = 0;
+
+void setup() {
+  size(400, 400);
+}
+
+void draw() {
+  background(20);
+  translate(width/2, height/2);
+  
+  float x = cos(angle) * 100;
+  float y = sin(angle) * 100;
+  
+  stroke(255);
+  line(0, 0, x, y);
+  
+  fill(100, 150, 255);
+  ellipse(x, y, 20, 20);
+  
+  angle += 0.02;
+}
+```
+
+## Fourier Series Visualization
+
+One of my favorite projects was visualizing Fourier series - showing how complex shapes can be broken down into simple circular motions.
+
+### The Concept
+
+Any periodic function can be represented as a sum of sines and cosines:
+
+$$f(x) = \frac{a_0}{2} + \sum_{n=1}^{\infty} [a_n \cos(nx) + b_n \sin(nx)]$$
+
+### The Visual Result
+
+By drawing circles whose radii and frequencies are determined by Fourier coefficients, we can recreate any shape!
+
+## Complex Function Mapping
+
+Another fascinating visualization is mapping complex functions. When we apply a function like $f(z) = z^2$ to points in the complex plane, we get beautiful transformations.
+
+| Function | Effect |
+|----------|--------|
+| $z^2$ | Doubles angles, squares distances |
+| $e^z$ | Maps strips to sectors |
+| $\sin(z)$ | Creates wave-like distortions |
+
+## Tips for Better Visualizations
+
+1. **Start simple** - Build complexity gradually
+2. **Use color meaningfully** - Map values to hues
+3. **Add interactivity** - Let users explore
+4. **Optimize performance** - Use appropriate data structures
+
+## Resources
+
+- [Processing.org](https://processing.org) - Official website
+- [The Coding Train](https://thecodingtrain.com) - Excellent tutorials
+- [OpenProcessing](https://openprocessing.org) - Community sketches
+
+---
+
+*Check out my [Complex Mapping Visualization](/projects/project_complex_mapping) to see these concepts in action!*

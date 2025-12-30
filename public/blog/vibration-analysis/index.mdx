@@ -1,0 +1,82 @@
+---
+title: "Getting Started with Single DOF Vibration Analysis"
+description: "A comprehensive guide to understanding single degree of freedom vibration systems, their mathematical models, and practical applications in mechanical engineering."
+date: "2024-12-15"
+tags: ["MATLAB", "Vibration", "Mechanical Engineering", "Simulation"]
+published: true
+---
+
+## Introduction
+
+Single degree of freedom (SDOF) vibration systems are fundamental to understanding mechanical vibrations. In this article, we'll explore the theory behind SDOF systems and how to simulate them using MATLAB.
+
+## The Mathematical Model
+
+A single DOF system can be represented by a mass-spring-damper system. The equation of motion is:
+
+$$m\ddot{x} + c\dot{x} + kx = F(t)$$
+
+Where:
+- $m$ is the mass
+- $c$ is the damping coefficient
+- $k$ is the spring stiffness
+- $F(t)$ is the external force
+
+## Types of Damping
+
+There are three main types of damping behavior:
+
+1. **Underdamped** ($\zeta < 1$): The system oscillates with decreasing amplitude
+2. **Critically Damped** ($\zeta = 1$): The fastest return to equilibrium without oscillation
+3. **Overdamped** ($\zeta > 1$): Slow return to equilibrium without oscillation
+
+## MATLAB Implementation
+
+Here's a simple MATLAB code to simulate an SDOF system:
+
+```matlab
+% System parameters
+m = 1;      % mass (kg)
+c = 0.5;    % damping coefficient (Ns/m)
+k = 10;     % stiffness (N/m)
+
+% Initial conditions
+x0 = 1;     % initial displacement (m)
+v0 = 0;     % initial velocity (m/s)
+
+% Time span
+tspan = [0 10];
+
+% ODE function
+odefun = @(t, y) [y(2); -c/m*y(2) - k/m*y(1)];
+
+% Solve ODE
+[t, y] = ode45(odefun, tspan, [x0; v0]);
+
+% Plot results
+figure;
+plot(t, y(:,1), 'LineWidth', 2);
+xlabel('Time (s)');
+ylabel('Displacement (m)');
+title('SDOF Vibration Response');
+grid on;
+```
+
+## Practical Applications
+
+Understanding SDOF vibrations is crucial in:
+
+- **Automotive suspension design**
+- **Building earthquake resistance**
+- **Machine tool vibration control**
+- **Acoustic isolation systems**
+
+## Conclusion
+
+SDOF systems provide a foundation for more complex vibration analysis. The principles learned here can be extended to multi-degree-of-freedom systems and continuous systems.
+
+> "The study of vibration is essential for any mechanical engineer working with dynamic systems."
+
+---
+
+*Want to see this in action? Check out my [interactive SDOF simulator](/projects/project_single_dof_vibration) built with React and p5.js!*

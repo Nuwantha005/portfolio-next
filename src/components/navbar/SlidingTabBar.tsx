@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 interface TabItem {
   id: string;
@@ -58,6 +59,13 @@ export const SlidingTabBar: React.FC<SlidingTabBarProps> = ({
           </button>
         );
       })}
+      {/* Blog Link - separate page */}
+      <Link
+        href="/blog"
+        className="my-auto cursor-pointer select-none rounded-full px-4 text-center font-bold text-black dark:text-blue-500 hover:text-blue-400 dark:hover:text-blue-800 transition-colors"
+      >
+        Blog
+      </Link>
     </div>
   );
 };

@@ -3,19 +3,21 @@
 import { useState, useEffect } from "react";
 
 const ThemeToggle = () => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
-    let savedTheme: string | null = "dark";
-    if (typeof window !== "undefined") {
-      savedTheme = localStorage.getItem("theme");
-    }
-    return savedTheme ? savedTheme === "dark" : false;
-  });
+  const [isDarkMode, setIsDarkMode] = useState<boolean | null>(null);
+  const [mounted, setMounted] = useState(false);
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
+  // Initialize theme from localStorage on mount
   useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const initialDark = savedTheme ? savedTheme === "dark" : prefersDark;
+    setIsDarkMode(initialDark);
+    setMounted(true);
+  }, []);
+
+  // Apply theme changes
+  useEffect(() => {
+    if (isDarkMode === null) return;
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
@@ -23,6 +25,24 @@ const ThemeToggle = () => {
       document.documentElement.classList.remove("dark");
     }
   }, [isDarkMode]);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => !prev);
+  };
+
+  // Show a placeholder during SSR and initial mount to prevent hydration mismatch
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        className="p-2 mr-4 rounded-full border-2 text-gray-800 hover:bg-gray-200 focus:outline-none dark:text-neutral-200 dark:hover:bg-neutral-800"
+      >
+        <span className="group inline-flex justify-center items-center size-9">
+          <span className="shrink-0 size-5" />
+        </span>
+      </button>
+    );
+  }
 
   return (
     <button
