@@ -228,4 +228,3 @@ function Project_SingleDOF() {
   );
 }
 
-export default Project_SingleDOF;
