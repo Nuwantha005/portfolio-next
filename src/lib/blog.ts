@@ -139,7 +139,7 @@ export function getAllPosts(): BlogPost[] {
         description: parsed.description,
         date: parsed.date,
         tags: parsed.tags,
-        image: parsed.image,
+        image: parsed.image ?? undefined,
         readingTime: readingTime(content).text,
         published: parsed.published,
       } as BlogPost;
@@ -180,7 +180,7 @@ export function getPostBySlug(slug: string): BlogPostWithContent | null {
     description: parsed.description,
     date: parsed.date,
     tags: parsed.tags,
-    image: parsed.image,
+    image: parsed.image ?? undefined,
     readingTime: readingTime(content).text,
     published: parsed.published,
     content: transformedContent,
