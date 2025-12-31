@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import MainNavbar from "@/components/navbar/MainNavbar";
 import Footer from "@/components/footer/Footer";
+import { onRouteChanged } from "@/lib/use-view-transition";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -10,6 +11,10 @@ interface MainLayoutProps {
 }
 
 export default function MainLayout({ children, currentPath }: MainLayoutProps) {
+  useEffect(() => {
+    onRouteChanged();
+  }, [currentPath]);
+
   return (
     <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
       <header 
@@ -19,7 +24,7 @@ export default function MainLayout({ children, currentPath }: MainLayoutProps) {
         <MainNavbar currentPath={currentPath} />
       </header>
       <main 
-        className="relative z-10 p-1 w-full overflow-y-auto overflow-x-hidden h-full"
+        className="relative z-10 p-1 w-full flex-1 overflow-y-auto overflow-x-hidden [scrollbar-gutter:stable]"
         style={{ viewTransitionName: "main-content" }}
       >
         {children}

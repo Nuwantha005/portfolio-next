@@ -25,7 +25,10 @@ export default function MainNavbar({ currentPath }: MainNavbarProps) {
 
   return (
     <div className="grid grid-cols-3 gap-4 items-center justify-items-start w-full">
-      <h1 className="font-display text-left text-lg md:text-2xl font-bold ml-4 tracking-[-0.1em] text-black dark:text-white">
+      <h1 
+        className="font-display text-left text-lg md:text-2xl font-bold ml-4 tracking-[-0.1em] text-black dark:text-white"
+        style={{ viewTransitionName: "navbar-title" }}
+      >
         {label}
       </h1>
       <div className="justify-self-center">

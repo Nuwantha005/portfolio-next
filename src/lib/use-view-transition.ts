@@ -13,11 +13,30 @@ function getPageIndex(path: string): number {
   return 0;
 }
 
+// Global resolve function for the pending transition
+let transitionResolve: (() => void) | null = null;
+
+export function onRouteChanged() {
+  if (transitionResolve) {
+    transitionResolve();
+    transitionResolve = null;
+  }
+}
+
 export function useViewTransition() {
   const router = useRouter();
 
+
   const navigateWithTransition = useCallback(
     async (href: string, currentPath: string) => {
+      // Disable view transition if navigating to or from any main page
+      const isMain = (path: string) =>
+        path === "/" || path.startsWith("/projects") || path.startsWith("/blog");
+      if (isMain(href) || isMain(currentPath)) {
+        router.push(href);
+        return;
+      }
+
       // Check if View Transitions API is supported
       if (!document.startViewTransition) {
         router.push(href);
@@ -38,8 +57,17 @@ export function useViewTransition() {
 
       const transition = document.startViewTransition(async () => {
         router.push(href);
-        // Wait a bit for React to start updating the DOM
-        await new Promise((resolve) => setTimeout(resolve, 50));
+        // Wait for the route to change
+        await new Promise<void>((resolve) => {
+          transitionResolve = resolve;
+          // Fallback timeout in case the route change isn't detected
+          setTimeout(() => {
+            if (transitionResolve === resolve) {
+              resolve();
+              transitionResolve = null;
+            }
+          }, 1000);
+        });
       });
 
       // Clean up class after transition finishes
@@ -47,6 +75,9 @@ export function useViewTransition() {
         await transition.finished;
       } finally {
         document.documentElement.classList.remove("back-transition");
+        if (transitionResolve) {
+          transitionResolve = null;
+        }
       }
     },
     [router]

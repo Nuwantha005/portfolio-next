@@ -146,28 +146,47 @@ body {
   to { opacity: 0; }
 }
 
-/* View Transitions - Sliding animations for main content */
+/* View Transitions - Simple fade for main content (avoids stretching issues with slide) */
 ::view-transition-old(main-content) {
-  animation: 600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+  animation: 250ms ease-out both fade-out;
 }
 
 ::view-transition-new(main-content) {
-  animation: 600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+  animation: 250ms ease-in 100ms both fade-in;
 }
 
-/* Reverse direction (going back) */
+/* Same animation for back transition - just fade */
 .back-transition::view-transition-old(main-content) {
-  animation: 600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-right;
+  animation: 250ms ease-out both fade-out;
 }
 
 .back-transition::view-transition-new(main-content) {
-  animation: 600ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-left;
+  animation: 250ms ease-in 100ms both fade-in;
 }
 
 /* Navbar stays fixed - no animation */
 ::view-transition-old(navbar),
 ::view-transition-new(navbar) {
-  animation: none;
+  /* Allow default cross-fade for navbar content (like the sliding pill) */
+}
+
+/* Navbar Title Animation */
+::view-transition-old(navbar-title) {
+  animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
+  width: 100%;
+}
+
+::view-transition-new(navbar-title) {
+  animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
+  width: 100%;
+}
+
+.back-transition::view-transition-old(navbar-title) {
+  animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-right;
+}
+
+.back-transition::view-transition-new(navbar-title) {
+  animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-left;
 }
 
 /* Root element - just crossfade quickly */
