@@ -31,33 +31,45 @@ export default function BlogCard({ post, index }: BlogCardProps) {
             <div className="flex flex-col gap-4">
               {/* Cover Image */}
               {post.image && (
-                <div className="relative w-full h-48 rounded-lg overflow-hidden">
+                <motion.div 
+                  layoutId={`blog-image-${post.slug}`}
+                  className="relative w-full h-48 rounded-lg overflow-hidden"
+                >
                   <img
                     src={post.image}
                     alt={post.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
-                </div>
+                </motion.div>
               )}
 
               {/* Content */}
               <div className="space-y-3">
                 {/* Title */}
-                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <motion.h2 
+                  layoutId={`blog-title-${post.slug}`}
+                  className="text-xl font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+                >
                   {post.title}
-                </h2>
+                </motion.h2>
 
                 {/* Meta Info */}
-                <div className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400">
+                <motion.div 
+                  layoutId={`blog-meta-${post.slug}`}
+                  className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400"
+                >
                   <time dateTime={post.date}>{formattedDate}</time>
                   <span>•</span>
                   <span>{post.readingTime}</span>
-                </div>
+                </motion.div>
 
                 {/* Description */}
-                <p className="text-gray-600 dark:text-gray-300 line-clamp-2">
+                <motion.p 
+                  layoutId={`blog-description-${post.slug}`}
+                  className="text-gray-600 dark:text-gray-300 line-clamp-2"
+                >
                   {post.description}
-                </p>
+                </motion.p>
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 pt-2">

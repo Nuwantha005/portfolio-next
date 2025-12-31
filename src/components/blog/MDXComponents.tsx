@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BlogImage, BlogVideo } from "./BlogMediaComponents";
 
 // Custom components for MDX
 const MDXComponents = {
@@ -143,26 +144,24 @@ const MDXComponents = {
     </pre>
   ),
 
-  // Images
+  // Images - Use BlogImage for gallery support
   img: ({
     src,
     alt,
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
-    <figure className="my-6">
-      <img
-        src={src}
-        alt={alt || ""}
-        className="rounded-lg w-full shadow-md"
-        {...props}
-      />
-      {alt && (
-        <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400 italic">
-          {alt}
-        </figcaption>
-      )}
-    </figure>
+    <BlogImage
+      src={typeof src === "string" ? src : ""}
+      alt={alt || ""}
+      caption={alt}
+      width={props.width?.toString()}
+      height={props.height?.toString()}
+    />
   ),
+
+  // Custom BlogImage and BlogVideo components for Obsidian syntax
+  BlogImage,
+  BlogVideo,
 
   // Tables
   table: ({ children, ...props }: React.HTMLAttributes<HTMLTableElement>) => (

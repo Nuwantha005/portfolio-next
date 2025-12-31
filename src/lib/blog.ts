@@ -26,18 +26,38 @@ export interface BlogPostWithContent extends BlogPost {
 function transformObsidianSyntax(content: string, slug: string): string {
   let transformed = content;
 
-  // Transform Obsidian image embeds: ![[image.png|width]] or ![[image.png]]
-  // Convert to standard markdown images with local path
+  // Transform Obsidian image/video embeds: ![[image.png|Caption]] or ![[image.png]]
+  // The pipe can contain either dimensions (width or widthxheight) or a caption
+  // Format: ![[filename|caption]] or ![[filename|width]] or ![[filename|widthxheight]]
   transformed = transformed.replace(
-    /!\[\[([^\]|]+)(?:\|(\d+)(?:x(\d+))?)?\]\]/g,
-    (match, filename, width, height) => {
+    /!\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g,
+    (match, filename, pipeContent) => {
       const imgPath = `/blog/${slug}/${filename}`;
-      if (width && height) {
-        return `<img src="${imgPath}" alt="${filename}" width="${width}" height="${height}" />`;
-      } else if (width) {
-        return `<img src="${imgPath}" alt="${filename}" width="${width}" />`;
+      const isVideo = /\.(mp4|webm|mov|avi)$/i.test(filename);
+      
+      let caption = "";
+      let width = "";
+      let height = "";
+      
+      if (pipeContent) {
+        // Check if pipeContent is dimensions (e.g., "400" or "400x300")
+        const dimensionMatch = pipeContent.match(/^(\d+)(?:x(\d+))?$/);
+        if (dimensionMatch) {
+          width = dimensionMatch[1];
+          height = dimensionMatch[2] || "";
+        } else {
+          // It's a caption
+          caption = pipeContent.trim();
+        }
       }
-      return `![${filename}](${imgPath})`;
+      
+      if (isVideo) {
+        // Use a custom video component marker that MDX can process
+        return `<BlogVideo src="${imgPath}" caption="${caption}" width="${width}" height="${height}" />`;
+      }
+      
+      // For images, use BlogImage component with caption support
+      return `<BlogImage src="${imgPath}" alt="${caption || filename}" caption="${caption}" width="${width}" height="${height}" />`;
     }
   );
 
