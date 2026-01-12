@@ -24,7 +24,7 @@ function Project_ComplexMapping() {
 
   const handleOpen = (id: number) => {
     // Find the index of the item with the given ID
-    const index = items.findIndex(item => item.id === id);
+    const index = items.findIndex((item) => item.id === id);
     if (index !== -1) {
       lgRef.current?.openGallery(index);
     }
@@ -51,25 +51,44 @@ function Project_ComplexMapping() {
           <div className="relative z-10 p-10 space-y-6">
             <FloatingSection>
               <h1 className="text-2xl mb-4">Overview</h1>
-              <motion.img
-                layoutId="Complex Transformations Mapping_img"
-                style={{
-                  cursor: "pointer",
-                  border: "4px solid gray",
-                  borderRadius: "8px",
-                  maxWidth: "50%", // Limit the width to 80% of the container
-                  height: "auto", // Maintain aspect ratio
-                }}
-                onClick={() => handleOpen(items[0].id)}
-                src="/projects/project_complex_mapping_vibration/images/Complex_Mapping.png"
-                alt="Landing Menu"
-                className="border-gray-800 dark:border-gray-200"
-              />
-              <p className="p-4 m-4 text-center lg:text-left lg:basis-1/2">
-                This project explores complex mappings and vibrations through
-                various visual representations. It includes both images and
-                videos to illustrate different concepts and transformations.
-              </p>
+              <div className="flex flex-col lg:flex-row items-center gap-6">
+                <div className="lg:w-1/2 flex justify-center">
+                  <motion.img
+                    layoutId="Complex Transformations Mapping_img"
+                    style={{
+                      cursor: "pointer",
+                      border: "4px solid gray",
+                      borderRadius: "8px",
+                      maxWidth: "100%", // Limit the width to 80% of the container
+                      height: "auto", // Maintain aspect ratio
+                    }}
+                    onClick={() => handleOpen(items[0].id)}
+                    src="/projects/project_complex_mapping_vibration/images/Complex_Mapping.png"
+                    alt="Landing Menu"
+                    className="border-gray-800 dark:border-gray-200"
+                  />
+                </div>
+                <div className="lg:w-1/2 text-justify text-xl">
+                  <p className="p-4 m-4 text-center lg:text-left lg:basis-1/2">
+                    Since complex plane is a 2D space, complex functions
+                    visualization can be difficult because the standard
+                    Cartesian graph only represents 1D functions. Therefore,
+                    coloured points in 2D space were used to represent
+                    differeent complex numbers, and the transformation can be
+                    visualized as an animation of points moving from the Domain
+                    of the function to the Image of the function.
+                  </p>
+                  <p className="p-4 m-4 text-center lg:text-left lg:basis-1/2">
+                    In this project, I explored various complex transformations
+                    and their effects on different shapes and patterns using
+                    color-coded visualizations. Additionally, I used 2 types of
+                    grids - Polar grid and Cartesian grid, and the colouring of
+                    the polar grid is based on the magnitude of the complext
+                    number while cartesian grid changes the color based on the
+                    real coordinate.
+                  </p>
+                </div>
+              </div>
             </FloatingSection>
             <Topic topicName="Gallery" />
             <FloatingSection>
