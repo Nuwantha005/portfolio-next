@@ -149,7 +149,7 @@ const AutoAdjustingSection: React.FC<AutoAdjustingSectionProps> = ({
 
         <div
           ref={textRef}
-          className="flex-1 flex flex-col justify-center p-4 text-center md:text-left"
+          className="flex-1 flex flex-col justify-center p-4 text-left"
         >
           {children}
         </div>

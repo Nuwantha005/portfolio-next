@@ -56,7 +56,7 @@ function Project_MoviesSoftware() {
                 alt="Landing Menu"
                 className="border-gray-800 dark:border-gray-200"
               />
-              <p className="p-4 m-4 text-center lg:text-left lg:basis-1/2">
+              <p className="p-4 m-4 text-left lg:basis-1/2">
                 This program was created as the final project for my course at
                 the ATARI city campus. It was a group project; however, it was
                 done all by myself as a test for my own skills. Project

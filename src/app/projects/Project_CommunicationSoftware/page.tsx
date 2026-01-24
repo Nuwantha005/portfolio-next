@@ -138,7 +138,7 @@ function Project_CommunicationSoftware() {
                     alt="Landing Menu"
                     className="basis-1/2 border-gray-800 dark:border-gray-200"
                   />
-                  <p className="p-2 sm:p-4 m-2 sm:m-4 text-sm sm:text-base text-center lg:text-left lg:basis-1/2">
+                  <p className="p-2 sm:p-4 m-2 sm:m-4 text-sm sm:text-base text-left lg:basis-1/2">
                     This program was created as the final project for my course
                     at the ATARI city campus. It was a group project; however,
                     it was done all by myself as a test for my own skills.

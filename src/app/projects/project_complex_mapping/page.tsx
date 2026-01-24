@@ -69,7 +69,7 @@ function Project_ComplexMapping() {
                   />
                 </div>
                 <div className="lg:w-1/2 text-justify text-sm sm:text-base lg:text-xl">
-                  <p className="p-2 sm:p-4 m-2 sm:m-4 text-center lg:text-left lg:basis-1/2">
+                  <p className="p-2 sm:p-4 m-2 sm:m-4 text-left lg:basis-1/2">
                     Since complex plane is a 2D space, complex functions
                     visualization can be difficult because the standard
                     Cartesian graph only represents 1D functions. Therefore,
@@ -78,7 +78,7 @@ function Project_ComplexMapping() {
                     visualized as an animation of points moving from the Domain
                     of the function to the Image of the function.
                   </p>
-                  <p className="p-2 sm:p-4 m-2 sm:m-4 text-center lg:text-left lg:basis-1/2">
+                  <p className="p-2 sm:p-4 m-2 sm:m-4 text-left lg:basis-1/2">
                     In this project, I explored various complex transformations
                     and their effects on different shapes and patterns using
                     color-coded visualizations. Additionally, I used 2 types of
