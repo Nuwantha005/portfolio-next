@@ -23,7 +23,7 @@ export const SlidingTabBar: React.FC<SlidingTabBarProps> = ({
   setActiveTabIndex,
 }) => {
   return (
-    <div className="inline-flex gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-slate-800/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-lg border border-slate-700 dark:border-slate-600 shadow-lg">
+    <div className="inline-flex gap-0.5 sm:gap-1 p-0.5 sm:p-1 bg-slate-800/50 dark:bg-slate-900/50 backdrop-blur-sm rounded border border-slate-700 dark:border-slate-600 shadow-md">
       {allTabs.map((tab, index) => {
         const isActive = activeTabIndex === index;
         return (
@@ -33,15 +33,16 @@ export const SlidingTabBar: React.FC<SlidingTabBarProps> = ({
             aria-selected={isActive}
             role="tab"
             className={`
-              px-2 sm:px-3 md:px-4 
-              py-1 sm:py-1.5 
-              text-[10px] sm:text-xs md:text-sm 
-              font-medium 
-              rounded 
+              px-2 sm:px-2.5 md:px-3
+              py-0.5 sm:py-1
+              text-[9px] sm:text-[10px] md:text-xs
+              font-medium
+              rounded-sm
               transition-all duration-200
+              whitespace-nowrap
               ${
                 isActive
-                  ? "bg-slate-700 dark:bg-slate-800 text-white shadow-md border border-slate-600 dark:border-slate-500"
+                  ? "bg-slate-700 dark:bg-slate-800 text-white shadow-sm border border-slate-600 dark:border-slate-500"
                   : "text-slate-300 dark:text-slate-400 hover:text-white hover:bg-slate-700/50 dark:hover:bg-slate-800/50"
               }
             `}
@@ -55,12 +56,13 @@ export const SlidingTabBar: React.FC<SlidingTabBarProps> = ({
       <Link
         href="/blog"
         className="
-          px-2 sm:px-3 md:px-4 
-          py-1 sm:py-1.5 
-          text-[10px] sm:text-xs md:text-sm 
-          font-medium 
-          rounded 
+          px-2 sm:px-2.5 md:px-3
+          py-0.5 sm:py-1
+          text-[9px] sm:text-[10px] md:text-xs
+          font-medium
+          rounded-sm
           transition-all duration-200
+          whitespace-nowrap
           text-slate-300 dark:text-slate-400 
           hover:text-white 
           hover:bg-slate-700/50 dark:hover:bg-slate-800/50
