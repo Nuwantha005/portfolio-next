@@ -230,17 +230,17 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
       <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
         {/* Header */}
         <header className="relative z-15 flex flex-row items-center top-0 m-2 w-screen justify-center">
-          <div className="flex flex-row gap-4 items-center justify-between ml-2 w-full px-4">
+          <div className="flex flex-row gap-2 sm:gap-4 items-center justify-between ml-2 w-full px-2 sm:px-4">
             <Link
               href="/blog"
-              className="text-lg hover:text-blue-500 transition-colors flex items-center gap-2"
+              className="text-base sm:text-lg hover:text-blue-500 transition-colors flex items-center gap-1 sm:gap-2"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
               >
                 <path
                   strokeLinecap="round"
@@ -251,14 +251,16 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
               </svg>
               <span className="hidden sm:inline">Back to Blog</span>
             </Link>
-            <div className="flex-1" />
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-center flex-1 font-semibold truncate px-2">
+              {post.title}
+            </p>
             <ThemeToggle />
           </div>
         </header>
 
       {/* Main Content with TOC Sidebar */}
       <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8">
+        <div className="max-w-7xl mx-auto px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4">
           <div className="flex gap-4 lg:gap-8">
             {/* TOC Sidebar - Hidden on mobile */}
             {tocItems.length > 0 && (
@@ -272,7 +274,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
             )}
 
             {/* Article Content */}
-            <article className="flex-1 max-w-4xl space-y-4 sm:space-y-6">
+            <article className="flex-1 max-w-4xl space-y-2 sm:space-y-3">
               {/* Hero Section */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -294,10 +296,10 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
                     </motion.div>
                   )}
 
-                  {/* Title */}
+                  {/* Title - Hidden since it's in navbar */}
                   <motion.h1 
                     layoutId={`blog-title-${post.slug}`}
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4"
+                    className="hidden"
                   >
                     {post.title}
                   </motion.h1>

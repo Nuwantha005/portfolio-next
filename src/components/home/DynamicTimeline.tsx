@@ -453,10 +453,12 @@ const DynamicTimeline: React.FC = () => {
 
     if (isMobile || isTablet) {
       // Straight vertical line
+      // Note: We add a tiny horizontal offset (0.1px) to prevent browser rendering
+      // issues with gradients on perfectly vertical lines
       const x = isMobile ? 30 : containerWidth / 2;
       const startY = CONFIG.paddingY;
       const endY = Math.max(...positions.map((p) => p.pathY)) + 40;
-      return `M ${x} ${startY} L ${x} ${endY}`;
+      return `M ${x} ${startY} L ${x + 0.1} ${endY}`;
     }
 
     // Desktop: Snake path with curves
@@ -475,10 +477,12 @@ const DynamicTimeline: React.FC = () => {
 
     if (isSingleColumn) {
       // Single column desktop - draw a straight vertical line through all points
+      // Note: We add a tiny horizontal offset (0.1px) to prevent browser rendering
+      // issues with gradients on perfectly vertical lines
       const avgX = xValues.reduce((a, b) => a + b, 0) / xValues.length;
       const startY = Math.min(...pathPoints.map(p => p.y)) - 20;
       const endY = Math.max(...pathPoints.map(p => p.y)) + 60;
-      return `M ${avgX} ${startY} L ${avgX} ${endY}`;
+      return `M ${avgX} ${startY} L ${avgX + 0.1} ${endY}`;
     }
 
     let d = `M ${pathPoints[0].x} ${pathPoints[0].y}`;
