@@ -137,7 +137,7 @@ const MDXComponents = {
   // Pre (code block wrapper)
   pre: ({ children, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
-      className="my-6 overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm"
+      className="my-6 overflow-x-auto rounded-lg bg-gray-900 p-4 text-sm max-w-full"
       {...props}
     >
       {children}
@@ -165,7 +165,7 @@ const MDXComponents = {
 
   // Tables
   table: ({ children, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
-    <div className="my-6 overflow-x-auto">
+    <div className="my-6 overflow-x-auto max-w-full">
       <table
         className="min-w-full divide-y divide-gray-200 dark:divide-gray-700"
         {...props}

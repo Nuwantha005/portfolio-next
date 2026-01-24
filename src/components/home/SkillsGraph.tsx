@@ -510,27 +510,27 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         className
       )}
     >
-      <div className="absolute right-4 top-4 z-20 flex flex-col gap-2">
+      <div className="absolute right-2 sm:right-4 top-2 sm:top-4 z-20 flex flex-col gap-2">
         <button
           type="button"
           onClick={handleFitToView}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-800 text-slate-200 shadow-md transition hover:border-indigo-400 hover:text-indigo-300"
+          className="inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-800 text-slate-200 shadow-md transition hover:border-indigo-400 hover:text-indigo-300"
           aria-label="Fit graph to view"
         >
-          <Maximize2 className="h-4 w-4" />
+          <Maximize2 className="h-3 w-3 sm:h-4 sm:w-4" />
         </button>
         <button
           type="button"
           onClick={() => setSettingsOpen((open) => !open)}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-800 text-slate-200 shadow-md transition hover:border-indigo-400 hover:text-indigo-300"
+          className="inline-flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-800 text-slate-200 shadow-md transition hover:border-indigo-400 hover:text-indigo-300"
           aria-label="Toggle physics settings"
         >
-          <Settings className="h-4 w-4" />
+          <Settings className="h-3 w-3 sm:h-4 sm:w-4" />
         </button>
       </div>
 
       {settingsOpen && (
-        <div className="absolute right-20 top-4 z-20 max-h-64 w-64 overflow-y-auto rounded-xl border border-slate-700 bg-slate-900/90 p-4 text-slate-200 shadow-xl backdrop-blur">
+        <div className="absolute right-12 sm:right-20 top-2 sm:top-4 z-20 max-h-48 sm:max-h-64 w-48 sm:w-64 overflow-y-auto rounded-xl border border-slate-700 bg-slate-900/90 p-3 sm:p-4 text-slate-200 shadow-xl backdrop-blur">
           <h3 className="text-sm font-semibold text-indigo-300">
             Graph Physics
           </h3>
@@ -592,32 +592,33 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         <g ref={gRef} />
       </svg>
 
-      <div className="pointer-events-none absolute left-4 top-4 z-10 w-48 rounded-lg border border-slate-700 bg-slate-800/90 p-4 text-slate-300 backdrop-blur">
-        <h3 className="text-sm font-semibold text-indigo-300">Controls</h3>
-        <ul className="mt-2 space-y-1 text-xs">
+      <div className="pointer-events-none absolute left-2 sm:left-4 top-2 sm:top-4 z-10 w-32 sm:w-48 rounded-lg border border-slate-700 bg-slate-800/90 p-2 sm:p-4 text-slate-300 backdrop-blur">
+        <h3 className="text-xs sm:text-sm font-semibold text-indigo-300">Controls</h3>
+        <ul className="mt-1 sm:mt-2 space-y-0.5 sm:space-y-1 text-[10px] sm:text-xs">
           <li>🖱️ Drag to pan</li>
           <li>🔍 Scroll to zoom</li>
-          <li>✋ Drag nodes to reposition</li>
-          <li>👆 Hover to highlight connections</li>
+          <li className="hidden sm:block">✋ Drag nodes to reposition</li>
+          <li className="hidden sm:block">👆 Hover to highlight connections</li>
         </ul>
       </div>
 
-      <div className="pointer-events-none absolute bottom-4 right-4 z-10 w-52 rounded-lg border border-slate-700 bg-slate-800/90 p-4 text-slate-300 backdrop-blur">
-        <h3 className="text-xs font-semibold uppercase tracking-wide text-indigo-300">
+      <div className="pointer-events-none absolute bottom-2 sm:bottom-4 right-2 sm:right-4 z-10 w-36 sm:w-52 rounded-lg border border-slate-700 bg-slate-800/90 p-2 sm:p-4 text-slate-300 backdrop-blur">
+        <h3 className="text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-indigo-300">
           Legend
         </h3>
-        <div className="mt-3 space-y-2 text-xs">
-          <div className="flex items-center gap-3">
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border-2 border-indigo-400 bg-indigo-900" />
+        <div className="mt-2 sm:mt-3 space-y-1 sm:space-y-2 text-[10px] sm:text-xs">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="inline-flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border-2 border-indigo-400 bg-indigo-900" />
             <span>Categories</span>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border-2 border-indigo-500 bg-slate-800" />
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="inline-flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border-2 border-indigo-500 bg-slate-800" />
             <span>Skills</span>
           </div>
-          <div className="flex items-center gap-3">
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border-2 border-orange-300 bg-orange-900" />
-            <span>Multi-domain Skills</span>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="inline-flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border-2 border-orange-300 bg-orange-900" />
+            <span className="hidden sm:inline">Multi-domain</span>
+            <span className="sm:hidden">Multi</span>
           </div>
         </div>
       </div>

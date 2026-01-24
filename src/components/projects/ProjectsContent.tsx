@@ -220,7 +220,7 @@ const ProjectsContent: React.FC = () => {
           <button
             key={index}
             onClick={() => toggleFilter(tag)}
-            className={`px-4 py-2 rounded-full font-medium transition-all border-2 ${
+            className={`px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all border-2 ${
               filters.includes(tag)
                 ? "bg-blue-600 text-white border-blue-600 dark:bg-blue-500 dark:border-blue-500"
                 : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-blue-100 hover:border-blue-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-blue-900/30 dark:hover:border-blue-600"

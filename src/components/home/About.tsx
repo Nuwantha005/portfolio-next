@@ -8,15 +8,17 @@ import Image from "next/image";
 function About() {
   return (
     <div className="flex flex-col sm:flex-row gap-4 justify-between justify-items-stretch content-center ">
-      <FloatingSection>
-      <Image
-          src="./Images/Profile.jpg"
-          alt="Profile"
-          width={288} // Adjust the width as needed
-          height={288} // Adjust the height as needed
-          className="rounded-full aspect-square max-w-48 sm:max-w-60 md:max-w-72 justify-self-center"
-        />
-      </FloatingSection>
+      <div className="flex justify-center items-center">
+        <FloatingSection>
+        <Image
+            src="./Images/Profile.jpg"
+            alt="Profile"
+            width={288}
+            height={288}
+            className="rounded-full aspect-square max-w-48 sm:max-w-60 md:max-w-72 mx-auto"
+          />
+        </FloatingSection>
+      </div>
       <div className="justify-self-stretch grow">
         <FloatingSection>
           <h1 className="text-bold text-2xl sm:text-3xl">About</h1>
@@ -39,8 +41,8 @@ function About() {
 
           <div className="mt-4 flex flex-row justify-end">
             <a
-              href="/resume.pdf" // Path to the resume file in the public folder
-              download="Nuwantha Kumara CV.pdf" // The name of the file when downloaded
+              href="/resume.pdf"
+              download="Nuwantha Kumara CV.pdf"
             >
               <button className="dark:bg-gray-300 bg-slate-800 dark:hover:bg-gray-400 hover:bg-slate-600 dark:text-gray-800 text-slate-50 font-bold py-2 px-3 sm:px-4 rounded inline-flex items-center text-sm sm:text-base">
                 <svg

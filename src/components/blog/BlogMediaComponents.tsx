@@ -45,13 +45,13 @@ export function BlogImage({ src, alt, caption, width, height }: BlogImageProps) 
   };
 
   return (
-    <figure className="my-6 flex flex-col items-center">
+    <figure className="my-6 flex flex-col items-center max-w-full">
       <img
         src={src}
         alt={alt || caption || ""}
         onClick={handleClick}
         style={style}
-        className="rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer dark:bg-gray-800/50 bg-gray-200/50 p-2"
+        className="rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer dark:bg-gray-800/50 bg-gray-200/50 p-2 max-w-full h-auto"
       />
       {(caption || alt) && (
         <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400 italic">
@@ -105,10 +105,10 @@ export function BlogVideo({ src, caption, width, height, poster }: BlogVideoProp
   };
 
   return (
-    <figure className="my-6 flex flex-col items-center">
+    <figure className="my-6 flex flex-col items-center max-w-full">
       <div
         onClick={handleClick}
-        className="cursor-pointer relative group"
+        className="cursor-pointer relative group max-w-full"
         style={style}
       >
         <video
@@ -119,7 +119,7 @@ export function BlogVideo({ src, caption, width, height, poster }: BlogVideoProp
           muted
           playsInline
           preload="metadata"
-          className="rounded-lg shadow-md hover:shadow-lg transition-shadow dark:bg-gray-800/50 bg-gray-200/50 p-2"
+          className="rounded-lg shadow-md hover:shadow-lg transition-shadow dark:bg-gray-800/50 bg-gray-200/50 p-2 max-w-full h-auto"
         />
         {/* Play icon overlay */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-70 group-hover:opacity-100 transition-opacity">
