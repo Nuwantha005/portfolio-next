@@ -41,7 +41,7 @@ function Project_MoviesSoftware() {
         <ProjectTitleBar title="Movies and Series Management Software" />
         {/* Floating Tiles Content */}
         <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
-          <div className="relative z-10 p-10 space-y-6">
+          <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-10 space-y-4 sm:space-y-6">
             <FloatingSection>
               <h1 className="text-2xl mb-4">Overview</h1>
               <motion.img

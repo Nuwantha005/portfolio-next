@@ -48,7 +48,7 @@ const ProgrammingLanguages = () => {
   }, []);
 
   return (
-    <main className="relative min-h-32 flex flex-col justify-center align-middle rounded-3xl bg-slate-700/80 dark:bg-slate-900/80 overflow-hidden">
+    <main className="relative min-h-24 sm:min-h-32 flex flex-col justify-center align-middle rounded-3xl bg-slate-700/80 dark:bg-slate-900/80 overflow-hidden">
       <div className="w-11/12 mx-auto overflow-hidden align-slef-middle">
         <div className="text-center">
           {/* Logo Carousel animation */}
@@ -59,8 +59,8 @@ const ProgrammingLanguages = () => {
             >
               {imageArray.map((item, index) => (
                 <li key={index} className="flex flex-col items-center">
-                  <Image width={64} height={64} src={item.src} alt={item.alt} />
-                  <span className="mt-2 text-white">{item.alt}</span>
+                  <Image width={64} height={64} src={item.src} alt={item.alt} className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16" />
+                  <span className="mt-1 sm:mt-2 text-white text-xs sm:text-sm">{item.alt}</span>
                 </li>
               ))}
             </ul>

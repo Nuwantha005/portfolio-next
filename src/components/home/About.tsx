@@ -14,24 +14,24 @@ function About() {
           alt="Profile"
           width={288} // Adjust the width as needed
           height={288} // Adjust the height as needed
-          className="rounded-full aspect-square max-w-72 justify-self-center"
+          className="rounded-full aspect-square max-w-48 sm:max-w-60 md:max-w-72 justify-self-center"
         />
       </FloatingSection>
       <div className="justify-self-stretch grow">
         <FloatingSection>
-          <h1 className="text-bold text-3xl">About</h1>
+          <h1 className="text-bold text-2xl sm:text-3xl">About</h1>
 
           <p className="mt-4 text-sm sm:text-md">
             Hello, my name is Nuwantha Kumara. I&apos;m a mechanical engineering
             undergraduate in University of Moratuwa.
           </p>
           <section className="mt-4 flex flex-row gap-2 content-center align-center max-h-20 grow">
-            <MdLocationPin size={35} />{" "}
+            <MdLocationPin className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" />{" "}
             <p className="text-sm self-center">Padukka</p>
           </section>
           <section className="mt-2 flex flex-row gap-2 content-center align-center max-h-20 ">
-            <HiOutlineMail size={35} />{" "}
-            <p className="text-sm self-center ">nuwanthakumara999@gmail.com</p>
+            <HiOutlineMail className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" />{" "}
+            <p className="text-xs sm:text-sm self-center break-all">nuwanthakumara999@gmail.com</p>
           </section>
           <div className=" flex flex-row gap-2 content-center align-center justify-start">
             <SocialDock />
@@ -42,9 +42,9 @@ function About() {
               href="/resume.pdf" // Path to the resume file in the public folder
               download="Nuwantha Kumara CV.pdf" // The name of the file when downloaded
             >
-              <button className="dark:bg-gray-300 bg-slate-800 dark:hover:bg-gray-400 hover:bg-slate-600 dark:text-gray-800 text-slate-50 font-bold py-2 px-4 rounded inline-flex items-center">
+              <button className="dark:bg-gray-300 bg-slate-800 dark:hover:bg-gray-400 hover:bg-slate-600 dark:text-gray-800 text-slate-50 font-bold py-2 px-3 sm:px-4 rounded inline-flex items-center text-sm sm:text-base">
                 <svg
-                  className="fill-current w-4 h-4 mr-2"
+                  className="fill-current w-3 h-3 sm:w-4 sm:h-4 mr-2"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                 >

@@ -167,7 +167,7 @@ function ContentSectionRenderer({
       className="scroll-mt-4"
     >
       <FloatingSection>
-        <div className="prose prose-lg dark:prose-invert max-w-none">
+        <div className="prose prose-sm sm:prose-base lg:prose-lg dark:prose-invert max-w-none">
           {mdxSource ? (
             <MDXRemote {...mdxSource} components={MDXComponents} />
           ) : (
@@ -258,8 +258,8 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
 
       {/* Main Content with TOC Sidebar */}
       <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8">
+          <div className="flex gap-4 lg:gap-8">
             {/* TOC Sidebar - Hidden on mobile */}
             {tocItems.length > 0 && (
               <aside className="hidden xl:block w-64 flex-shrink-0">
@@ -272,7 +272,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
             )}
 
             {/* Article Content */}
-            <article className="flex-1 max-w-4xl space-y-6">
+            <article className="flex-1 max-w-4xl space-y-4 sm:space-y-6">
               {/* Hero Section */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -297,7 +297,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
                   {/* Title */}
                   <motion.h1 
                     layoutId={`blog-title-${post.slug}`}
-                    className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4"
+                    className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-3 sm:mb-4"
                   >
                     {post.title}
                   </motion.h1>
@@ -358,7 +358,7 @@ export default function BlogPostClient({ post }: BlogPostClientProps) {
                   {post.description && (
                     <motion.p 
                       layoutId={`blog-description-${post.slug}`}
-                      className="mt-4 text-lg text-gray-600 dark:text-gray-300 border-l-4 border-blue-500 pl-4 italic"
+                      className="mt-3 sm:mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300 border-l-4 border-blue-500 pl-3 sm:pl-4 italic"
                     >
                       {post.description}
                     </motion.p>

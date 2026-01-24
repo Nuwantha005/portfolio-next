@@ -177,10 +177,10 @@ const ProjectsContent: React.FC = () => {
       {/* View Mode Toggle & Filter Controls */}
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         {/* View Mode Toggle */}
-        <div className="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
+        <div className="flex items-center gap-1 sm:gap-2 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
           <button
             onClick={() => setViewMode("categorized")}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+            className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-all ${
               viewMode === "categorized"
                 ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
                 : "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
@@ -190,7 +190,7 @@ const ProjectsContent: React.FC = () => {
           </button>
           <button
             onClick={() => setViewMode("all")}
-            className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+            className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-all ${
               viewMode === "all"
                 ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
                 : "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"

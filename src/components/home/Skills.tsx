@@ -39,8 +39,8 @@ function Skills() {
 
   return (
     <FloatingSection>
-      <h1 className="text-bold text-3xl">Skills</h1>
-      <p className="mt-4 text-sm text-slate-300">
+      <h1 className="text-bold text-2xl sm:text-3xl">Skills</h1>
+      <p className="mt-4 text-xs sm:text-sm text-slate-300">
         The skill set behind my projects now lives in a force-directed graph.
         Hover to highlight related technologies, drag to rearrange, and scroll
         to zoom. The dataset driving the graph is defined centrally in{" "}
@@ -49,8 +49,8 @@ function Skills() {
         </code>{" "}
         so it&apos;s easy to extend without touching the component.
       </p>
-      <div className="mt-8 flex flex-col gap-6 lg:h-[36rem] lg:flex-row lg:items-stretch">
-        <div className="space-y-4 rounded-xl border border-slate-800 bg-slate-900/40 p-6 text-sm text-slate-300 lg:w-1/4 lg:max-w-none lg:overflow-y-auto">
+      <div className="mt-6 sm:mt-8 flex flex-col gap-4 sm:gap-6 lg:h-[36rem] lg:flex-row lg:items-stretch">
+        <div className="hidden lg:block space-y-4 rounded-xl border border-slate-800 bg-slate-900/40 p-6 text-sm text-slate-300 lg:w-1/4 lg:max-w-none lg:overflow-y-auto">
           <h2 className="text-base font-semibold text-indigo-300">
             Skill Hierarchy
           </h2>
@@ -109,11 +109,11 @@ function Skills() {
             )}
         </div>
 
-        <div className="h-[32rem] flex-1 lg:h-full lg:w-3/4">
+        <div className="h-[20rem] sm:h-[24rem] md:h-[32rem] flex-1 lg:h-full lg:w-3/4">
           <SkillsGraph className="h-full w-full" />
         </div>
       </div>
-      <div className="w-11/12 mx-auto px-4 py-12 md:px-6">
+      <div className="w-11/12 mx-auto px-2 sm:px-4 py-6 sm:py-8 md:py-12">
         <ProgrammingLanguages />
       </div>
     </FloatingSection>

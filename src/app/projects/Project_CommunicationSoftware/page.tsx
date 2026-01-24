@@ -88,19 +88,19 @@ function Project_CommunicationSoftware() {
       </Head>
       <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
         <header className="relative z-15 flex flex-row items-center top-0 m-2 w-screen justify-center">
-          <div className="flex flex-row gap-4 items-center justify-between ml-2 w-full">
+          <div className="flex flex-row gap-2 sm:gap-4 items-center justify-between ml-2 w-full px-2 sm:px-4">
             <button
               onClick={() => {
                 window.history.back();
               }}
-              className="text-lg"
+              className="text-lg flex-shrink-0"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-5 h-5 sm:w-6 sm:h-6"
               >
                 <path
                   strokeLinecap="round"
@@ -112,7 +112,7 @@ function Project_CommunicationSoftware() {
             </button>
             <motion.p
               layoutId="Communication Software_title"
-              className="text-4xl"
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-center flex-1"
             >
               Communication Software
             </motion.p>
@@ -121,11 +121,11 @@ function Project_CommunicationSoftware() {
         </header>
         {/* Floating Tiles Content */}
         <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
-          <div className="relative z-10 p-10 space-y-6">
+          <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-10 space-y-4 sm:space-y-6">
             <div className="flex flex-col sm:flex-row gap-4 items-stretch">
               <div className="basis-3/4">
                 <FloatingSection>
-                  <h1 className="text-2xl mb-4">Overview</h1>
+                  <h1 className="text-xl sm:text-2xl mb-3 sm:mb-4">Overview</h1>
                   <motion.img
                     layoutId="Communication Software_img"
                     style={{
@@ -138,7 +138,7 @@ function Project_CommunicationSoftware() {
                     alt="Landing Menu"
                     className="basis-1/2 border-gray-800 dark:border-gray-200"
                   />
-                  <p className="p-4 m-4 text-center lg:text-left lg:basis-1/2">
+                  <p className="p-2 sm:p-4 m-2 sm:m-4 text-sm sm:text-base text-center lg:text-left lg:basis-1/2">
                     This program was created as the final project for my course
                     at the ATARI city campus. It was a group project; however,
                     it was done all by myself as a test for my own skills.
@@ -153,7 +153,7 @@ function Project_CommunicationSoftware() {
               </div>
               <div className="basis-1/4 justify-center">
                 <FloatingSection>
-                  <h1 className="text-2xl mb-4">Project Structure</h1>
+                  <h1 className="text-xl sm:text-2xl mb-3 sm:mb-4">Project Structure</h1>
                   <div className="flex flex-col gap-8 justify-center">
                     <ImageDoc image={images[1]} onOpen={onOpen} />
                   </div>

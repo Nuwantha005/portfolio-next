@@ -53,7 +53,7 @@ function Project_SingleDOF() {
       <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
         <ProjectTitleBar title="Single DOF Vibration Simulation" />
         <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
-          <div className="relative z-10 p-10 space-y-6 text-lg">
+          <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-10 space-y-4 sm:space-y-6 text-sm sm:text-base lg:text-lg">
             {/* Hero Section */}
             <FloatingSection>
               <h1 className="text-3xl mb-4 font-bold">Problem Definition</h1>

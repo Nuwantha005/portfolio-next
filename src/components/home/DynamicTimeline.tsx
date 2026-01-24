@@ -173,7 +173,7 @@ const TimelineCard: React.FC<{
         absolute backdrop-blur-md 
         bg-slate-800/80 dark:bg-slate-900/80
         border ${typeStyles.border}
-        rounded-xl p-4 shadow-lg
+        rounded-xl p-3 sm:p-4 shadow-lg
         transition-all duration-300 ease-out
         ${isHovered ? "z-50 shadow-2xl shadow-indigo-500/20 scale-[1.02]" : "z-30"}
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
@@ -192,20 +192,20 @@ const TimelineCard: React.FC<{
         <span
           className={`
             ${typeStyles.bg} text-white
-            text-[10px] font-bold px-2 py-1 rounded-full
+            text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full
             uppercase tracking-wider shadow-sm
           `}
         >
           {entry.type}
         </span>
-        <span className="text-xs text-muted-foreground font-mono flex items-center gap-1">
+        <span className="text-[10px] sm:text-xs text-muted-foreground font-mono flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-current opacity-50" />
           {entry.date}
         </span>
       </div>
 
       {/* Title */}
-      <h3 className="text-base font-bold text-foreground mb-2 leading-tight">
+      <h3 className="text-sm sm:text-base font-bold text-foreground mb-2 leading-tight">
         {entry.title}
       </h3>
 
@@ -218,7 +218,7 @@ const TimelineCard: React.FC<{
           maxHeight: isHovered ? "500px" : "80px",
         }}
       >
-        <p className={`text-sm text-muted-foreground leading-relaxed ${!isHovered ? "line-clamp-3" : ""}`}>
+        <p className={`text-xs sm:text-sm text-muted-foreground leading-relaxed ${!isHovered ? "line-clamp-3" : ""}`}>
           {entry.description}
         </p>
       </div>
@@ -231,7 +231,7 @@ const TimelineCard: React.FC<{
           ${isHovered ? "opacity-0 h-0" : "opacity-100 h-4"}
         `}
       >
-        <span className="text-[10px]">hover to expand</span>
+        <span className="text-[9px] sm:text-[10px]">hover to expand</span>
       </div>
     </div>
   );
