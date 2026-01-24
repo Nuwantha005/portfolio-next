@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
-import { useViewTransition, getPageIndex } from "@/lib/use-view-transition";
+import React from "react";
+import { useViewTransition } from "@/lib/use-view-transition";
 
 interface TabItem {
   id: string;
@@ -21,25 +20,13 @@ interface SlidingNavBarProps {
 }
 
 export const SlidingNavBar: React.FC<SlidingNavBarProps> = ({ currentPath }) => {
-  const pathname = usePathname();
   const { navigateWithTransition } = useViewTransition();
-  const tabsRef = useRef<HTMLButtonElement[] | null[]>([]);
-  const [tabUnderlineWidth, setTabUnderlineWidth] = useState<number>(0);
-  const [tabUnderlineLeft, setTabUnderlineLeft] = useState<number>(0);
 
   // Get current active tab index based on path
   const activeTabIndex = allTabs.findIndex((tab) => {
     if (tab.path === "/") return currentPath === "/";
     return currentPath.startsWith(tab.path);
   });
-
-  useEffect(() => {
-    const currentTab = tabsRef.current[activeTabIndex];
-    if (currentTab) {
-      setTabUnderlineLeft(currentTab.offsetLeft);
-      setTabUnderlineWidth(currentTab.clientWidth);
-    }
-  }, [activeTabIndex]);
 
   const handleNavigation = (path: string) => {
     if (path !== currentPath) {
@@ -48,27 +35,29 @@ export const SlidingNavBar: React.FC<SlidingNavBarProps> = ({ currentPath }) => 
   };
 
   return (
-    <div className="flew-row relative mx-auto flex h-12 rounded-3xl border border-slate-700/40 bg-gray-600 dark:border-white/40 dark:bg-slate-200 px-2 backdrop-blur-md">
-      <span
-        className="absolute bottom-0 top-0 -z-10 flex overflow-hidden rounded-3xl py-2 transition-all duration-300"
-        style={{ left: tabUnderlineLeft, width: tabUnderlineWidth }}
-      >
-        <span className="h-full w-full rounded-3xl bg-gray-300 dark:bg-gray-900" />
-      </span>
+    <div className="inline-flex gap-0.5 sm:gap-1 p-0.5 sm:p-1 bg-slate-800/50 dark:bg-slate-900/50 backdrop-blur-sm rounded border border-slate-700 dark:border-slate-600 shadow-md">
       {allTabs.map((tab, index) => {
         const isActive = activeTabIndex === index;
         return (
           <button
             key={tab.id}
-            ref={(el) => {
-              tabsRef.current[index] = el;
-            }}
-            className={`${
-              isActive ? `` : `hover:text-blue-400 dark:hover:text-blue-800`
-            } my-auto cursor-pointer select-none rounded-full px-4 text-center font-bold text-black dark:text-blue-500`}
             onClick={() => handleNavigation(tab.path)}
             aria-selected={isActive}
             role="tab"
+            className={`
+              px-2 sm:px-2.5 md:px-3
+              py-0.5 sm:py-1
+              text-[9px] sm:text-[10px] md:text-xs
+              font-medium
+              rounded-sm
+              transition-all duration-200
+              whitespace-nowrap
+              ${
+                isActive
+                  ? "bg-slate-700 dark:bg-slate-800 text-white shadow-sm border border-slate-600 dark:border-slate-500"
+                  : "text-slate-300 dark:text-slate-400 hover:text-white hover:bg-slate-700/50 dark:hover:bg-slate-800/50"
+              }
+            `}
           >
             {tab.name}
           </button>
