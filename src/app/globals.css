@@ -215,3 +215,35 @@ body {
   to { transform: translateX(0); opacity: 1; }
 }
 
+/* KaTeX Math Responsiveness - Prevent overflow on mobile */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+.katex {
+  font-size: 1em;
+  max-width: 100%;
+}
+
+/* Scale down math on smaller screens */
+@media (max-width: 640px) {
+  .katex-display {
+    font-size: 0.9em;
+  }
+  
+  .katex {
+    font-size: 0.95em;
+  }
+}
+
+/* Allow horizontal scrolling for very long equations on mobile */
+.katex-display > .katex {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+
