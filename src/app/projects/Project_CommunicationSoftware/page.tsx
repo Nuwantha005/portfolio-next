@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import FloatingSection from "@/components/ui/FloatingSection";
+import AutoAdjustingSection from "@/components/ui/AutoAdjustingSection";
 import ThemeToggle from "@/components/navbar/ThemeToggle";
 import Topic from "@/components/ui/Topic";
 import LightGallery from "lightgallery/react";
@@ -159,13 +160,15 @@ function Project_CommunicationSoftware() {
                 </FloatingSection>
               </div>
             </div>
-            <FloatingSection>
-              <div className="grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
-                <div className="xl:col-span-1 2xl:col-span-1">
-                  <h1 className="text-2xl mb-4">Database Structure</h1>
-                  <ImageDoc image={images[2]} onOpen={onOpen} />
-                </div>
-                <p className="m-4 p-5 text-center lg:text-left lg:basis-1/2">
+            {images[2] && (
+              <AutoAdjustingSection
+                title="Database Structure"
+                imageSrc={images[2].thumb}
+                imageAlt="Database Structure"
+                imagePosition="left"
+                onImageClick={() => onOpen(images[2].id)}
+              >
+                <p>
                   Database contains tables to store on sales, products,
                   services, suppliers, customers, and much more. Actions such as
                   selling, adding items to inventory, buying from suppliers, and
@@ -174,16 +177,18 @@ function Project_CommunicationSoftware() {
                   drawn for examples between sales and inventory (stock table).
                   Furthermore, suitable data types are assigned to each column.
                 </p>
-              </div>
-            </FloatingSection>
+              </AutoAdjustingSection>
+            )}
             <Topic topicName="Features" />
-            <FloatingSection>
-              <div className="grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
-                <div className="xl:col-span-1 2xl:col-span-1">
-                  <h1 className="text-2xl mb-4">Chart Generation</h1>
-                  <ImageDoc image={images[3]} onOpen={onOpen} />
-                </div>
-                <p className="m-4 p-5 text-center lg:text-left lg:basis-1/2">
+            {images[3] && (
+              <AutoAdjustingSection
+                title="Chart Generation"
+                imageSrc={images[3].thumb}
+                imageAlt="Chart Generation"
+                imagePosition="left"
+                onImageClick={() => onOpen(images[3].id)}
+              >
+                <p>
                   Charts section in the program can generate 2D and 3D charts
                   for different data such as sales, income, inventory, and
                   expenses. These charts can be in the form of line charts, bar
@@ -206,17 +211,17 @@ function Project_CommunicationSoftware() {
                   </a>{" "}
                   libraries were used to generate charts.
                 </p>
-              </div>
-            </FloatingSection>
-            <FloatingSection>
-              <div className="grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
-                <div className="xl:col-span-1 2xl:col-span-1">
-                  <h1 className="text-2xl mb-4">
-                    Printable Reports Generation
-                  </h1>
-                  <ImageDoc image={images[4]} onOpen={onOpen} />
-                </div>
-                <p className="m-4 p-5 text-center lg:text-left lg:basis-1/2">
+              </AutoAdjustingSection>
+            )}
+            {images[4] && (
+              <AutoAdjustingSection
+                title="Printable Reports Generation"
+                imageSrc={images[4].thumb}
+                imageAlt="Printable Reports Generation"
+                imagePosition="left"
+                onImageClick={() => onOpen(images[4].id)}
+              >
+                <p>
                   For several tables, data can be exported to a report, and
                   physical copies can be obtained through printing them. These
                   reports are of two kinds: detailed reports and simple reports.
@@ -232,15 +237,17 @@ function Project_CommunicationSoftware() {
                   generated for customers and suppliers through the same
                   techniques.
                 </p>
-              </div>
-            </FloatingSection>
-            <FloatingSection>
-              <div className="grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
-                <div className="xl:col-span-1 2xl:col-span-1">
-                  <h1 className="text-2xl mb-4">Barcode and QR Generation</h1>
-                  <ImageDoc image={images[5]} onOpen={onOpen} />
-                </div>
-                <p className="m-4 p-5 text-center lg:text-left lg:basis-1/2">
+              </AutoAdjustingSection>
+            )}
+            {images[5] && (
+              <AutoAdjustingSection
+                title="Barcode and QR Generation"
+                imageSrc={images[5].thumb}
+                imageAlt="Barcode and QR Generation"
+                imagePosition="left"
+                onImageClick={() => onOpen(images[5].id)}
+              >
+                <p>
                   If necessary, barcodes and QR codes for each product can be
                   generated through the software itself without using external
                   sources. The user will have to enter the text, which should be
@@ -250,17 +257,17 @@ function Project_CommunicationSoftware() {
                   codes can be attached to products, and they can be scanned by
                   the cashier when sales occur.
                 </p>
-              </div>
-            </FloatingSection>
-            <FloatingSection>
-              <div className="grid lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
-                <div className="xl:col-span-1 2xl:col-span-1">
-                  <h1 className="text-2xl mb-4">
-                    Data Viewing, Filtering and Editing
-                  </h1>
-                  <ImageDoc image={images[6]} onOpen={onOpen} />
-                </div>
-                <p className="m-4 p-5 text-center md:text-left md:basis-1/2">
+              </AutoAdjustingSection>
+            )}
+            {images[6] && (
+              <AutoAdjustingSection
+                title="Data Viewing, Filtering and Editing"
+                imageSrc={images[6].thumb}
+                imageAlt="Data Viewing, Filtering and Editing"
+                imagePosition="left"
+                onImageClick={() => onOpen(images[6].id)}
+              >
+                <p>
                   All types of data that were entered, such as sales, inventory,
                   incomes, expenses, services, and standard attendance, can be
                   viewed and edited. Apart from that, static data such as
@@ -270,8 +277,8 @@ function Project_CommunicationSoftware() {
                   sales amount, and discount provided. Data can also be ascended
                   or descended according to these column values.
                 </p>
-              </div>
-            </FloatingSection>
+              </AutoAdjustingSection>
+            )}
             <Topic topicName="Images" />
             <FloatingSection>
               <LightGallery

@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import FloatingSection from "@/components/ui/FloatingSection";
+import AutoAdjustingSection from "@/components/ui/AutoAdjustingSection";
 import "@/app/projects/galleryStyle.css";
 import LGComponent, { LGRef } from "@/components/ui/LGComponent";
 import ProjectTitleBar from "@/components/ui/ProjectTitleBar";
@@ -110,113 +111,91 @@ function Project_SingleDOF() {
             <Topic topicName="Damping Situations" />
 
             {/* 1) No Damping */}
-            <FloatingSection>
-              <h2 className="text-2xl mb-4 font-semibold">1) No Damping</h2>
-              <div className="flex flex-col lg:flex-row items-center gap-6">
-                <div className="lg:w-1/2">
-                  {getItem(3) && (
-                    <VideoDock
-                      video={getItem(3)!}
-                      onOpen={handleOpen}
-                    />
-                  )}
-                </div>
-                <div className="lg:w-1/2 text-justify">
-                  <p>
-                    When damping coefficient is equal to zero (<InlineMath math="c = 0" />
-                    ), there is no damping happening and harmonic motion
-                    continues forever.
-                  </p>
-                </div>
-              </div>
-            </FloatingSection>
+            <AutoAdjustingSection
+              title="1) No Damping"
+              imagePosition="left"
+              mediaContent={
+                getItem(3) && (
+                  <VideoDock video={getItem(3)!} onOpen={handleOpen} />
+                )
+              }
+            >
+              <p>
+                When damping coefficient is equal to zero (
+                <InlineMath math="c = 0" />
+                ), there is no damping happening and harmonic motion continues
+                forever.
+              </p>
+            </AutoAdjustingSection>
 
             {/* 2) Under Damped */}
-            <FloatingSection>
-              <h2 className="text-2xl mb-4 font-semibold">2) Under Damped</h2>
-              <div className="flex flex-col lg:flex-row items-center gap-6">
-                <div className="lg:w-1/2 text-justify">
-                  <p className="mb-4">
-                    When <InlineMath math="\beta < 1" />, <InlineMath math="s" />{" "}
-                    has two complex solutions and it leads to following form of
-                    solution known as underdamped system.
-                  </p>
-                  <div className="mb-4">
-                    <BlockMath math="x(t) = X_0e^{-\beta\omega_n t} \sin(\omega_d t + \phi_0)" />
-                  </div>
-                  <p>
-                    Where <InlineMath math="X_0, \phi_0" />, and{" "}
-                    <InlineMath math="\omega_d" /> are amplitude, phase angle
-                    and frequency of oscillation and:
-                  </p>
-                  <div className="mt-4">
-                    <BlockMath math="\omega_d = \omega_n\sqrt{1-\beta^2}" />
-                  </div>
-                </div>
-                <div className="lg:w-1/2">
-                  {getItem(5) && (
-                    <VideoDock
-                      video={getItem(5)!}
-                      onOpen={handleOpen}
-                    />
-                  )}
-                </div>
+            <AutoAdjustingSection
+              title="2) Under Damped"
+              imagePosition="right"
+              mediaContent={
+                getItem(5) && (
+                  <VideoDock video={getItem(5)!} onOpen={handleOpen} />
+                )
+              }
+            >
+              <p className="mb-4">
+                When <InlineMath math="\beta < 1" />, <InlineMath math="s" />{" "}
+                has two complex solutions and it leads to following form of
+                solution known as underdamped system.
+              </p>
+              <div className="mb-4">
+                <BlockMath math="x(t) = X_0e^{-\beta\omega_n t} \sin(\omega_d t + \phi_0)" />
               </div>
-            </FloatingSection>
+              <p>
+                Where <InlineMath math="X_0, \phi_0" />, and{" "}
+                <InlineMath math="\omega_d" /> are amplitude, phase angle and
+                frequency of oscillation and:
+              </p>
+              <div className="mt-4">
+                <BlockMath math="\omega_d = \omega_n\sqrt{1-\beta^2}" />
+              </div>
+            </AutoAdjustingSection>
 
             {/* 3) Critically Damped */}
-            <FloatingSection>
-              <h2 className="text-2xl mb-4 font-semibold">
-                3) Critically Damped
-              </h2>
-              <div className="flex flex-col lg:flex-row items-center gap-6">
-                <div className="lg:w-1/2">
-                  {getItem(7) && (
-                    <VideoDock
-                      video={getItem(7)!}
-                      onOpen={handleOpen}
-                    />
-                  )}
-                </div>
-                <div className="lg:w-1/2 text-justify">
-                  <p className="mb-4">
-                    When <InlineMath math="\beta = 1" />,{" "}
-                    <InlineMath math="s_1=s_2" />. Because of that system is
-                    critically damped and it reaches the stability within
-                    shortest possible time. The solution to DE is in the
-                    following form:
-                  </p>
-                  <div className="mb-4">
-                    <BlockMath math="x(t) = (c_1 + c_2t)e^{\omega_n t}" />
-                  </div>
-                </div>
+            <AutoAdjustingSection
+              title="3) Critically Damped"
+              imagePosition="left"
+              mediaContent={
+                getItem(7) && (
+                  <VideoDock video={getItem(7)!} onOpen={handleOpen} />
+                )
+              }
+            >
+              <p className="mb-4">
+                When <InlineMath math="\beta = 1" />,{" "}
+                <InlineMath math="s_1=s_2" />. Because of that system is
+                critically damped and it reaches the stability within shortest
+                possible time. The solution to DE is in the following form:
+              </p>
+              <div className="mb-4">
+                <BlockMath math="x(t) = (c_1 + c_2t)e^{\omega_n t}" />
               </div>
-            </FloatingSection>
+            </AutoAdjustingSection>
 
             {/* 4) Overdamped */}
-            <FloatingSection>
-              <h2 className="text-2xl mb-4 font-semibold">4) Overdamped</h2>
-              <div className="flex flex-col lg:flex-row items-center gap-6">
-                <div className="lg:w-1/2 text-justify">
-                  <p className="mb-4">
-                    When <InlineMath math="\beta > 1" />, system has two real
-                    roots and solution has the following form:
-                  </p>
-                  <div className="mb-4">
-                    <BlockMath math="x(t) = c_1e^{s_1t} + c_2e^{s_2t}" />
-                  </div>
-                  {/*<ImageDoc key={getItem(8)?.id} image={getItem(8)!} onOpen={handleOpen} />*/}
-                </div>
-                <div className="lg:w-1/2">
-                  {getItem(9) && (
-                    <VideoDock
-                      video={getItem(9)!}
-                      onOpen={handleOpen}
-                    />
-                  )}
-                </div>
+            <AutoAdjustingSection
+              title="4) Overdamped"
+              imagePosition="right"
+              mediaContent={
+                getItem(9) && (
+                  <VideoDock video={getItem(9)!} onOpen={handleOpen} />
+                )
+              }
+            >
+              <p className="mb-4">
+                When <InlineMath math="\beta > 1" />, system has two real roots
+                and solution has the following form:
+              </p>
+              <div className="mb-4">
+                <BlockMath math="x(t) = c_1e^{s_1t} + c_2e^{s_2t}" />
               </div>
-            </FloatingSection>
+              {/*<ImageDoc key={getItem(8)?.id} image={getItem(8)!} onOpen={handleOpen} />*/}
+            </AutoAdjustingSection>
             <section className="bg-slate-400/50 max-h-20 shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300 border-2 border-gray-800 dark:border-gray-200">
               <div className="flex flex-row justify-between">
                 <h1 className="font-bold text-2xl"> Interactive Webpage </h1>
