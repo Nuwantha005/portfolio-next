@@ -105,7 +105,7 @@ function Skills() {
             )}
         </div>
 
-        <div className="h-[20rem] sm:h-[24rem] md:h-[32rem] flex-1 lg:h-full lg:w-3/4">
+        <div className="h-[32rem] sm:h-[28rem] md:h-[24rem] flex-1 lg:h-full lg:w-3/4">
           <SkillsGraph className="h-full w-full" />
         </div>
       </div>

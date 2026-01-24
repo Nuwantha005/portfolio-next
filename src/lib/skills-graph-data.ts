@@ -64,7 +64,7 @@ export const skillsGraphStructure: SkillsGraphStructure = {
       ]
     },
     {
-      id: "Design Software",
+      id: "CAD",
       skills: ["SolidWorks", "AutoCAD"]
     },
     {
@@ -94,7 +94,7 @@ export const skillsGraphStructure: SkillsGraphStructure = {
   special: [
     {
       id: "OpenCascade",
-      connections: ["Design Software", "Libraries and Tools", "C++"]
+      connections: ["CAD", "Libraries and Tools", "C++"]
     }
   ],
   crossConnections: [

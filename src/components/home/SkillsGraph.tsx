@@ -190,6 +190,10 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       .filter((node) => node.type === "category")
       .map((node) => node.id);
 
+    // Detect if we're in portrait mode (mobile)
+    const isPortrait = dimensions.height > dimensions.width;
+    const primaryDimension = isPortrait ? dimensions.height : dimensions.width;
+
     const preferredCategoryRatios: Record<string, number> = {
       "Design Software": 0.22,
       Programming: 0.5,
@@ -202,7 +206,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
 
     Object.entries(preferredCategoryRatios).forEach(([categoryId, ratio]) => {
       if (categoryIds.includes(categoryId)) {
-        categoryPositions.set(categoryId, ratio * dimensions.width);
+        categoryPositions.set(categoryId, ratio * primaryDimension);
         assignedCategories.add(categoryId);
       }
     });
@@ -216,13 +220,13 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       remainingCategories.forEach((categoryId, index) => {
         categoryPositions.set(
           categoryId,
-          (index + 1) * spacing * dimensions.width
+          (index + 1) * spacing * primaryDimension
         );
       });
     }
 
     const getCategoryPosition = (categoryId: string) =>
-      categoryPositions.get(categoryId) ?? dimensions.width / 2;
+      categoryPositions.get(categoryId) ?? primaryDimension / 2;
 
     const resolveId = (
       endpoint: ForceLink["source"] | ForceLink["target"]
@@ -254,8 +258,14 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       }
     });
 
+    // In portrait mode, use Y-axis for categories; in landscape, use X-axis
     const horizontalForce = d3
       .forceX<ForceNode>((node) => {
+        if (isPortrait) {
+          // In portrait, center horizontally
+          return dimensions.width / 2;
+        }
+        
         if (node.type === "category") {
           return getCategoryPosition(node.id);
         }
@@ -281,6 +291,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         return dimensions.width / 2;
       })
       .strength((node) => {
+        if (isPortrait) return 0.15; // Weak horizontal force in portrait
         if (node.type === "category") return 0.6;
         if (node.type === "special") return 0.25;
         const primaryCategory = categoryAssignments[node.id];
@@ -291,8 +302,51 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       });
 
     const verticalForce = d3
-      .forceY<ForceNode>(() => dimensions.height / 2)
-      .strength((node) => (node.type === "category" ? 0.35 : 0.12));
+      .forceY<ForceNode>((node) => {
+        if (!isPortrait) {
+          // In landscape, center vertically
+          return dimensions.height / 2;
+        }
+        
+        // In portrait, use Y-axis for category positions
+        if (node.type === "category") {
+          return getCategoryPosition(node.id);
+        }
+
+        if (node.type === "special") {
+          const categories = specialToCategories.get(node.id);
+          if (categories && categories.size > 0) {
+            const entries = Array.from(categories);
+            const total = entries.reduce(
+              (sum, categoryId) => sum + getCategoryPosition(categoryId),
+              0
+            );
+            return total / entries.length;
+          }
+          return dimensions.height / 2;
+        }
+
+        const primaryCategory = categoryAssignments[node.id];
+        if (primaryCategory) {
+          return getCategoryPosition(primaryCategory);
+        }
+
+        return dimensions.height / 2;
+      })
+      .strength((node) => {
+        if (!isPortrait) {
+          // Weak vertical force in landscape
+          return node.type === "category" ? 0.35 : 0.12;
+        }
+        // Strong vertical force in portrait
+        if (node.type === "category") return 0.6;
+        if (node.type === "special") return 0.25;
+        const primaryCategory = categoryAssignments[node.id];
+        if (primaryCategory && categoryPositions.has(primaryCategory)) {
+          return 0.2;
+        }
+        return 0.08;
+      });
 
     const resolveX = (
       endpoint: ForceLink["source"] | ForceLink["target"]
@@ -464,6 +518,13 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       nodeSelection.attr("transform", (d: ForceNode) =>
         `translate(${d.x ?? 0},${d.y ?? 0})`
       );
+    });
+
+    // Auto-zoom to fit view after simulation stabilizes
+    simulation.on("end", () => {
+      setTimeout(() => {
+        handleFitToView();
+      }, 100);
     });
 
     return () => {

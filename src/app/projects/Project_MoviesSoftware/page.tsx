@@ -41,9 +41,9 @@ function Project_MoviesSoftware() {
         <ProjectTitleBar title="Movies and Series Management Software" />
         {/* Floating Tiles Content */}
         <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
-          <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-10 space-y-4 sm:space-y-6">
+          <div className="relative z-10 p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3">
             <FloatingSection>
-              <h1 className="text-2xl mb-4">Overview</h1>
+              <h1 className="text-base sm:text-lg mb-2 sm:mb-3">Overview</h1>
               <motion.img
                 layoutId="Movies and Series Management Software_img"
                 style={{
@@ -56,7 +56,7 @@ function Project_MoviesSoftware() {
                 alt="Landing Menu"
                 className="border-gray-800 dark:border-gray-200"
               />
-              <p className="p-4 m-4 text-left lg:basis-1/2">
+              <p className="text-left lg:basis-1/2">
                 This program was created as the final project for my course at
                 the ATARI city campus. It was a group project; however, it was
                 done all by myself as a test for my own skills. Project

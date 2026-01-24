@@ -48,9 +48,9 @@ function Project_ComplexMapping() {
         <ProjectTitleBar title="Complex Mapping and Vibration" />
         {/* Floating Tiles Content */}
         <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
-          <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-10 space-y-4 sm:space-y-6">
+          <div className="relative z-10 p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3">
             <FloatingSection>
-              <h1 className="text-xl sm:text-2xl mb-3 sm:mb-4">Overview</h1>
+              <h1 className="text-base sm:text-lg mb-2 sm:mb-3">Overview</h1>
               <div className="flex flex-col lg:flex-row items-center gap-6">
                 <div className="lg:w-1/2 flex justify-center">
                   <motion.img
@@ -69,7 +69,7 @@ function Project_ComplexMapping() {
                   />
                 </div>
                 <div className="lg:w-1/2 text-justify text-sm sm:text-base lg:text-xl">
-                  <p className="p-2 sm:p-4 m-2 sm:m-4 text-left lg:basis-1/2">
+                  <p className="text-left lg:basis-1/2">
                     Since complex plane is a 2D space, complex functions
                     visualization can be difficult because the standard
                     Cartesian graph only represents 1D functions. Therefore,
@@ -78,7 +78,7 @@ function Project_ComplexMapping() {
                     visualized as an animation of points moving from the Domain
                     of the function to the Image of the function.
                   </p>
-                  <p className="p-2 sm:p-4 m-2 sm:m-4 text-left lg:basis-1/2">
+                  <p className="text-left lg:basis-1/2">
                     In this project, I explored various complex transformations
                     and their effects on different shapes and patterns using
                     color-coded visualizations. Additionally, I used 2 types of

@@ -121,11 +121,11 @@ function Project_CommunicationSoftware() {
         </header>
         {/* Floating Tiles Content */}
         <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
-          <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-10 space-y-4 sm:space-y-6">
+          <div className="relative z-10 p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3">
             <div className="flex flex-col sm:flex-row gap-4 items-stretch">
               <div className="basis-3/4">
                 <FloatingSection>
-                  <h1 className="text-xl sm:text-2xl mb-3 sm:mb-4">Overview</h1>
+                  <h1 className="text-base sm:text-lg mb-2 sm:mb-3">Overview</h1>
                   <motion.img
                     layoutId="Communication Software_img"
                     style={{
@@ -138,7 +138,7 @@ function Project_CommunicationSoftware() {
                     alt="Landing Menu"
                     className="basis-1/2 border-gray-800 dark:border-gray-200"
                   />
-                  <p className="p-2 sm:p-4 m-2 sm:m-4 text-sm sm:text-base text-left lg:basis-1/2">
+                  <p className="text-sm sm:text-base text-left lg:basis-1/2">
                     This program was created as the final project for my course
                     at the ATARI city campus. It was a group project; however,
                     it was done all by myself as a test for my own skills.

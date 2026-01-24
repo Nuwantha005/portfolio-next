@@ -71,7 +71,7 @@ const timelineData: TimelineEntry[] = [
     id: 4,
     type: "education",
     date: "2018",
-    title: "Started Education in Thurstan College",
+    title: "Started A/L Education in Thurstan College",
     description:
       "After the G.C.E. O/L examination, I entered Thurstan College, Colombo 7 for my A/L education. I studied there for roughly 2 years and passed G.C.E. A/L examination with 3 A grades.",
   },
@@ -93,6 +93,14 @@ const timelineData: TimelineEntry[] = [
   },
   {
     id: 7,
+    type: "award",
+    date: "Jan 2026",
+    title: "Received the best poster Award at the MERS 2025",
+    description:
+      "A paper titled 'Linear Matrix Formulation for Parametric Curve Design' was submitted to the Mechanical Engineering Research Symposium. The paper passed the binding review and was presented at the symposium, where it won the best poster award.",
+  },
+  {
+    id: 8,
     type: "education",
     date: "2026",
     title: "Graduation",
@@ -115,7 +123,7 @@ const CONFIG: TimelineConfig = {
 
 // Type badge colors
 const getTypeStyles = (
-  type: TimelineEntry["type"]
+  type: TimelineEntry["type"],
 ): { bg: string; border: string; text: string } => {
   switch (type) {
     case "education":
@@ -218,7 +226,9 @@ const TimelineCard: React.FC<{
           maxHeight: isHovered ? "500px" : "80px",
         }}
       >
-        <p className={`text-xs sm:text-sm text-muted-foreground leading-relaxed ${!isHovered ? "line-clamp-3" : ""}`}>
+        <p
+          className={`text-xs sm:text-sm text-muted-foreground leading-relaxed ${!isHovered ? "line-clamp-3" : ""}`}
+        >
           {entry.description}
         </p>
       </div>
@@ -399,7 +409,7 @@ const DynamicTimeline: React.FC = () => {
       // Desktop: Snake/Zigzag layout
       let cols = Math.floor(
         (containerWidth - CONFIG.paddingX * 2 + CONFIG.cardGapX) /
-          (CONFIG.cardWidth + CONFIG.cardGapX)
+          (CONFIG.cardWidth + CONFIG.cardGapX),
       );
       cols = Math.max(1, Math.min(cols, 4));
 
@@ -453,10 +463,12 @@ const DynamicTimeline: React.FC = () => {
 
     if (isMobile || isTablet) {
       // Straight vertical line
+      // Note: We add a tiny horizontal offset (0.1px) to prevent browser rendering
+      // issues with gradients on perfectly vertical lines
       const x = isMobile ? 30 : containerWidth / 2;
       const startY = CONFIG.paddingY;
       const endY = Math.max(...positions.map((p) => p.pathY)) + 40;
-      return `M ${x} ${startY} L ${x} ${endY}`;
+      return `M ${x} ${startY} L ${x + 0.1} ${endY}`;
     }
 
     // Desktop: Snake path with curves
@@ -468,17 +480,19 @@ const DynamicTimeline: React.FC = () => {
     }
 
     // Check if it's essentially a single column (all X values are very close)
-    const xValues = pathPoints.map(p => p.x);
+    const xValues = pathPoints.map((p) => p.x);
     const minX = Math.min(...xValues);
     const maxX = Math.max(...xValues);
-    const isSingleColumn = (maxX - minX) < 20;
+    const isSingleColumn = maxX - minX < 20;
 
     if (isSingleColumn) {
       // Single column desktop - draw a straight vertical line through all points
+      // Note: We add a tiny horizontal offset (0.1px) to prevent browser rendering
+      // issues with gradients on perfectly vertical lines
       const avgX = xValues.reduce((a, b) => a + b, 0) / xValues.length;
-      const startY = Math.min(...pathPoints.map(p => p.y)) - 20;
-      const endY = Math.max(...pathPoints.map(p => p.y)) + 60;
-      return `M ${avgX} ${startY} L ${avgX} ${endY}`;
+      const startY = Math.min(...pathPoints.map((p) => p.y)) - 20;
+      const endY = Math.max(...pathPoints.map((p) => p.y)) + 60;
+      return `M ${avgX} ${startY} L ${avgX + 0.1} ${endY}`;
     }
 
     let d = `M ${pathPoints[0].x} ${pathPoints[0].y}`;
@@ -497,8 +511,8 @@ const DynamicTimeline: React.FC = () => {
         // Determine which side the current point is on to decide bulge direction
         const isRightSide = curr.x > containerWidth / 2;
         const bulgeDir = isRightSide ? 1 : -1;
-        const controlX = curr.x + (80 * bulgeDir);
-        
+        const controlX = curr.x + 80 * bulgeDir;
+
         // Gemini's approach: both control points have same X, different Y
         d += ` C ${controlX} ${curr.y}, ${controlX} ${next.y}, ${next.x} ${next.y}`;
       }
@@ -579,10 +593,24 @@ const DynamicTimeline: React.FC = () => {
               y2="100%"
             >
               <stop offset="0%" stopColor="rgb(99, 102, 241)" stopOpacity="1" />
-              <stop offset="50%" stopColor="rgb(168, 85, 247)" stopOpacity="1" />
-              <stop offset="100%" stopColor="rgb(99, 102, 241)" stopOpacity="1" />
+              <stop
+                offset="50%"
+                stopColor="rgb(168, 85, 247)"
+                stopOpacity="1"
+              />
+              <stop
+                offset="100%"
+                stopColor="rgb(99, 102, 241)"
+                stopOpacity="1"
+              />
             </linearGradient>
-            <filter id="dynamic-timeline-glow" x="-50%" y="-50%" width="200%" height="200%">
+            <filter
+              id="dynamic-timeline-glow"
+              x="-50%"
+              y="-50%"
+              width="200%"
+              height="200%"
+            >
               <feGaussianBlur stdDeviation="3" result="coloredBlur" />
               <feMerge>
                 <feMergeNode in="coloredBlur" />
@@ -632,10 +660,7 @@ const DynamicTimeline: React.FC = () => {
             {pos.mode === "mobile-alternating" && (
               <ConnectorLine
                 from={{
-                  x:
-                    pos.side === "left"
-                      ? pos.x + pos.width
-                      : pos.centerX! + 8,
+                  x: pos.side === "left" ? pos.x + pos.width : pos.centerX! + 8,
                   y: pos.pathY,
                 }}
                 to={{

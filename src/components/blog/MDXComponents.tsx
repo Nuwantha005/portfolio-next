@@ -8,7 +8,7 @@ const MDXComponents = {
   // Headings
   h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
-      className="text-2xl sm:text-3xl lg:text-4xl font-bold mt-6 sm:mt-8 mb-3 sm:mb-4 text-gray-900 dark:text-gray-100"
+      className="text-lg sm:text-xl md:text-2xl font-bold mt-4 sm:mt-6 mb-2 sm:mb-3 text-gray-900 dark:text-gray-100"
       {...props}
     >
       {children}
@@ -16,7 +16,7 @@ const MDXComponents = {
   ),
   h2: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
-      className="text-xl sm:text-2xl lg:text-3xl font-bold mt-6 sm:mt-8 mb-3 sm:mb-4 text-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2"
+      className="text-base sm:text-lg md:text-xl font-bold mt-4 sm:mt-6 mb-2 sm:mb-3 text-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-1 sm:pb-2"
       {...props}
     >
       {children}
@@ -24,7 +24,7 @@ const MDXComponents = {
   ),
   h3: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
-      className="text-lg sm:text-xl lg:text-2xl font-semibold mt-4 sm:mt-6 mb-2 sm:mb-3 text-gray-800 dark:text-gray-100"
+      className="text-sm sm:text-base md:text-lg font-semibold mt-3 sm:mt-4 mb-1 sm:mb-2 text-gray-800 dark:text-gray-100"
       {...props}
     >
       {children}
@@ -32,7 +32,7 @@ const MDXComponents = {
   ),
   h4: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4
-      className="text-base sm:text-lg lg:text-xl font-semibold mt-3 sm:mt-4 mb-2 text-gray-800 dark:text-gray-100"
+      className="text-sm sm:text-base font-semibold mt-2 sm:mt-3 mb-1 sm:mb-2 text-gray-800 dark:text-gray-100"
       {...props}
     >
       {children}

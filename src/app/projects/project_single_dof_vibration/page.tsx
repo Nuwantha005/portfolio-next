@@ -53,10 +53,10 @@ function Project_SingleDOF() {
       <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
         <ProjectTitleBar title="Single DOF Vibration Simulation" />
         <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
-          <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-10 space-y-4 sm:space-y-6 text-sm sm:text-base lg:text-lg">
+          <div className="relative z-10 p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3 text-sm sm:text-base">
             {/* Hero Section */}
             <FloatingSection>
-              <h1 className="text-3xl mb-4 font-bold">Problem Definition</h1>
+              <h1 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">Problem Definition</h1>
               <div className="flex flex-col lg:flex-row items-center gap-6">
                 <div className="lg:w-1/2 text-justify">
                   <p className="mb-4">
@@ -198,7 +198,7 @@ function Project_SingleDOF() {
             </AutoAdjustingSection>
             <section className="bg-slate-400/50 max-h-20 shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300 border-2 border-gray-800 dark:border-gray-200">
               <div className="flex flex-row justify-between">
-                <h1 className="font-bold text-2xl"> Interactive Webpage </h1>
+                <h1 className="font-bold text-base sm:text-lg"> Interactive Webpage </h1>
                 <div className="flex justify-right gap-4">
                   <a
                     href="https://github.com/nuwantha005/Single_DOF_Vibration_Animation"
