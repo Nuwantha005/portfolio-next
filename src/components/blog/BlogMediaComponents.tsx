@@ -38,11 +38,19 @@ export function BlogImage({ src, alt, caption, width, height }: BlogImageProps) 
     }
   };
 
+  // Build inline style only for aspect ratio if both width and height provided
   const style: React.CSSProperties = {
     cursor: "pointer",
-    maxWidth: width ? `${width}px` : "100%",
-    height: height ? `${height}px` : "auto",
+    // Set max dimensions as CSS custom properties, will be constrained by max-w-full
+    ...(width && { "--max-width": `${width}px` } as any),
+    maxWidth: width ? `min(${width}px, 100%)` : "100%",
   };
+
+  // Calculate aspect ratio if both dimensions provided
+  const aspectRatio = width && height ? `${width} / ${height}` : undefined;
+  if (aspectRatio) {
+    style.aspectRatio = aspectRatio;
+  }
 
   return (
     <figure className="my-6 flex flex-col items-center max-w-full">
@@ -51,7 +59,7 @@ export function BlogImage({ src, alt, caption, width, height }: BlogImageProps) 
         alt={alt || caption || ""}
         onClick={handleClick}
         style={style}
-        className="rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer dark:bg-gray-800/50 bg-gray-200/50 p-2 max-w-full h-auto"
+        className="rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer dark:bg-gray-800/50 bg-gray-200/50 p-2 max-w-full w-full h-auto object-contain"
       />
       {(caption || alt) && (
         <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400 italic">
@@ -99,16 +107,22 @@ export function BlogVideo({ src, caption, width, height, poster }: BlogVideoProp
     }
   };
 
+  // Build inline style for responsive video sizing
   const style: React.CSSProperties = {
-    maxWidth: width ? `${width}px` : "100%",
-    height: height ? `${height}px` : "auto",
+    maxWidth: width ? `min(${width}px, 100%)` : "100%",
   };
+
+  // Calculate aspect ratio if both dimensions provided
+  const aspectRatio = width && height ? `${width} / ${height}` : undefined;
+  if (aspectRatio) {
+    style.aspectRatio = aspectRatio;
+  }
 
   return (
     <figure className="my-6 flex flex-col items-center max-w-full">
       <div
         onClick={handleClick}
-        className="cursor-pointer relative group max-w-full"
+        className="cursor-pointer relative group max-w-full w-full"
         style={style}
       >
         <video
@@ -119,7 +133,7 @@ export function BlogVideo({ src, caption, width, height, poster }: BlogVideoProp
           muted
           playsInline
           preload="metadata"
-          className="rounded-lg shadow-md hover:shadow-lg transition-shadow dark:bg-gray-800/50 bg-gray-200/50 p-2 max-w-full h-auto"
+          className="rounded-lg shadow-md hover:shadow-lg transition-shadow dark:bg-gray-800/50 bg-gray-200/50 p-2 max-w-full w-full h-auto"
         />
         {/* Play icon overlay */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-70 group-hover:opacity-100 transition-opacity">
