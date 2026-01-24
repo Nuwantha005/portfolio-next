@@ -35,7 +35,7 @@ export const SlidingNavBar: React.FC<SlidingNavBarProps> = ({ currentPath }) => 
   };
 
   return (
-    <div className="inline-flex gap-0.5 sm:gap-1 p-0.5 sm:p-1 bg-slate-800/50 dark:bg-slate-900/50 backdrop-blur-sm rounded border border-slate-700 dark:border-slate-600 shadow-md">
+    <div className="inline-flex gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-slate-800/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-md border border-slate-700 dark:border-slate-600 shadow-md">
       {allTabs.map((tab, index) => {
         const isActive = activeTabIndex === index;
         return (
@@ -45,11 +45,11 @@ export const SlidingNavBar: React.FC<SlidingNavBarProps> = ({ currentPath }) => 
             aria-selected={isActive}
             role="tab"
             className={`
-              px-2 sm:px-2.5 md:px-3
-              py-0.5 sm:py-1
-              text-[9px] sm:text-[10px] md:text-xs
+              px-3 sm:px-4 md:px-5
+              py-1.5 sm:py-2
+              text-xs sm:text-sm md:text-base
               font-medium
-              rounded-sm
+              rounded
               transition-all duration-200
               whitespace-nowrap
               ${
