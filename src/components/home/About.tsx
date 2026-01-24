@@ -8,8 +8,7 @@ import Image from "next/image";
 function About() {
   return (
     <div className="flex flex-col sm:flex-row gap-4 justify-between justify-items-stretch content-center ">
-      <div className="flex justify-center items-center">
-        <FloatingSection>
+      <FloatingSection className="flex justify-center items-center sm:items-stretch">
         <Image
             src="./Images/Profile.jpg"
             alt="Profile"
@@ -17,8 +16,7 @@ function About() {
             height={288}
             className="rounded-full aspect-square max-w-48 sm:max-w-60 md:max-w-72 mx-auto"
           />
-        </FloatingSection>
-      </div>
+      </FloatingSection>
       <div className="justify-self-stretch grow">
         <FloatingSection>
           <h1 className="text-bold text-2xl sm:text-3xl">About</h1>

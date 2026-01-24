@@ -41,13 +41,9 @@ function Skills() {
     <FloatingSection>
       <h1 className="text-bold text-2xl sm:text-3xl">Skills</h1>
       <p className="mt-4 text-xs sm:text-sm text-slate-300">
-        The skill set behind my projects now lives in a force-directed graph.
+        Explore my technical skill set through an interactive force-directed graph.
         Hover to highlight related technologies, drag to rearrange, and scroll
-        to zoom. The dataset driving the graph is defined centrally in{" "}
-        <code className="mx-1 rounded bg-slate-800 px-1 py-0.5 text-xs text-indigo-300">
-          src/lib/skills-graph-data.ts
-        </code>{" "}
-        so it&apos;s easy to extend without touching the component.
+        to zoom in or out.
       </p>
       <div className="mt-6 sm:mt-8 flex flex-col gap-4 sm:gap-6 lg:h-[36rem] lg:flex-row lg:items-stretch">
         <div className="hidden lg:block space-y-4 rounded-xl border border-slate-800 bg-slate-900/40 p-6 text-sm text-slate-300 lg:w-1/4 lg:max-w-none lg:overflow-y-auto">
