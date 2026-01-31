@@ -26,17 +26,8 @@ export function onRouteChanged() {
 export function useViewTransition() {
   const router = useRouter();
 
-
   const navigateWithTransition = useCallback(
     async (href: string, currentPath: string) => {
-      // Disable view transition if navigating to or from any main page
-      const isMain = (path: string) =>
-        path === "/" || path.startsWith("/projects") || path.startsWith("/blog");
-      if (isMain(href) || isMain(currentPath)) {
-        router.push(href);
-        return;
-      }
-
       // Check if View Transitions API is supported
       if (!document.startViewTransition) {
         router.push(href);

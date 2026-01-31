@@ -147,21 +147,39 @@ body {
 }
 
 /* View Transitions - Simple fade for main content (avoids stretching issues with slide) */
+::view-transition-old(main-content),
+::view-transition-new(main-content) {
+  /* Prevent stretching by not constraining to the animation group's size */
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
 ::view-transition-old(main-content) {
-  animation: 250ms ease-out both fade-out;
+  animation: 200ms ease-out both fade-out;
 }
 
 ::view-transition-new(main-content) {
-  animation: 250ms ease-in 100ms both fade-in;
+  animation: 200ms ease-in 50ms both fade-in;
 }
 
 /* Same animation for back transition - just fade */
 .back-transition::view-transition-old(main-content) {
-  animation: 250ms ease-out both fade-out;
+  animation: 200ms ease-out both fade-out;
 }
 
 .back-transition::view-transition-new(main-content) {
-  animation: 250ms ease-in 100ms both fade-in;
+  animation: 200ms ease-in 50ms both fade-in;
+}
+
+/* Prevent the view transition group from causing layout issues */
+::view-transition-group(main-content) {
+  overflow: hidden;
+}
+
+/* Image container for view transitions - prevent stretching */
+::view-transition-image-pair(main-content) {
+  isolation: isolate;
 }
 
 /* Navbar stays fixed - no animation */
