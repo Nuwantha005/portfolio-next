@@ -489,6 +489,8 @@ const DynamicTimeline: React.FC = () => {
       // Single column desktop - draw a straight vertical line through all points
       // Note: We add a tiny horizontal offset (0.1px) to prevent browser rendering
       // issues with gradients on perfectly vertical lines
+      // Note: We add a tiny horizontal offset (0.1px) to prevent browser rendering
+      // issues with gradients on perfectly vertical lines
       const avgX = xValues.reduce((a, b) => a + b, 0) / xValues.length;
       const startY = Math.min(...pathPoints.map((p) => p.y)) - 20;
       const endY = Math.max(...pathPoints.map((p) => p.y)) + 60;
