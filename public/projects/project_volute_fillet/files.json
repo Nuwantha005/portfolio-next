@@ -1,0 +1,135 @@
+[
+  {
+    "id": 0,
+    "name": "Reference Fillet from Commercial Software",
+    "loc": "/projects/project_volute_fillet/images/reference_fillet.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/reference_fillet.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 1,
+    "name": "Tangent Curve Loft Method",
+    "loc": "/projects/project_volute_fillet/images/tangent_curve_method.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/tangent_curve_method.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 2,
+    "name": "Scaling Method",
+    "loc": "/projects/project_volute_fillet/images/scaling_method.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/scaling_method.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 3,
+    "name": "Combined Method",
+    "loc": "/projects/project_volute_fillet/images/combined_method.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/combined_method.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 4,
+    "name": "Coons Patch Theory (Koons Flap)",
+    "loc": "/projects/project_volute_fillet/images/coons_patch_theory.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/coons_patch_theory.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 5,
+    "name": "Intersection Pipe for Boundary Identification",
+    "loc": "/projects/project_volute_fillet/images/intersection_pipe.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/intersection_pipe.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 6,
+    "name": "Boundary Curves for Side and End Fillets",
+    "loc": "/projects/project_volute_fillet/images/boundary_curves.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/boundary_curves.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 7,
+    "name": "Constrained Filling Output Fillet",
+    "loc": "/projects/project_volute_fillet/images/constrained_filling_output.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/constrained_filling_output.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 8,
+    "name": "Exit Pipe After Cutting",
+    "loc": "/projects/project_volute_fillet/images/exit_pipe_cutting.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/exit_pipe_cutting.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 9,
+    "name": "Scroll Pipe After Cutting",
+    "loc": "/projects/project_volute_fillet/images/scroll_pipe_cutting.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/scroll_pipe_cutting.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 10,
+    "name": "Geometric Hierarchy of Solid Volute",
+    "loc": "/projects/project_volute_fillet/images/geometric_hierarchy.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/geometric_hierarchy.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 11,
+    "name": "ISO Curve Grid Analysis",
+    "loc": "/projects/project_volute_fillet/images/iso_curve_grid.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/iso_curve_grid.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 12,
+    "name": "Self-Intersecting Face at Degree 3",
+    "loc": "/projects/project_volute_fillet/images/self_intersecting_face.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/self_intersecting_face.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 13,
+    "name": "Self-Intersection Comparison",
+    "loc": "/projects/project_volute_fillet/images/self_intersection_comparison.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/self_intersection_comparison.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 14,
+    "name": "Circular Arc Tangent Construction",
+    "loc": "/projects/project_volute_fillet/images/circular_arc_construction.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/circular_arc_construction.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 15,
+    "name": "Before and After Fillet Application",
+    "loc": "/projects/project_volute_fillet/images/before_after_fillet.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/before_after_fillet.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 16,
+    "name": "Fillet on Curved Exit Pipe",
+    "loc": "/projects/project_volute_fillet/images/curved_exit_pipe_fillet.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/curved_exit_pipe_fillet.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 17,
+    "name": "Fillet Radius Parameter",
+    "loc": "/projects/project_volute_fillet/images/fillet_radius_parameter.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/fillet_radius_parameter.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 18,
+    "name": "Intersection Cut Length Parameter",
+    "loc": "/projects/project_volute_fillet/images/intersection_cut_length.jpeg",
+    "thumb": "/projects/project_volute_fillet/images/intersection_cut_length.jpeg",
+    "type": "image"
+  }
+]

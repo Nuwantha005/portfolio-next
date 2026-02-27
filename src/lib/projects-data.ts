@@ -27,18 +27,37 @@ export const projectCategories: ProjectCategory[] = [
     description: "Projects completed during my industrial training period",
     priority: 1,
     projects: [
-      // Add your industrial training projects here
-      // Example:
-      // {
-      //   image: "./Images/Projects/training_project.png",
-      //   name: "Industrial Project Name",
-      //   description: "Description of the project...",
-      //   tags: ["Python", "React", "AWS"],
-      //   link: "projects/training_project",
-      //   featured: true,
-      //   year: 2024,
-      //   duration: "3 months"
-      // },
+      {
+        image: "./Images/Projects/Volute_Fillet_Thumbnail.jpeg",
+        name: "Parametric Volute Tongue Fillet",
+        description:
+          "Developed a parametric fillet generation algorithm for volute tongue geometry in centrifugal turbomachinery using Coons patches with tangency constraints, integrated into a commercial CAD suite.",
+        tags: ["C++", "OpenCascade", "CAD", "Qt"],
+        link: "projects/project_volute_fillet",
+        year: 2025,
+        duration: "3 months",
+      },
+      {
+        image: "./Images/Projects/Constrained_Solver_Thumbnail.jpeg",
+        name: "Constrained Parametric Curve Solver",
+        description:
+          "A linear algebra-based solver for repositioning B-Spline and Bézier control points while maintaining geometric tangency constraints in real time. Published at MERS 2025 and won Best Poster Award.",
+        tags: ["C++", "Python", "Linear Algebra", "NLopt"],
+        link: "projects/project_constrained_solver",
+        featured: true,
+        year: 2025,
+        duration: "2 months",
+      },
+      {
+        image: "./Images/Projects/Meridional_Solver_Thumbnail.jpeg",
+        name: "Meridional Flow Solver",
+        description:
+          "A rapid quasi-3D flow solver for preliminary turbomachinery design, estimating velocity, pressure and temperature distributions along the meridional plane with sub-second solve times.",
+        tags: ["C++", "Python", "NumPy", "Qt", "Multi-threading"],
+        link: "projects/project_meridional_solver",
+        year: 2025,
+        duration: "2 months",
+      },
     ],
   },
   {

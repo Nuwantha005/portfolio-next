@@ -1,0 +1,58 @@
+[
+  {
+    "id": 0,
+    "name": "Bézier Curve Tangent to Three Circles",
+    "loc": "/projects/project_constrained_solver/images/bezier_tangent_circles.jpeg",
+    "thumb": "/projects/project_constrained_solver/images/bezier_tangent_circles.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 1,
+    "name": "Generalized 6-Point Algorithm Output",
+    "loc": "/projects/project_constrained_solver/images/generalized_6point.jpeg",
+    "thumb": "/projects/project_constrained_solver/images/generalized_6point.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 2,
+    "name": "B-Spline Tangent to Three Circles",
+    "loc": "/projects/project_constrained_solver/images/bspline_tangent_circles.jpeg",
+    "thumb": "/projects/project_constrained_solver/images/bspline_tangent_circles.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 3,
+    "name": "Bézier Curve Tangent to a Line",
+    "loc": "/projects/project_constrained_solver/images/bezier_tangent_line.jpeg",
+    "thumb": "/projects/project_constrained_solver/images/bezier_tangent_line.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 4,
+    "name": "Displacement Finding — No Intersection",
+    "loc": "/projects/project_constrained_solver/images/displacement_no_intersection.jpeg",
+    "thumb": "/projects/project_constrained_solver/images/displacement_no_intersection.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 5,
+    "name": "Displacement Finding — With Intersection",
+    "loc": "/projects/project_constrained_solver/images/displacement_with_intersection.jpeg",
+    "thumb": "/projects/project_constrained_solver/images/displacement_with_intersection.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 6,
+    "name": "Python Blade Section Editor",
+    "loc": "/projects/project_constrained_solver/images/python_blade_editor.jpeg",
+    "thumb": "/projects/project_constrained_solver/images/python_blade_editor.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 7,
+    "name": "Constrained Curve Calculation Demo",
+    "loc": "/projects/project_constrained_solver/images/constrained_curve_demo.jpeg",
+    "thumb": "/projects/project_constrained_solver/images/constrained_curve_demo.jpeg",
+    "type": "image"
+  }
+]

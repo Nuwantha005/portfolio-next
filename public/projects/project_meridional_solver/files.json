@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "name": "Python Prototype Flow Solver Output",
+    "loc": "/projects/project_meridional_solver/images/python_prototype.jpeg",
+    "thumb": "/projects/project_meridional_solver/images/python_prototype.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 1,
+    "name": "Meridional Plane of a Radial Machine",
+    "loc": "/projects/project_meridional_solver/images/meridional_plane.jpeg",
+    "thumb": "/projects/project_meridional_solver/images/meridional_plane.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 2,
+    "name": "Flow Solver Results — Thermodynamic Properties",
+    "loc": "/projects/project_meridional_solver/images/flow_solver_results.jpeg",
+    "thumb": "/projects/project_meridional_solver/images/flow_solver_results.jpeg",
+    "type": "image"
+  }
+]
