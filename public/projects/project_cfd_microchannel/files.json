@@ -1,0 +1,121 @@
+[
+  {
+    "id": 1,
+    "loc": "/projects/project_cfd_microchannel/images/geometry_cross_section.jpeg",
+    "name": "Physical model — cross section and isometric view",
+    "thumb": "/projects/project_cfd_microchannel/images/geometry_cross_section.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 2,
+    "loc": "/projects/project_cfd_microchannel/images/rib_arrangement_top.jpeg",
+    "name": "Top view of circular rib arrangement",
+    "thumb": "/projects/project_cfd_microchannel/images/rib_arrangement_top.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 3,
+    "loc": "/projects/project_cfd_microchannel/images/mesh_cross_section.jpeg",
+    "name": "Cross section view of the computational mesh",
+    "thumb": "/projects/project_cfd_microchannel/images/mesh_cross_section.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 4,
+    "loc": "/projects/project_cfd_microchannel/images/mesh_boundary_layers.jpeg",
+    "name": "Boundary layers on solid and fluid domains at the interface",
+    "thumb": "/projects/project_cfd_microchannel/images/mesh_boundary_layers.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 5,
+    "loc": "/projects/project_cfd_microchannel/images/mesh_side_inlet.jpeg",
+    "name": "Side section view of solid-fluid domain near the inlet",
+    "thumb": "/projects/project_cfd_microchannel/images/mesh_side_inlet.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 6,
+    "loc": "/projects/project_cfd_microchannel/images/mesh_top_outlet.jpeg",
+    "name": "Top view of horizontally cut mesh near the outlet",
+    "thumb": "/projects/project_cfd_microchannel/images/mesh_top_outlet.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 7,
+    "loc": "/projects/project_cfd_microchannel/images/mesh_near_ribs.jpeg",
+    "name": "Horizontal cut section near the circular ribs",
+    "thumb": "/projects/project_cfd_microchannel/images/mesh_near_ribs.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 8,
+    "loc": "/projects/project_cfd_microchannel/images/mesh_surface_rib.jpeg",
+    "name": "Surface mesh at solid-fluid boundary near a circular rib",
+    "thumb": "/projects/project_cfd_microchannel/images/mesh_surface_rib.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 9,
+    "loc": "/projects/project_cfd_microchannel/images/grid_independence.jpeg",
+    "name": "Grid independence study — Nusselt number and friction factor vs cell count",
+    "thumb": "/projects/project_cfd_microchannel/images/grid_independence.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 10,
+    "loc": "/projects/project_cfd_microchannel/images/residual_convergence.jpeg",
+    "name": "Residual convergence plot",
+    "thumb": "/projects/project_cfd_microchannel/images/residual_convergence.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 11,
+    "loc": "/projects/project_cfd_microchannel/images/friction_convergence.jpeg",
+    "name": "Friction factor convergence over iterations",
+    "thumb": "/projects/project_cfd_microchannel/images/friction_convergence.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 12,
+    "loc": "/projects/project_cfd_microchannel/images/contour_pressure_mid.jpeg",
+    "name": "Pressure contours in mid plane — all Reynolds numbers",
+    "thumb": "/projects/project_cfd_microchannel/images/contour_pressure_mid.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 13,
+    "loc": "/projects/project_cfd_microchannel/images/contour_temp_mid.jpeg",
+    "name": "Temperature contours in mid plane — all Reynolds numbers",
+    "thumb": "/projects/project_cfd_microchannel/images/contour_temp_mid.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 14,
+    "loc": "/projects/project_cfd_microchannel/images/contour_temp_base.jpeg",
+    "name": "Temperature contours at base plane — all Reynolds numbers",
+    "thumb": "/projects/project_cfd_microchannel/images/contour_temp_base.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 15,
+    "loc": "/projects/project_cfd_microchannel/images/contour_velocity_top.jpeg",
+    "name": "Velocity contours in top plane — all Reynolds numbers",
+    "thumb": "/projects/project_cfd_microchannel/images/contour_velocity_top.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 16,
+    "loc": "/projects/project_cfd_microchannel/images/validation_nusselt.jpeg",
+    "name": "Nusselt number vs Reynolds number — simulation vs literature",
+    "thumb": "/projects/project_cfd_microchannel/images/validation_nusselt.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 17,
+    "loc": "/projects/project_cfd_microchannel/images/validation_friction.jpeg",
+    "name": "Friction factor vs Reynolds number — simulation vs literature",
+    "thumb": "/projects/project_cfd_microchannel/images/validation_friction.jpeg",
+    "type": "image"
+  }
+]

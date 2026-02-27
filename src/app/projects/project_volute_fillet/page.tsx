@@ -131,8 +131,8 @@ function Project_VoluteFillet() {
 
             <Topic topicName="Methods Explored" />
 
-            {/* Methods 1 & 2: Side-by-side on desktop */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-3 items-stretch">
+            {/* Methods 1 & 2: Side-by-side on desktop — adjust ratio in lg:grid-cols-[Xfr_Yfr] */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-2 sm:gap-3 items-stretch">
               <FloatingSection className="flex flex-col">
                 <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
                   1) Tangent Curve Loft
@@ -218,107 +218,122 @@ function Project_VoluteFillet() {
 
             <Topic topicName="Final Approach: Constrained Filling" />
 
-            {/* Coons Patch Theory */}
-            <AutoAdjustingSection
-              title="Coons Patches"
-              imagePosition="right"
-              mediaContent={
-                getItem(4) && (
-                  <ImageDoc image={getItem(4)!} onOpen={handleOpen} />
-                )
-              }
-            >
-              <p className="mb-4">
-                The final approach used{" "}
-                <strong>OpenCascade&apos;s GeomFill_ConstrainedFilling</strong>{" "}
-                class, which constructs surfaces using Coons patches. A Coons
-                patch takes four boundary curves and generates a smooth surface
-                that interpolates between them, with optional tangency
-                constraints to ensure the resulting surface is tangent to
-                adjacent geometry.
-              </p>
-              <p>
-                Each fillet section was built from 3–4 boundary curves: the top
-                and bottom boundaries (with tangency constraints to the scroll
-                and exit pipe surfaces) and one or two side boundaries. Previous
-                fillet sections were used as tangent surfaces for subsequent
-                ones, ensuring C2 continuity across the entire fillet.
-              </p>
-            </AutoAdjustingSection>
+            {/* Coons Patch + Boundary ID: Side-by-side on desktop — adjust ratio in lg:grid-cols-[Xfr_Yfr] */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_3fr] gap-2 sm:gap-3 items-stretch">
+              <FloatingSection className="flex flex-col">
+                <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
+                  Coons Patches
+                </h2>
+                {getItem(4) && (
+                  <div className="mb-3 flex justify-center">
+                    <ImageDoc image={getItem(4)!} onOpen={handleOpen} />
+                  </div>
+                )}
+                <div className="text-justify space-y-3 flex-1">
+                  <p>
+                    The final approach used{" "}
+                    <strong>
+                      OpenCascade&apos;s GeomFill_ConstrainedFilling
+                    </strong>{" "}
+                    class, which constructs surfaces using Coons patches. A
+                    Coons patch takes four boundary curves and generates a
+                    smooth surface that interpolates between them, with optional
+                    tangency constraints to ensure the resulting surface is
+                    tangent to adjacent geometry.
+                  </p>
+                  <p>
+                    Each fillet section was built from 3–4 boundary curves: the
+                    top and bottom boundaries (with tangency constraints to the
+                    scroll and exit pipe surfaces) and one or two side
+                    boundaries. Previous fillet sections were used as tangent
+                    surfaces for subsequent ones, ensuring C2 continuity across
+                    the entire fillet.
+                  </p>
+                </div>
+              </FloatingSection>
 
-            {/* Boundary Identification */}
-            <AutoAdjustingSection
-              title="Boundary Identification"
-              imagePosition="left"
-              mediaContent={
-                getItem(5) && (
-                  <ImageDoc image={getItem(5)!} onOpen={handleOpen} />
-                )
-              }
-            >
-              <p className="mb-4">
-                To identify fillet boundaries, a scaled intersection pipe was
-                used. By intersecting this pipe with both the scroll and exit
-                pipe surfaces, clean boundary curves were extracted that define
-                where the fillet starts and ends on each surface.
-              </p>
-              <p>
-                These boundary curves were combined with tangent curves to form
-                closed wires with 3 or 4 edges — the input required by the
-                constrained filling algorithm.
-              </p>
-            </AutoAdjustingSection>
+              <FloatingSection className="flex flex-col">
+                <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
+                  Boundary Identification
+                </h2>
+                {getItem(5) && (
+                  <div className="mb-3 flex justify-center">
+                    <ImageDoc image={getItem(5)!} onOpen={handleOpen} />
+                  </div>
+                )}
+                <div className="text-justify space-y-3 flex-1">
+                  <p>
+                    To identify fillet boundaries, a scaled intersection pipe
+                    was used. By intersecting this pipe with both the scroll and
+                    exit pipe surfaces, clean boundary curves were extracted
+                    that define where the fillet starts and ends on each
+                    surface.
+                  </p>
+                  <p>
+                    These boundary curves were combined with tangent curves to
+                    form closed wires with 3 or 4 edges — the input required by
+                    the constrained filling algorithm.
+                  </p>
+                </div>
+              </FloatingSection>
+            </div>
 
-            {/* Boundary Curves Figure */}
-            <AutoAdjustingSection
-              title="Fillet Section Construction"
-              imagePosition="right"
-              mediaContent={
-                getItem(6) && (
-                  <ImageDoc image={getItem(6)!} onOpen={handleOpen} />
-                )
-              }
-            >
-              <p className="mb-4">
-                The fillet was constructed as multiple sections, each defined by
-                boundary curves extracted from the scroll and exit pipe
-                geometry. Side fillets use 4-boundary Coons patches with
-                tangency on the top and bottom curves. End (corner) fillets
-                required special treatment.
-              </p>
-              <p>
-                For the circular arc tangent curves, OpenCascade&apos;s built-in
-                analytic geometry solver was used to construct arcs with a
-                user-defined radius that are tangent to both the scroll and exit
-                pipe section curves — replacing the earlier arbitrary tangent
-                curves with a properly parametrized construction.
-              </p>
-            </AutoAdjustingSection>
+            {/* Fillet construction steps: Side-by-side on desktop — adjust ratio in lg:grid-cols-[Xfr_Yfr] */}
+            <div className="grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-2 sm:gap-3 items-stretch">
+              <FloatingSection className="flex flex-col">
+                <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
+                  Fillet Section Construction
+                </h2>
+                {getItem(6) && (
+                  <div className="mb-3 flex justify-center">
+                    <ImageDoc image={getItem(6)!} onOpen={handleOpen} />
+                  </div>
+                )}
+                <div className="text-justify space-y-3 flex-1">
+                  <p>
+                    The fillet was constructed as multiple sections, each
+                    defined by boundary curves extracted from the scroll and
+                    exit pipe geometry. Side fillets use 4-boundary Coons
+                    patches with tangency on the top and bottom curves. End
+                    (corner) fillets required special treatment.
+                  </p>
+                  <p>
+                    For the circular arc tangent curves, OpenCascade&apos;s
+                    built-in analytic geometry solver was used to construct arcs
+                    with a user-defined radius that are tangent to both the
+                    scroll and exit pipe section curves — replacing the earlier
+                    arbitrary tangent curves with a properly parametrized
+                    construction.
+                  </p>
+                </div>
+              </FloatingSection>
 
-            {/* Circular Arc Construction */}
-            <AutoAdjustingSection
-              title="Circular Arc Tangent Curves"
-              imagePosition="left"
-              mediaContent={
-                getItem(14) && (
-                  <ImageDoc image={getItem(14)!} onOpen={handleOpen} />
-                )
-              }
-            >
-              <p className="mb-4">
-                At each cross-section plane, the scroll and exit pipe
-                intersection curves lie on the same 2D plane. OpenCascade&apos;s
-                analytic solver constructs a circular arc with user-defined
-                radius R that is tangent to both curves.
-              </p>
-              <p>
-                The solver naturally produces two solutions; the correct one is
-                selected by filtering based on distance from the main
-                intersection curve. This approach replaced earlier ad-hoc
-                tangent curve generation with a clean, parametrized
-                construction.
-              </p>
-            </AutoAdjustingSection>
+              <FloatingSection className="flex flex-col">
+                <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
+                  Circular Arc Tangent Curves
+                </h2>
+                {getItem(14) && (
+                  <div className="mb-3 flex justify-center">
+                    <ImageDoc image={getItem(14)!} onOpen={handleOpen} />
+                  </div>
+                )}
+                <div className="text-justify space-y-3 flex-1">
+                  <p>
+                    At each cross-section plane, the scroll and exit pipe
+                    intersection curves lie on the same 2D plane.
+                    OpenCascade&apos;s analytic solver constructs a circular arc
+                    with user-defined radius R that is tangent to both curves.
+                  </p>
+                  <p>
+                    The solver naturally produces two solutions; the correct one
+                    is selected by filtering based on distance from the main
+                    intersection curve. This approach replaced earlier ad-hoc
+                    tangent curve generation with a clean, parametrized
+                    construction.
+                  </p>
+                </div>
+              </FloatingSection>
+            </div>
 
             {/* Face Cutting */}
             <AutoAdjustingSection
@@ -348,8 +363,8 @@ function Project_VoluteFillet() {
 
             <Topic topicName="Debugging & Challenges" />
 
-            {/* Debugging sections: Side-by-side on desktop */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-3 items-stretch">
+            {/* Debugging sections: Side-by-side on desktop — adjust ratio in lg:grid-cols-[Xfr_Yfr] */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-2 sm:gap-3 items-stretch">
               <FloatingSection className="flex flex-col">
                 <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
                   Degenerate Corner Fillets
@@ -605,51 +620,56 @@ function Project_VoluteFillet() {
 
             <Topic topicName="Parametrization" />
 
-            {/* Fillet Radius */}
-            <AutoAdjustingSection
-              title="Fillet Radius"
-              imagePosition="left"
-              mediaContent={
-                getItem(17) && (
-                  <ImageDoc image={getItem(17)!} onOpen={handleOpen} />
-                )
-              }
-            >
-              <p>
-                The primary parameter controlling the fillet shape is the{" "}
-                <strong>fillet radius</strong> — the radius of the circular arcs
-                used as tangent curves between the scroll and exit pipe. A
-                larger radius creates a more gradual, sweeping transition while
-                a smaller radius produces a tighter fillet closer to the
-                original sharp edge.
-              </p>
-            </AutoAdjustingSection>
+            {/* Parametrization: Side-by-side on desktop — adjust ratio in lg:grid-cols-[Xfr_Yfr] */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-2 sm:gap-3 items-stretch">
+              <FloatingSection className="flex flex-col">
+                <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
+                  Fillet Radius
+                </h2>
+                {getItem(17) && (
+                  <div className="mb-3 flex justify-center">
+                    <ImageDoc image={getItem(17)!} onOpen={handleOpen} />
+                  </div>
+                )}
+                <div className="text-justify space-y-3 flex-1">
+                  <p>
+                    The primary parameter controlling the fillet shape is the{" "}
+                    <strong>fillet radius</strong> — the radius of the circular
+                    arcs used as tangent curves between the scroll and exit
+                    pipe. A larger radius creates a more gradual, sweeping
+                    transition while a smaller radius produces a tighter fillet
+                    closer to the original sharp edge.
+                  </p>
+                </div>
+              </FloatingSection>
 
-            {/* Intersection Cut Length */}
-            <AutoAdjustingSection
-              title="Intersection Cut Length"
-              imagePosition="right"
-              mediaContent={
-                getItem(18) && (
-                  <ImageDoc image={getItem(18)!} onOpen={handleOpen} />
-                )
-              }
-            >
-              <p>
-                The second parameter is the{" "}
-                <strong>intersection cut percentage</strong> — the amount of the
-                scroll–exit pipe intersection that is trimmed away and replaced
-                by the fillet. Increasing this parameter extends the fillet
-                along the tongue but reduces the effective fillet radius.
-                Together, these two parameters give designers precise control
-                over the fillet geometry.
-              </p>
-            </AutoAdjustingSection>
+              <FloatingSection className="flex flex-col">
+                <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
+                  Intersection Cut Length
+                </h2>
+                {getItem(18) && (
+                  <div className="mb-3 flex justify-center">
+                    <ImageDoc image={getItem(18)!} onOpen={handleOpen} />
+                  </div>
+                )}
+                <div className="text-justify space-y-3 flex-1">
+                  <p>
+                    The second parameter is the{" "}
+                    <strong>intersection cut percentage</strong> — the amount of
+                    the scroll–exit pipe intersection that is trimmed away and
+                    replaced by the fillet. Increasing this parameter extends
+                    the fillet along the tongue but reduces the effective fillet
+                    radius. Together, these two parameters give designers
+                    precise control over the fillet geometry.
+                  </p>
+                </div>
+              </FloatingSection>
+            </div>
 
             <Topic topicName="Results" />
 
             {/* Test Results */}
-            <FloatingSection>
+            <FloatingSection className="max-w-[60%] mx-auto">
               <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
                 Validation Results
               </h2>
@@ -753,44 +773,51 @@ function Project_VoluteFillet() {
               </div>
             </FloatingSection>
 
-            {/* Before/After Examples */}
-            <AutoAdjustingSection
-              title="Test Case: Before and After"
-              imagePosition="left"
-              mediaContent={
-                getItem(15) && (
-                  <ImageDoc image={getItem(15)!} onOpen={handleOpen} />
-                )
-              }
-            >
-              <p>
-                The fillet was tested across a wide variety of volute
-                configurations. This example shows a test case with an aspect
-                ratio of 1.5, demonstrating the smooth transition from the sharp
-                tongue (left) to the filleted tongue (right). The fillet
-                maintains tangency to both the scroll and exit pipe surfaces
-                while providing a clean, meshable geometry.
-              </p>
-            </AutoAdjustingSection>
+            {/* Test cases: Side-by-side on desktop — adjust ratio in lg:grid-cols-[Xfr_Yfr] */}
+            <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-2 sm:gap-3 items-stretch">
+              <FloatingSection className="flex flex-col">
+                <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
+                  Test Case: Before and After
+                </h2>
+                {getItem(15) && (
+                  <div className="mb-3 flex justify-center">
+                    <ImageDoc image={getItem(15)!} onOpen={handleOpen} />
+                  </div>
+                )}
+                <div className="text-justify space-y-3 flex-1">
+                  <p>
+                    The fillet was tested across a wide variety of volute
+                    configurations. This example shows a test case with an
+                    aspect ratio of 1.5, demonstrating the smooth transition
+                    from the sharp tongue (left) to the filleted tongue (right).
+                    The fillet maintains tangency to both the scroll and exit
+                    pipe surfaces while providing a clean, meshable geometry.
+                  </p>
+                </div>
+              </FloatingSection>
 
-            <AutoAdjustingSection
-              title="Curved Exit Pipe Support"
-              imagePosition="right"
-              mediaContent={
-                getItem(16) && (
-                  <ImageDoc image={getItem(16)!} onOpen={handleOpen} />
-                )
-              }
-            >
-              <p>
-                The algorithm was generalized to support curved exit pipes —
-                where the pipe follows a curvilinear path rather than a straight
-                one. This required handling exit pipes with multiple faces and
-                rewriting the fillet builder to support an arbitrary number of
-                face–scroll intersections. The image shows a successfully
-                filleted volute with a curved exit pipe.
-              </p>
-            </AutoAdjustingSection>
+              <FloatingSection className="flex flex-col">
+                <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
+                  Curved Exit Pipe Support
+                </h2>
+                {getItem(16) && (
+                  <div className="mb-3 flex justify-center">
+                    <ImageDoc image={getItem(16)!} onOpen={handleOpen} />
+                  </div>
+                )}
+                <div className="text-justify space-y-3 flex-1">
+                  <p>
+                    The algorithm was generalized to support curved exit pipes —
+                    where the pipe follows a curvilinear path rather than a
+                    straight one. This required handling exit pipes with
+                    multiple faces and rewriting the fillet builder to support
+                    an arbitrary number of face–scroll intersections. The image
+                    shows a successfully filleted volute with a curved exit
+                    pipe.
+                  </p>
+                </div>
+              </FloatingSection>
+            </div>
 
             <Topic topicName="Technologies" />
 

@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "loc": "/projects/project_gearbox_design/images/gearbox_layout.jpeg",
+    "name": "Gearbox layout — three-shaft arrangement",
+    "thumb": "/projects/project_gearbox_design/images/gearbox_layout.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 2,
+    "loc": "/projects/project_gearbox_design/images/feasible_forward_gears.jpeg",
+    "name": "Feasible module combinations for forward gears (Python brute-force output)",
+    "thumb": "/projects/project_gearbox_design/images/feasible_forward_gears.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 3,
+    "loc": "/projects/project_gearbox_design/images/forces_reverse_gears.jpeg",
+    "name": "Tangential loads on input shaft — reverse gear engagement",
+    "thumb": "/projects/project_gearbox_design/images/forces_reverse_gears.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 4,
+    "loc": "/projects/project_gearbox_design/images/bmd_reverse_gears.jpeg",
+    "name": "Free-body and bending moment diagrams — reverse gear engagements",
+    "thumb": "/projects/project_gearbox_design/images/bmd_reverse_gears.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 5,
+    "loc": "/projects/project_gearbox_design/images/forces_forward_gears.jpeg",
+    "name": "Tangential loads on input shaft — forward gear engagement",
+    "thumb": "/projects/project_gearbox_design/images/forces_forward_gears.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 6,
+    "loc": "/projects/project_gearbox_design/images/bmd_forward_horizontal.jpeg",
+    "name": "Free-body and BMD — forward gears, horizontal components",
+    "thumb": "/projects/project_gearbox_design/images/bmd_forward_horizontal.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 7,
+    "loc": "/projects/project_gearbox_design/images/bmd_forward_vertical.jpeg",
+    "name": "Free-body and BMD — forward gears, vertical components",
+    "thumb": "/projects/project_gearbox_design/images/bmd_forward_vertical.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 8,
+    "loc": "/projects/project_gearbox_design/images/bmd_forward_combined.jpeg",
+    "name": "Combined bending moment diagram — forward gear engagements",
+    "thumb": "/projects/project_gearbox_design/images/bmd_forward_combined.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 9,
+    "loc": "/projects/project_gearbox_design/images/shifting_arrangement.jpeg",
+    "name": "Shifting arrangement — 9 positions (3 neutral + 6 gear engagements)",
+    "thumb": "/projects/project_gearbox_design/images/shifting_arrangement.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 10,
+    "loc": "/projects/project_gearbox_design/images/shifter_dog_clutch.jpeg",
+    "name": "Connection between shifting lever and dog clutch",
+    "thumb": "/projects/project_gearbox_design/images/shifter_dog_clutch.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 11,
+    "loc": "/projects/project_gearbox_design/images/shifting_mechanism_overall.jpeg",
+    "name": "Overall design of shifting mechanism with ball-and-socket joint",
+    "thumb": "/projects/project_gearbox_design/images/shifting_mechanism_overall.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 12,
+    "loc": "/projects/project_gearbox_design/images/engagement_sectional_view.jpeg",
+    "name": "Sectional view of the lever engagement",
+    "thumb": "/projects/project_gearbox_design/images/engagement_sectional_view.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 13,
+    "loc": "/projects/project_gearbox_design/images/engagement_closeup.jpeg",
+    "name": "Close-up view of the engagement location — levers aligned in neutral",
+    "thumb": "/projects/project_gearbox_design/images/engagement_closeup.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 14,
+    "loc": "/projects/project_gearbox_design/images/socket_internal_view.jpeg",
+    "name": "Internal view of the ball-and-socket gear shift gate",
+    "thumb": "/projects/project_gearbox_design/images/socket_internal_view.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 15,
+    "loc": "/projects/project_gearbox_design/images/shifter_in_housing.jpeg",
+    "name": "Shifter location in the gearbox housing assembly",
+    "thumb": "/projects/project_gearbox_design/images/shifter_in_housing.jpeg",
+    "type": "image"
+  },
+  {
+    "id": 16,
+    "loc": "/projects/project_gearbox_design/images/leaver_geometry.jpeg",
+    "name": "Lever engagement part — geometry and dimensions",
+    "thumb": "/projects/project_gearbox_design/images/leaver_geometry.jpeg",
+    "type": "image"
+  }
+]

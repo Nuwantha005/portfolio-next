@@ -1,5 +1,3 @@
-// Project data with categories and hierarchy support
-
 export interface Project {
   image: string;
   name: string;
@@ -66,6 +64,37 @@ export const projectCategories: ProjectCategory[] = [
     description: "Projects from university coursework and research",
     priority: 2,
     projects: [
+      {
+        image: "./Images/Projects/MEMS_TEC_Thumbnail.jpeg",
+        name: "MEMS Radial Thermoelectric Cooler",
+        description:
+          "Designed a radial thermoelectric cooler for hotspot management in 3D stacked chips. Built a compact thermal model (resistor network → linear system) in MATLAB, optimized geometry via grid search and NSGA-II, and validated with coupled multiphysics COMSOL simulations driven through SolidWorks LiveLink and MATLAB API.",
+        tags: ["MATLAB", "COMSOL", "SolidWorks", "MEMS", "Optimization"],
+        link: "projects/project_mems_tec",
+        featured: true,
+        year: 2024,
+        duration: "4 months",
+      },
+      {
+        image: "./Images/Projects/CFD_Microchannel_Thumbnail.jpeg",
+        name: "CFD Study on Micro Channel Heat Sink",
+        description:
+          "Numerical study on heat transfer and fluid flow in a micro channel with circular ribs using ANSYS Fluent. Simulated 9 Reynolds numbers with conjugate heat transfer, validated against literature, and built unified contour plots in Matplotlib from exported Fluent data.",
+        tags: ["ANSYS Fluent", "CFD", "SolidWorks", "Python", "Matplotlib"],
+        link: "projects/project_cfd_microchannel",
+        year: 2024,
+        duration: "3 months",
+      },
+      {
+        image: "./Images/Projects/Gearbox_Design_Thumbnail.jpeg",
+        name: "Gearbox Design for a Spacer Cart",
+        description:
+          "Group project designing a 3-speed forward + 3-speed reverse gearbox. My contributions: brute-force search in Python to find feasible gear tooth/module combinations, shaft bending moment analysis with Python-generated BMD plots, gear safety calculations (Lewis, Buckingham, wear), bearing selection, and full shifting mechanism geometry design with ball-and-socket joint.",
+        tags: ["Machine Design", "Python", "SolidWorks", "Gearbox"],
+        link: "projects/project_gearbox_design",
+        year: 2024,
+        duration: "4 months",
+      },
       {
         image: "./Images/Projects/Reverse_Engineering_Project.png",
         name: "Reverse Engineering of a Water Dispensor",
