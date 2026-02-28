@@ -52,20 +52,11 @@ export const skillsGraphStructure: SkillsGraphStructure = {
   categories: [
     {
       id: "Programming",
-      skills: [
-        "Python",
-        "Java",
-        "JavaFX",
-        "C++",
-        "Javascript",
-        "Processing",
-        "Arduino",
-        "CSS"
-      ]
+      skills: ["C++", "Python", "MATLAB", "Java", "Processing", "Arduino"]
     },
     {
       id: "CAD",
-      skills: ["SolidWorks", "AutoCAD"]
+      skills: ["SolidWorks", "AutoCAD", "ANSYS SpaceClaim"]
     },
     {
       id: "Simulation",
@@ -74,35 +65,54 @@ export const skillsGraphStructure: SkillsGraphStructure = {
           id: "ANSYS",
           children: ["Mechanical", "Fluent"]
         },
-        "MATLAB",
         "COMSOL Multiphysics",
         {
           id: "OpenFOAM",
           type: "special",
-          connections: [
-            "Libraries and Tools",
-            "C++"
-          ]
+          connections: ["C++"]
         }
       ]
     },
     {
-      id: "Libraries and Tools",
-      skills: ["Jupyter Notebooks", "Numpy", "OpenCV", "MatplotLib"]
+      id: "Scientific Libraries",
+      skills: ["Eigen", "NLopt", "NumPy", "SciPy", "OpenCV"]
+    },
+    {
+      id: "Visualization & GUI",
+      skills: ["Qt", "VTK", "Matplotlib", "JavaFX", "p5.js"]
+    },
+    {
+      id: "Tools",
+      skills: ["Jupyter Notebooks", "LaTeX", "MySQL"]
     }
   ],
   special: [
     {
       id: "OpenCascade",
-      connections: ["CAD", "Libraries and Tools", "C++"]
+      connections: ["CAD", "C++"]
     }
   ],
   crossConnections: [
-    { from: "Python", to: "Jupyter Notebooks" },
-    { from: "Python", to: "Numpy" },
+    // Python ecosystem
+    { from: "Python", to: "NumPy" },
+    { from: "Python", to: "SciPy" },
+    { from: "Python", to: "Matplotlib" },
     { from: "Python", to: "OpenCV" },
-    { from: "Python", to: "MatplotLib" },
-    { from: "Java", to: "JavaFX" }
+    { from: "Python", to: "Jupyter Notebooks" },
+    // C++ ecosystem
+    { from: "C++", to: "Eigen" },
+    { from: "C++", to: "NLopt" },
+    { from: "C++", to: "Qt" },
+    { from: "C++", to: "VTK" },
+    // Java ecosystem
+    { from: "Java", to: "JavaFX" },
+    { from: "Java", to: "MySQL" },
+    // MATLAB ↔ Simulation
+    { from: "MATLAB", to: "COMSOL Multiphysics" },
+    // Processing ecosystem
+    { from: "Processing", to: "p5.js" },
+    // CAD ↔ Simulation
+    { from: "ANSYS SpaceClaim", to: "ANSYS" }
   ]
 };
 

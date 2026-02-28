@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  type ChangeEvent
-} from "react";
+import { useEffect, useMemo, useRef, useState, type ChangeEvent } from "react";
 import * as d3 from "d3";
 import type { D3DragEvent, D3ZoomEvent } from "d3";
 import { Maximize2, Settings } from "lucide-react";
@@ -14,7 +8,7 @@ import {
   buildSkillsGraphData,
   skillsGraphStructure,
   SkillGraphLink,
-  SkillGraphNode
+  SkillGraphNode,
 } from "@/lib/skills-graph-data";
 import { cn } from "@/lib/utils";
 
@@ -33,13 +27,22 @@ const COLORS = {
   nodeCategoryFill: "#3730a3",
   nodeCategoryStroke: "#818cf8",
   nodeSpecialFill: "#7c2d12",
-  nodeSpecialStroke: "#fb923c"
+  nodeSpecialStroke: "#fb923c",
 } as const;
+
+const CATEGORY_COLORS: Record<string, { fill: string; stroke: string }> = {
+  Programming: { fill: "#1e3a5f", stroke: "#60a5fa" },
+  CAD: { fill: "#14532d", stroke: "#4ade80" },
+  Simulation: { fill: "#4c1d95", stroke: "#a78bfa" },
+  "Scientific Libraries": { fill: "#713f12", stroke: "#fbbf24" },
+  "Visualization & GUI": { fill: "#831843", stroke: "#f472b6" },
+  Tools: { fill: "#164e63", stroke: "#22d3ee" },
+};
 
 const radiusByType: Record<ForceNode["type"], number> = {
   category: 22,
   skill: 14,
-  special: 18
+  special: 18,
 };
 
 export interface SkillsGraphProps {
@@ -51,15 +54,17 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const gRef = useRef<SVGGElement | null>(null);
   const simulationRef = useRef<d3.Simulation<ForceNode, ForceLink> | null>(
-    null
+    null,
   );
-  const zoomBehaviourRef =
-    useRef<d3.ZoomBehavior<SVGSVGElement, undefined> | null>(null);
+  const zoomBehaviourRef = useRef<d3.ZoomBehavior<
+    SVGSVGElement,
+    undefined
+  > | null>(null);
   const nodesRef = useRef<ForceNode[]>([]);
   const physicsRef = useRef({
     linkDistance: 110,
     chargeStrength: -320,
-    collisionPadding: 10
+    collisionPadding: 10,
   });
 
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -67,7 +72,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
   const [physics, setPhysics] = useState({
     linkDistance: 110,
     chargeStrength: -320,
-    collisionPadding: 10
+    collisionPadding: 10,
   });
 
   useEffect(() => {
@@ -87,7 +92,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
     if (!dimensions.width || !dimensions.height) return;
 
     const nodes = nodesRef.current.filter(
-      (node) => typeof node.x === "number" && typeof node.y === "number"
+      (node) => typeof node.x === "number" && typeof node.y === "number",
     );
 
     if (nodes.length === 0) return;
@@ -109,9 +114,9 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         minScale,
         Math.min(
           (dimensions.width - padding) / contentWidth,
-          (dimensions.height - padding) / contentHeight
-        )
-      )
+          (dimensions.height - padding) / contentHeight,
+        ),
+      ),
     );
 
     const centerX = (minX + maxX) / 2;
@@ -135,7 +140,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         const { width, height } = entry.contentRect;
         setDimensions({
           width: Math.floor(width),
-          height: Math.floor(height)
+          height: Math.floor(height),
         });
       }
     });
@@ -144,7 +149,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
 
     setDimensions({
       width: Math.floor(container.clientWidth),
-      height: Math.floor(container.clientHeight)
+      height: Math.floor(container.clientHeight),
     });
 
     return () => observer.disconnect();
@@ -156,8 +161,8 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
 
     simulationRef.current?.stop();
 
-  const svg = d3.select<SVGSVGElement, undefined>(svgRef.current);
-  const g = d3.select<SVGGElement, undefined>(gRef.current);
+    const svg = d3.select<SVGSVGElement, undefined>(svgRef.current);
+    const g = d3.select<SVGGElement, undefined>(gRef.current);
 
     svg.attr("width", dimensions.width).attr("height", dimensions.height);
 
@@ -175,8 +180,8 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         g.attr("transform", event.transform.toString());
       });
 
-  svg.call(zoom);
-  zoom.transform(svg, existingTransform);
+    svg.call(zoom);
+    zoom.transform(svg, existingTransform);
     zoomBehaviourRef.current = zoom;
 
     const nodes: ForceNode[] = data.nodes.map((node) => ({ ...node }));
@@ -195,10 +200,12 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
     const primaryDimension = isPortrait ? dimensions.height : dimensions.width;
 
     const preferredCategoryRatios: Record<string, number> = {
-      "Design Software": 0.22,
-      Programming: 0.5,
-      "Libraries and Tools": 0.65,
-      Simulation: 0.78
+      Programming: 0.12,
+      CAD: 0.28,
+      Simulation: 0.44,
+      "Scientific Libraries": 0.58,
+      "Visualization & GUI": 0.74,
+      Tools: 0.9,
     };
 
     const assignedCategories = new Set<string>();
@@ -212,7 +219,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
     });
 
     const remainingCategories = categoryIds.filter(
-      (categoryId) => !assignedCategories.has(categoryId)
+      (categoryId) => !assignedCategories.has(categoryId),
     );
 
     if (remainingCategories.length > 0) {
@@ -220,7 +227,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       remainingCategories.forEach((categoryId, index) => {
         categoryPositions.set(
           categoryId,
-          (index + 1) * spacing * primaryDimension
+          (index + 1) * spacing * primaryDimension,
         );
       });
     }
@@ -229,7 +236,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       categoryPositions.get(categoryId) ?? primaryDimension / 2;
 
     const resolveId = (
-      endpoint: ForceLink["source"] | ForceLink["target"]
+      endpoint: ForceLink["source"] | ForceLink["target"],
     ): string => {
       if (typeof endpoint === "string") return endpoint;
       if (typeof endpoint === "number") return String(endpoint);
@@ -265,7 +272,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
           // In portrait, center horizontally
           return dimensions.width / 2;
         }
-        
+
         if (node.type === "category") {
           return getCategoryPosition(node.id);
         }
@@ -276,7 +283,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
             const entries = Array.from(categories);
             const total = entries.reduce(
               (sum, categoryId) => sum + getCategoryPosition(categoryId),
-              0
+              0,
             );
             return total / entries.length;
           }
@@ -307,7 +314,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
           // In landscape, center vertically
           return dimensions.height / 2;
         }
-        
+
         // In portrait, use Y-axis for category positions
         if (node.type === "category") {
           return getCategoryPosition(node.id);
@@ -319,7 +326,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
             const entries = Array.from(categories);
             const total = entries.reduce(
               (sum, categoryId) => sum + getCategoryPosition(categoryId),
-              0
+              0,
             );
             return total / entries.length;
           }
@@ -349,7 +356,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       });
 
     const resolveX = (
-      endpoint: ForceLink["source"] | ForceLink["target"]
+      endpoint: ForceLink["source"] | ForceLink["target"],
     ): number => {
       if (typeof endpoint === "string" || typeof endpoint === "number") {
         return 0;
@@ -359,7 +366,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
     };
 
     const resolveY = (
-      endpoint: ForceLink["source"] | ForceLink["target"]
+      endpoint: ForceLink["source"] | ForceLink["target"],
     ): number => {
       if (typeof endpoint === "string" || typeof endpoint === "number") {
         return 0;
@@ -403,13 +410,26 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       .append("circle")
       .attr("r", (d: ForceNode) => d.radius ?? radiusByType[d.type])
       .attr("fill", (d: ForceNode) => {
-        if (d.type === "category") return COLORS.nodeCategoryFill;
+        if (d.type === "category") {
+          return CATEGORY_COLORS[d.id]?.fill ?? COLORS.nodeCategoryFill;
+        }
         if (d.type === "special") return COLORS.nodeSpecialFill;
+        // Tint skill nodes based on their parent category
+        const cat = categoryAssignments[d.id];
+        if (cat && CATEGORY_COLORS[cat]) {
+          return CATEGORY_COLORS[cat].fill + "80";
+        }
         return COLORS.nodeSkillFill;
       })
       .attr("stroke", (d: ForceNode) => {
-        if (d.type === "category") return COLORS.nodeCategoryStroke;
+        if (d.type === "category") {
+          return CATEGORY_COLORS[d.id]?.stroke ?? COLORS.nodeCategoryStroke;
+        }
         if (d.type === "special") return COLORS.nodeSpecialStroke;
+        const cat = categoryAssignments[d.id];
+        if (cat && CATEGORY_COLORS[cat]) {
+          return CATEGORY_COLORS[cat].stroke;
+        }
         return COLORS.nodeSkillStroke;
       })
       .attr("stroke-width", (d: ForceNode) => (d.type === "skill" ? 2 : 3));
@@ -421,7 +441,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       .attr("fill", COLORS.text)
       .attr("font-size", (d: ForceNode) => (d.type === "category" ? 14 : 12))
       .attr("font-weight", (d: ForceNode) =>
-        d.type === "category" ? "bold" : "normal"
+        d.type === "category" ? "bold" : "normal",
       )
       .attr("text-anchor", "middle")
       .style("pointer-events", "none");
@@ -433,11 +453,11 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         d3
           .forceLink<ForceNode, ForceLink>(links)
           .id((d: ForceNode) => d.id)
-          .distance(physicsRef.current.linkDistance)
+          .distance(physicsRef.current.linkDistance),
       )
       .force(
         "charge",
-        d3.forceManyBody().strength(physicsRef.current.chargeStrength)
+        d3.forceManyBody().strength(physicsRef.current.chargeStrength),
       )
       .force("horizontal", horizontalForce)
       .force("vertical", verticalForce)
@@ -447,57 +467,75 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
           .forceCollide<ForceNode>()
           .radius(
             (d: ForceNode) =>
-              (d.radius ?? 18) + physicsRef.current.collisionPadding
-          )
+              (d.radius ?? 18) + physicsRef.current.collisionPadding,
+          ),
       );
 
     simulationRef.current = simulation;
 
     const dragBehaviour = d3
       .drag<SVGGElement, ForceNode, ForceNode>()
-      .on("start", (event: D3DragEvent<SVGGElement, ForceNode, ForceNode>, d: ForceNode) => {
-        if (!event.active) simulation.alphaTarget(0.3).restart();
-        d.fx = d.x;
-        d.fy = d.y;
-      })
-      .on("drag", (event: D3DragEvent<SVGGElement, ForceNode, ForceNode>, d: ForceNode) => {
-        d.fx = event.x;
-        d.fy = event.y;
-      })
-      .on("end", (event: D3DragEvent<SVGGElement, ForceNode, ForceNode>, d: ForceNode) => {
-        if (!event.active) simulation.alphaTarget(0);
-        d.fx = null;
-        d.fy = null;
-      });
-
-  nodeSelection.call(dragBehaviour);
-
-    nodeSelection.on("mouseenter", function (
-      event: PointerEvent,
-      hoveredNode: ForceNode
-    ) {
-      const connected = new Set<string>([hoveredNode.id]);
-
-      linkSelection.each(function (linkDatum: ForceLink) {
-        const sourceId = resolveId(linkDatum.source);
-        const targetId = resolveId(linkDatum.target);
-
-        if (sourceId === hoveredNode.id || targetId === hoveredNode.id) {
-          connected.add(sourceId);
-          connected.add(targetId);
-          d3.select(this)
-            .attr("stroke", COLORS.linkHighlight)
-            .attr("stroke-opacity", 0.9)
-            .attr("stroke-width", 2.5);
-        } else {
-          d3.select(this).attr("stroke-opacity", 0.15);
-        }
-      });
-
-      nodeSelection.style("opacity", (nodeDatum: ForceNode) =>
-        connected.has(nodeDatum.id) ? 1 : 0.3
+      .on(
+        "start",
+        (
+          event: D3DragEvent<SVGGElement, ForceNode, ForceNode>,
+          d: ForceNode,
+        ) => {
+          if (!event.active) simulation.alphaTarget(0.3).restart();
+          d.fx = d.x;
+          d.fy = d.y;
+        },
+      )
+      .on(
+        "drag",
+        (
+          event: D3DragEvent<SVGGElement, ForceNode, ForceNode>,
+          d: ForceNode,
+        ) => {
+          d.fx = event.x;
+          d.fy = event.y;
+        },
+      )
+      .on(
+        "end",
+        (
+          event: D3DragEvent<SVGGElement, ForceNode, ForceNode>,
+          d: ForceNode,
+        ) => {
+          if (!event.active) simulation.alphaTarget(0);
+          d.fx = null;
+          d.fy = null;
+        },
       );
-    });
+
+    nodeSelection.call(dragBehaviour);
+
+    nodeSelection.on(
+      "mouseenter",
+      function (event: PointerEvent, hoveredNode: ForceNode) {
+        const connected = new Set<string>([hoveredNode.id]);
+
+        linkSelection.each(function (linkDatum: ForceLink) {
+          const sourceId = resolveId(linkDatum.source);
+          const targetId = resolveId(linkDatum.target);
+
+          if (sourceId === hoveredNode.id || targetId === hoveredNode.id) {
+            connected.add(sourceId);
+            connected.add(targetId);
+            d3.select(this)
+              .attr("stroke", COLORS.linkHighlight)
+              .attr("stroke-opacity", 0.9)
+              .attr("stroke-width", 2.5);
+          } else {
+            d3.select(this).attr("stroke-opacity", 0.15);
+          }
+        });
+
+        nodeSelection.style("opacity", (nodeDatum: ForceNode) =>
+          connected.has(nodeDatum.id) ? 1 : 0.3,
+        );
+      },
+    );
 
     nodeSelection.on("mouseleave", () => {
       linkSelection
@@ -515,8 +553,9 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         .attr("x2", (d: ForceLink) => resolveX(d.target))
         .attr("y2", (d: ForceLink) => resolveY(d.target));
 
-      nodeSelection.attr("transform", (d: ForceNode) =>
-        `translate(${d.x ?? 0},${d.y ?? 0})`
+      nodeSelection.attr(
+        "transform",
+        (d: ForceNode) => `translate(${d.x ?? 0},${d.y ?? 0})`,
       );
     });
 
@@ -557,7 +596,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       "collision",
       d3
         .forceCollide<ForceNode>()
-        .radius((d: ForceNode) => (d.radius ?? 18) + physics.collisionPadding)
+        .radius((d: ForceNode) => (d.radius ?? 18) + physics.collisionPadding),
     );
 
     simulation.alpha(0.6).restart();
@@ -568,7 +607,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       ref={containerRef}
       className={cn(
         "relative h-full w-full overflow-hidden rounded-xl border border-slate-800 bg-[#1e1e1e]",
-        className
+        className,
       )}
     >
       <div className="absolute right-2 sm:right-4 top-2 sm:top-4 z-20 hidden md:flex flex-col gap-2">
@@ -653,8 +692,10 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         <g ref={gRef} />
       </svg>
 
-      <div className="pointer-events-none absolute left-2 sm:left-4 top-2 sm:top-4 z-10 w-32 sm:w-48 rounded-lg border border-slate-700 bg-slate-800/90 p-2 sm:p-4 text-slate-300 backdrop-blur hidden md:block">
-        <h3 className="text-xs sm:text-sm font-semibold text-indigo-300">Controls</h3>
+      <div className="pointer-events-auto absolute left-2 sm:left-4 top-2 sm:top-4 z-10 w-32 sm:w-48 rounded-lg border border-slate-700 bg-slate-800/90 p-2 sm:p-4 text-slate-300 backdrop-blur hidden md:block opacity-0 hover:opacity-100 transition-opacity duration-300">
+        <h3 className="text-xs sm:text-sm font-semibold text-indigo-300">
+          Controls
+        </h3>
         <ul className="mt-1 sm:mt-2 space-y-0.5 sm:space-y-1 text-[10px] sm:text-xs">
           <li>🖱️ Drag to pan</li>
           <li>🔍 Scroll to zoom</li>
@@ -663,23 +704,26 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         </ul>
       </div>
 
-      <div className="pointer-events-none absolute bottom-2 sm:bottom-4 right-2 sm:right-4 z-10 w-36 sm:w-52 rounded-lg border border-slate-700 bg-slate-800/90 p-2 sm:p-4 text-slate-300 backdrop-blur hidden md:block">
+      <div className="pointer-events-auto absolute bottom-2 sm:bottom-4 right-2 sm:right-4 z-10 w-36 sm:w-52 rounded-lg border border-slate-700 bg-slate-800/90 p-2 sm:p-4 text-slate-300 backdrop-blur hidden md:block opacity-0 hover:opacity-100 transition-opacity duration-300">
         <h3 className="text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-indigo-300">
           Legend
         </h3>
         <div className="mt-2 sm:mt-3 space-y-1 sm:space-y-2 text-[10px] sm:text-xs">
+          {Object.entries(CATEGORY_COLORS).map(([name, colors]) => (
+            <div key={name} className="flex items-center gap-2 sm:gap-3">
+              <span
+                className="inline-flex h-4 w-4 sm:h-5 sm:w-5 shrink-0 items-center justify-center rounded-full border-2"
+                style={{
+                  borderColor: colors.stroke,
+                  backgroundColor: colors.fill,
+                }}
+              />
+              <span className="truncate">{name}</span>
+            </div>
+          ))}
           <div className="flex items-center gap-2 sm:gap-3">
-            <span className="inline-flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border-2 border-indigo-400 bg-indigo-900" />
-            <span>Categories</span>
-          </div>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <span className="inline-flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border-2 border-indigo-500 bg-slate-800" />
-            <span>Skills</span>
-          </div>
-          <div className="flex items-center gap-2 sm:gap-3">
-            <span className="inline-flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border-2 border-orange-300 bg-orange-900" />
-            <span className="hidden sm:inline">Multi-domain</span>
-            <span className="sm:hidden">Multi</span>
+            <span className="inline-flex h-4 w-4 sm:h-5 sm:w-5 shrink-0 items-center justify-center rounded-full border-2 border-orange-300 bg-orange-900" />
+            <span>Multi-domain</span>
           </div>
         </div>
       </div>
