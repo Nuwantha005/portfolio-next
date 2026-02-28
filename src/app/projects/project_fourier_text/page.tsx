@@ -43,7 +43,7 @@ function Project_FourierText() {
                   />
                 )}
               </div>
-              <div className="lg:w-1/2 text-justify text-sm sm:text-base lg:text-xl">
+              <div className="lg:w-1/2 text-justify">
                 <p className="mb-4">
                   This project is an extension of the Fourier Images project.
                   Instead of requiring an input image file, it converts any

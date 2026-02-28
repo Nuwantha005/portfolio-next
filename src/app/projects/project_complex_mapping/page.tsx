@@ -43,7 +43,7 @@ function Project_ComplexMapping() {
                   className="border-gray-800 dark:border-gray-200"
                 />
               </div>
-              <div className="lg:w-1/2 text-justify text-sm sm:text-base lg:text-xl">
+              <div className="lg:w-1/2 text-justify">
                 <p className="mb-4">
                   Visualizing complex functions is inherently challenging: the
                   complex plane is already two-dimensional, so a function{" "}

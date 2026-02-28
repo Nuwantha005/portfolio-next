@@ -45,7 +45,7 @@ function Project_TSP() {
                   />
                 )}
               </div>
-              <div className="lg:w-1/2 text-justify text-sm sm:text-base lg:text-xl">
+              <div className="lg:w-1/2 text-justify">
                 <p className="mb-4">
                   A real-time visualization built in Processing (Java) that
                   solves the Travelling Salesman Problem using two fundamentally

@@ -43,7 +43,7 @@ function Project_FourierImages() {
                   className="border-gray-800 dark:border-gray-200"
                 />
               </div>
-              <div className="lg:w-1/2 text-justify text-sm sm:text-base lg:text-xl">
+              <div className="lg:w-1/2 text-justify">
                 <p className="mb-4">
                   This Processing (Java) application takes an input image,
                   extracts its contours using <strong>OpenCV</strong>, and
