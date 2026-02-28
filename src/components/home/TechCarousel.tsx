@@ -20,7 +20,7 @@ const TechCarousel = () => {
     { src: "./Images/svgIcons/icons8-autocad.svg", alt: "AutoCAD" },
     // Simulation
     { src: "./Images/svgIcons/ANSS.D.svg", alt: "ANSYS" },
-    { src: "./Images/svgIcons/simple-icons--comsol.svg", alt: "COMSOL" },
+    { src: "./Images/svgIcons/comsol-logo.png", alt: "COMSOL" },
     { src: "./Images/svgIcons/simple-icons--openfoam.svg", alt: "OpenFOAM" },
     // Scientific Libraries
     { src: "./Images/svgIcons/logos--numpy.svg", alt: "NumPy" },

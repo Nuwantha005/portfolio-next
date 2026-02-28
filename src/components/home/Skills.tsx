@@ -1,16 +1,13 @@
 import React from "react";
-import ProgrammingLanguages from "./ProgrammingLanguages";
+import TechCarousel from "./TechCarousel";
 import FloatingSection from "../ui/FloatingSection";
 import SkillsGraph from "./SkillsGraph";
-import {
-  skillsGraphStructure,
-  type SkillEntry
-} from "@/lib/skills-graph-data";
+import { skillsGraphStructure, type SkillEntry } from "@/lib/skills-graph-data";
 
 function Skills() {
   const renderSkillEntry = (
     entry: SkillEntry,
-    key: string
+    key: string,
   ): React.ReactElement => {
     if (typeof entry === "string") {
       return (
@@ -29,7 +26,7 @@ function Skills() {
         {entry.children && entry.children.length > 0 && (
           <ul className="ml-4 space-y-1 border-l border-slate-700 pl-4">
             {entry.children.map((child, childIndex) =>
-              renderSkillEntry(child, `${key}-${childIndex}`)
+              renderSkillEntry(child, `${key}-${childIndex}`),
             )}
           </ul>
         )}
@@ -41,9 +38,9 @@ function Skills() {
     <FloatingSection>
       <h1 className="text-bold text-2xl sm:text-3xl">Skills</h1>
       <p className="mt-4 text-xs sm:text-sm text-slate-300">
-        Explore my technical skill set through an interactive force-directed graph.
-        Hover to highlight related technologies, drag to rearrange, and scroll
-        to zoom in or out.
+        Explore my technical skill set through an interactive force-directed
+        graph. Hover to highlight related technologies, drag to rearrange, and
+        scroll to zoom in or out.
       </p>
       <div className="mt-6 sm:mt-8 flex flex-col gap-4 sm:gap-6 lg:h-[36rem] lg:flex-row lg:items-stretch">
         <div className="hidden lg:block space-y-4 rounded-xl border border-slate-800 bg-slate-900/40 p-6 text-sm text-slate-300 lg:w-1/4 lg:max-w-none lg:overflow-y-auto">
@@ -64,8 +61,8 @@ function Skills() {
                   {category.skills.map((skill, skillIndex) =>
                     renderSkillEntry(
                       skill,
-                      `${category.id}-${categoryIndex}-${skillIndex}`
-                    )
+                      `${category.id}-${categoryIndex}-${skillIndex}`,
+                    ),
                   )}
                 </ul>
               </li>
@@ -93,8 +90,8 @@ function Skills() {
                             {specialNode.children.map((child, childIndex) =>
                               renderSkillEntry(
                                 child,
-                                `${specialNode.id}-${index}-${childIndex}`
-                              )
+                                `${specialNode.id}-${index}-${childIndex}`,
+                              ),
                             )}
                           </ul>
                         )}
@@ -110,7 +107,7 @@ function Skills() {
         </div>
       </div>
       <div className="w-11/12 mx-auto px-2 sm:px-4 py-6 sm:py-8 md:py-12">
-        <ProgrammingLanguages />
+        <TechCarousel />
       </div>
     </FloatingSection>
   );
