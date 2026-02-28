@@ -15,6 +15,7 @@ interface TimelineEntry {
   date: string;
   title: string;
   description: string;
+  link?: string;
 }
 
 interface Position {
@@ -98,6 +99,7 @@ const timelineData: TimelineEntry[] = [
     title: "Received the best poster Award at the MERS 2025",
     description:
       "A paper titled 'Linear Matrix Formulation for Parametric Curve Design' was submitted to the Mechanical Engineering Research Symposium. The paper passed the binding review and was presented at the symposium, where it won the best poster award.",
+    link: "#publications",
   },
   {
     id: 8,
@@ -175,6 +177,23 @@ const TimelineCard: React.FC<{
   const typeStyles = getTypeStyles(entry.type);
   const [isHovered, setIsHovered] = useState(false);
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (!entry.link) return;
+
+    // Prevent default to avoid interfering with any drag/scroll behavior
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (entry.link.startsWith("#")) {
+      const element = document.querySelector(entry.link);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    } else {
+      window.location.href = entry.link;
+    }
+  };
+
   return (
     <div
       className={`
@@ -185,6 +204,7 @@ const TimelineCard: React.FC<{
         transition-all duration-300 ease-out
         ${isHovered ? "z-50 shadow-2xl shadow-indigo-500/20 scale-[1.02]" : "z-30"}
         ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
+        ${entry.link ? "cursor-pointer" : ""}
       `}
       style={{
         left: position.x,
@@ -194,6 +214,7 @@ const TimelineCard: React.FC<{
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={handleClick}
     >
       {/* Header */}
       <div className="flex justify-between items-start mb-2">
