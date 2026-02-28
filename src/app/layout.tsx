@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { BackgroundWrapper } from "@/components/ui/BackgroundWrapper";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://nuwanthakumara.com"),
   title: {
     default: "Nuwantha Kumara - Portfolio",
     template: "%s | Nuwantha Kumara",
@@ -31,12 +32,21 @@ export const metadata: Metadata = {
     title: "Nuwantha Kumara - Portfolio",
     description:
       "Mechanical Engineering student with a passion for programming. Explore my projects in software development, simulations, and more.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Nuwantha Kumara - Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nuwantha Kumara - Portfolio",
     description:
       "Mechanical Engineering student with a passion for programming.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -61,9 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
-        <BackgroundWrapper>
-          {children}
-        </BackgroundWrapper>
+        <BackgroundWrapper>{children}</BackgroundWrapper>
       </body>
     </html>
   );

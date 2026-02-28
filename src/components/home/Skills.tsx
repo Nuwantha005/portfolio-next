@@ -199,7 +199,9 @@ function Skills() {
 
   return (
     <FloatingSection>
-      <h1 className="text-bold text-2xl sm:text-3xl">Skills</h1>
+      <h1 id="skills" className="text-bold text-2xl sm:text-3xl">
+        Skills
+      </h1>
       <p className="mt-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
         Explore my technical skill set through an interactive force-directed
         graph. Hover to highlight related technologies, drag to rearrange, and

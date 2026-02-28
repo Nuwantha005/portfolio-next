@@ -1,7 +1,7 @@
 import React from "react";
 import FloatingSection from "@/components/ui/FloatingSection";
 import Link from "next/link";
-import { Download, ArrowRight, ExternalLink } from "lucide-react";
+import { Download, ArrowRight } from "lucide-react";
 
 const PublicationsSection: React.FC = () => {
   return (

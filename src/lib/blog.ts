@@ -118,8 +118,8 @@ function parseFrontmatter(data: Record<string, any>, slug: string): {
     }
   }
 
-  // Published: support "Published" or "published"
-  const published = data["Published"] !== false && data.published !== false;
+  // Published: require explicit "Published: true" or "published: true"
+  const published = data["Published"] === true || data.published === true;
 
   return { title, description, date, tags, image, published };
 }

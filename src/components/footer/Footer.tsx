@@ -96,12 +96,12 @@ const Icons = {
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/NuwanthikaW96",
+    href: "https://github.com/Nuwantha005",
     icon: Icons.gitHub,
   },
   {
     name: "LinkedIn",
-    href: "https://www.linkedin.com/in/nuwantha-kumara-a97a2a1b6/",
+    href: "https://www.linkedin.com/in/nuwantha-kumara-1b2573166",
     icon: Icons.linkedIn,
   },
   {
@@ -117,10 +117,11 @@ const socialLinks = [
 ];
 
 const quickLinks = [
-  { name: "Home", href: "/#home" },
+  { name: "Home", href: "/" },
   { name: "About", href: "/#about" },
   { name: "Skills", href: "/#skills" },
-  { name: "Projects", href: "/#projects" },
+  { name: "Projects", href: "/projects" },
+  { name: "Blog", href: "/blog" },
 ];
 
 export default function Footer() {
@@ -136,8 +137,8 @@ export default function Footer() {
               Nuwantha Kumara
             </h3>
             <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-xs">
-              Mechanical Engineering student passionate about software development,
-              simulations, and creating impactful solutions.
+              Mechanical Engineering student passionate about software
+              development, simulations, and creating impactful solutions.
             </p>
           </div>
 

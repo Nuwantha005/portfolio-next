@@ -120,11 +120,12 @@ function SocialDock() {
       >
         <DockIcon
           className="bg-black/10 dark:bg-white/10 p-3"
+          aria-label="GitHub"
           onClick={() =>
             window.open(
               "https://github.com/Nuwantha005",
               "_blank",
-              "noopener noreferrer"
+              "noopener noreferrer",
             )
           }
         >
@@ -132,11 +133,12 @@ function SocialDock() {
         </DockIcon>
         <DockIcon
           className="bg-black/10 dark:bg-white/10 p-3"
+          aria-label="LinkedIn"
           onClick={() =>
             window.open(
-              "https://www.linkedin.com/in/nuwantha-kumara/",
+              "https://www.linkedin.com/in/nuwantha-kumara-1b2573166",
               "_blank",
-              "noopener noreferrer"
+              "noopener noreferrer",
             )
           }
         >
@@ -144,11 +146,12 @@ function SocialDock() {
         </DockIcon>
         <DockIcon
           className="bg-black/10 dark:bg-white/10 p-3"
+          aria-label="YouTube"
           onClick={() =>
             window.open(
               "https://www.youtube.com/@nuwanthakumara6121",
               "_blank",
-              "noopener noreferrer"
+              "noopener noreferrer",
             )
           }
         >
@@ -156,11 +159,12 @@ function SocialDock() {
         </DockIcon>
         <DockIcon
           className="bg-black/10 dark:bg-white/10 p-3"
+          aria-label="Email"
           onClick={() =>
             window.open(
               "mailto:nuwanthakumara999@gmail.com",
               "_blank",
-              "noopener noreferrer"
+              "noopener noreferrer",
             )
           }
         >
@@ -168,11 +172,12 @@ function SocialDock() {
         </DockIcon>
         <DockIcon
           className="bg-black/10 dark:bg-white/10 p-3"
+          aria-label="X (Twitter)"
           onClick={() =>
             window.open(
               "https://x.com/KumaraNuwantha",
               "_blank",
-              "noopener noreferrer"
+              "noopener noreferrer",
             )
           }
         >

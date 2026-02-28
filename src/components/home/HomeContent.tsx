@@ -12,7 +12,10 @@ const HomeContent: React.FC = () => {
     <div className="relative z-10 p-4 sm:p-6 md:p-8 lg:p-10 space-y-3 sm:space-y-4 md:space-y-6">
       <About />
       <FloatingSection>
-        <h1 className="text-bold text-2xl sm:text-3xl mb-3 sm:mb-4">
+        <h1
+          id="journey"
+          className="text-bold text-2xl sm:text-3xl mb-3 sm:mb-4"
+        >
           My Journey
         </h1>
         <p className="text-muted-foreground text-sm sm:text-base mb-4 sm:mb-6">

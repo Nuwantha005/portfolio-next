@@ -7,15 +7,18 @@ import Image from "next/image";
 
 function About() {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 justify-between justify-items-stretch content-center ">
+    <div
+      id="about"
+      className="flex flex-col sm:flex-row gap-4 justify-between justify-items-stretch content-center "
+    >
       <FloatingSection className="flex justify-center items-center sm:items-stretch">
         <Image
-            src="./Images/Profile.jpg"
-            alt="Profile"
-            width={288}
-            height={288}
-            className="rounded-full aspect-square max-w-48 sm:max-w-60 md:max-w-72 mx-auto"
-          />
+          src="./Images/Profile.jpg"
+          alt="Profile"
+          width={288}
+          height={288}
+          className="rounded-full aspect-square max-w-48 sm:max-w-60 md:max-w-72 mx-auto"
+        />
       </FloatingSection>
       <div className="justify-self-stretch grow">
         <FloatingSection>
@@ -31,17 +34,16 @@ function About() {
           </section>
           <section className="mt-2 flex flex-row gap-2 content-center align-center max-h-20 ">
             <HiOutlineMail className="w-6 h-6 sm:w-8 sm:h-8 flex-shrink-0" />{" "}
-            <p className="text-xs sm:text-sm self-center break-all">nuwanthakumara999@gmail.com</p>
+            <p className="text-xs sm:text-sm self-center break-all">
+              nuwanthakumara999@gmail.com
+            </p>
           </section>
           <div className=" flex flex-row gap-2 content-center align-center justify-start">
             <SocialDock />
           </div>
 
           <div className="mt-4 flex flex-row justify-end">
-            <a
-              href="/resume.pdf"
-              download="Nuwantha Kumara CV.pdf"
-            >
+            <a href="/resume.pdf" download="Nuwantha Kumara CV.pdf">
               <button className="dark:bg-gray-300 bg-slate-800 dark:hover:bg-gray-400 hover:bg-slate-600 dark:text-gray-800 text-slate-50 font-bold py-2 px-3 sm:px-4 rounded inline-flex items-center text-sm sm:text-base">
                 <svg
                   className="fill-current w-3 h-3 sm:w-4 sm:h-4 mr-2"
