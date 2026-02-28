@@ -30,13 +30,46 @@ const COLORS = {
   nodeSpecialStroke: "#fb923c",
 } as const;
 
-const CATEGORY_COLORS: Record<string, { fill: string; stroke: string }> = {
-  Programming: { fill: "#1e3a5f", stroke: "#60a5fa" },
-  CAD: { fill: "#14532d", stroke: "#4ade80" },
-  Simulation: { fill: "#4c1d95", stroke: "#a78bfa" },
-  "Scientific Libraries": { fill: "#713f12", stroke: "#fbbf24" },
-  "Visualization & GUI": { fill: "#831843", stroke: "#f472b6" },
-  Tools: { fill: "#164e63", stroke: "#22d3ee" },
+export const CATEGORY_COLORS: Record<
+  string,
+  { fill: string; stroke: string; fillLight: string; strokeLight: string }
+> = {
+  Programming: {
+    fill: "#1e3a5f",
+    stroke: "#60a5fa",
+    fillLight: "#dbeafe",
+    strokeLight: "#1d4ed8",
+  },
+  CAD: {
+    fill: "#14532d",
+    stroke: "#4ade80",
+    fillLight: "#dcfce7",
+    strokeLight: "#15803d",
+  },
+  Simulation: {
+    fill: "#4c1d95",
+    stroke: "#a78bfa",
+    fillLight: "#ede9fe",
+    strokeLight: "#6d28d9",
+  },
+  "Scientific Libraries": {
+    fill: "#713f12",
+    stroke: "#fbbf24",
+    fillLight: "#fef3c7",
+    strokeLight: "#b45309",
+  },
+  "Visualization & GUI": {
+    fill: "#831843",
+    stroke: "#f472b6",
+    fillLight: "#fce7f3",
+    strokeLight: "#be185d",
+  },
+  Tools: {
+    fill: "#164e63",
+    stroke: "#22d3ee",
+    fillLight: "#cffafe",
+    strokeLight: "#0e7490",
+  },
 };
 
 const radiusByType: Record<ForceNode["type"], number> = {
@@ -47,9 +80,15 @@ const radiusByType: Record<ForceNode["type"], number> = {
 
 export interface SkillsGraphProps {
   className?: string;
+  onHoverSkill?: (skillId: string | null) => void;
+  externalHoveredSkill?: string | null;
 }
 
-export default function SkillsGraph({ className }: SkillsGraphProps) {
+export default function SkillsGraph({
+  className,
+  onHoverSkill,
+  externalHoveredSkill,
+}: SkillsGraphProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const gRef = useRef<SVGGElement | null>(null);
@@ -61,6 +100,24 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
     undefined
   > | null>(null);
   const nodesRef = useRef<ForceNode[]>([]);
+  const onHoverSkillRef = useRef(onHoverSkill);
+  const nodeSelectionRef = useRef<d3.Selection<
+    SVGGElement,
+    ForceNode,
+    SVGGElement,
+    undefined
+  > | null>(null);
+  const linkSelectionRef = useRef<d3.Selection<
+    SVGLineElement,
+    ForceLink,
+    SVGGElement,
+    undefined
+  > | null>(null);
+  const resolveIdRef = useRef<
+    (endpoint: ForceLink["source"] | ForceLink["target"]) => string
+  >(() => "");
+  const linkColorRef = useRef("#4a4a4a");
+  const categoryAssignmentsRef = useRef<Record<string, string>>({});
   const physicsRef = useRef({
     linkDistance: 110,
     chargeStrength: -320,
@@ -87,8 +144,8 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
   }, []);
 
   useEffect(() => {
-    physicsRef.current = physics;
-  }, [physics]);
+    onHoverSkillRef.current = onHoverSkill;
+  }, [onHoverSkill]);
 
   const data = useMemo(() => buildSkillsGraphData(skillsGraphStructure), []);
 
@@ -205,6 +262,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
 
     nodesRef.current = nodes;
     const categoryAssignments = data.categoryAssignments;
+    categoryAssignmentsRef.current = categoryAssignments;
     const nodeTypeById = new Map(nodes.map((node) => [node.id, node.type]));
 
     const categoryIds = nodes
@@ -258,6 +316,8 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       if (typeof endpoint === "number") return String(endpoint);
       return (endpoint as ForceNode).id;
     };
+
+    resolveIdRef.current = resolveId;
 
     const specialToCategories = new Map<string, Set<string>>();
     links.forEach((link) => {
@@ -415,12 +475,17 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       .data(links)
       .join("line");
 
+    linkSelectionRef.current = linkSelection;
+    linkColorRef.current = linkColor;
+
     const nodeSelection = g
       .append("g")
       .selectAll<SVGGElement, ForceNode>("g")
       .data(nodes)
       .join("g")
       .attr("cursor", "grab");
+
+    nodeSelectionRef.current = nodeSelection;
 
     nodeSelection
       .append("circle")
@@ -550,6 +615,8 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         nodeSelection.style("opacity", (nodeDatum: ForceNode) =>
           connected.has(nodeDatum.id) ? 1 : 0.3,
         );
+
+        onHoverSkillRef.current?.(hoveredNode.id);
       },
     );
 
@@ -560,6 +627,8 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         .attr("stroke-width", 1.5);
 
       nodeSelection.style("opacity", 1);
+
+      onHoverSkillRef.current?.(null);
     });
 
     simulation.on("tick", () => {
@@ -617,6 +686,52 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
 
     simulation.alpha(0.6).restart();
   }, [physics]);
+
+  // React to external hover from list → highlight matching nodes/links in the graph
+  useEffect(() => {
+    const nodeSelection = nodeSelectionRef.current;
+    const linkSelection = linkSelectionRef.current;
+    if (!nodeSelection || !linkSelection) return;
+
+    const resolveId = resolveIdRef.current;
+    const linkColor = linkColorRef.current;
+
+    if (!externalHoveredSkill) {
+      // Reset everything
+      linkSelection
+        .attr("stroke", linkColor)
+        .attr("stroke-opacity", 0.6)
+        .attr("stroke-width", 1.5);
+      nodeSelection.style("opacity", 1);
+      return;
+    }
+
+    // Build the connected set
+    const connected = new Set<string>([externalHoveredSkill]);
+
+    linkSelection.each(function (linkDatum: ForceLink) {
+      const sourceId = resolveId(linkDatum.source);
+      const targetId = resolveId(linkDatum.target);
+
+      if (
+        sourceId === externalHoveredSkill ||
+        targetId === externalHoveredSkill
+      ) {
+        connected.add(sourceId);
+        connected.add(targetId);
+        d3.select(this)
+          .attr("stroke", COLORS.linkHighlight)
+          .attr("stroke-opacity", 0.9)
+          .attr("stroke-width", 2.5);
+      } else {
+        d3.select(this).attr("stroke-opacity", 0.15);
+      }
+    });
+
+    nodeSelection.style("opacity", (nodeDatum: ForceNode) =>
+      connected.has(nodeDatum.id) ? 1 : 0.3,
+    );
+  }, [externalHoveredSkill]);
 
   return (
     <div
