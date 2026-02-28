@@ -130,37 +130,37 @@ const getTypeStyles = (
       return {
         bg: "bg-gradient-to-r from-emerald-500 to-teal-500",
         border: "border-emerald-500/50",
-        text: "text-emerald-400",
+        text: "text-emerald-700 dark:text-emerald-400",
       };
     case "internship":
       return {
         bg: "bg-gradient-to-r from-amber-500 to-orange-500",
         border: "border-amber-500/50",
-        text: "text-amber-400",
+        text: "text-amber-700 dark:text-amber-400",
       };
     case "work":
       return {
         bg: "bg-gradient-to-r from-indigo-500 to-purple-500",
         border: "border-indigo-500/50",
-        text: "text-indigo-400",
+        text: "text-indigo-700 dark:text-indigo-400",
       };
     case "award":
       return {
         bg: "bg-gradient-to-r from-rose-500 to-pink-500",
         border: "border-rose-500/50",
-        text: "text-rose-400",
+        text: "text-rose-700 dark:text-rose-400",
       };
     case "project":
       return {
         bg: "bg-gradient-to-r from-cyan-500 to-blue-500",
         border: "border-cyan-500/50",
-        text: "text-cyan-400",
+        text: "text-cyan-700 dark:text-cyan-400",
       };
     default:
       return {
         bg: "bg-gradient-to-r from-slate-500 to-gray-500",
         border: "border-slate-500/50",
-        text: "text-slate-400",
+        text: "text-slate-700 dark:text-slate-400",
       };
   }
 };
@@ -179,7 +179,7 @@ const TimelineCard: React.FC<{
     <div
       className={`
         absolute backdrop-blur-md 
-        bg-slate-800/80 dark:bg-slate-900/80
+        bg-white/90 dark:bg-slate-900/80
         border ${typeStyles.border}
         rounded-xl p-3 sm:p-4 shadow-lg
         transition-all duration-300 ease-out

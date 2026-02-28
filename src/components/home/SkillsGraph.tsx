@@ -69,11 +69,22 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
 
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [isDark, setIsDark] = useState(true);
   const [physics, setPhysics] = useState({
     linkDistance: 110,
     chargeStrength: -320,
     collisionPadding: 10,
   });
+
+  useEffect(() => {
+    const html = document.documentElement;
+    setIsDark(html.classList.contains("dark"));
+    const observer = new MutationObserver(() => {
+      setIsDark(html.classList.contains("dark"));
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     physicsRef.current = physics;
@@ -158,6 +169,11 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
   useEffect(() => {
     if (!dimensions.width || !dimensions.height) return;
     if (!svgRef.current || !gRef.current) return;
+
+    const isDark = document.documentElement.classList.contains("dark");
+    const textColor = isDark ? "#dcddde" : "#1e1e1e";
+    const linkColor = isDark ? "#4a4a4a" : "#cbd5e1";
+    const skillFill = isDark ? "#2d2d2d" : "#f1f5f9";
 
     simulationRef.current?.stop();
 
@@ -392,7 +408,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
 
     const linkSelection = g
       .append("g")
-      .attr("stroke", COLORS.link)
+      .attr("stroke", linkColor)
       .attr("stroke-opacity", 0.6)
       .attr("stroke-width", 1.5)
       .selectAll<SVGLineElement, ForceLink>("line")
@@ -417,9 +433,9 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
         // Tint skill nodes based on their parent category
         const cat = categoryAssignments[d.id];
         if (cat && CATEGORY_COLORS[cat]) {
-          return CATEGORY_COLORS[cat].fill + "80";
+          return CATEGORY_COLORS[cat].fill + (isDark ? "80" : "30");
         }
-        return COLORS.nodeSkillFill;
+        return skillFill;
       })
       .attr("stroke", (d: ForceNode) => {
         if (d.type === "category") {
@@ -438,7 +454,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       .append("text")
       .text((d: ForceNode) => d.id)
       .attr("dy", (d: ForceNode) => (d.radius ?? radiusByType[d.type]) + 14)
-      .attr("fill", COLORS.text)
+      .attr("fill", textColor)
       .attr("font-size", (d: ForceNode) => (d.type === "category" ? 14 : 12))
       .attr("font-weight", (d: ForceNode) =>
         d.type === "category" ? "bold" : "normal",
@@ -539,7 +555,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
 
     nodeSelection.on("mouseleave", () => {
       linkSelection
-        .attr("stroke", COLORS.link)
+        .attr("stroke", linkColor)
         .attr("stroke-opacity", 0.6)
         .attr("stroke-width", 1.5);
 
@@ -571,7 +587,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
       simulation.stop();
       zoomBehaviourRef.current = null;
     };
-  }, [data, dimensions]);
+  }, [data, dimensions, isDark]);
 
   useEffect(() => {
     const simulation = simulationRef.current;
@@ -606,7 +622,7 @@ export default function SkillsGraph({ className }: SkillsGraphProps) {
     <div
       ref={containerRef}
       className={cn(
-        "relative h-full w-full overflow-hidden rounded-xl border border-slate-800 bg-[#1e1e1e]",
+        "relative h-full w-full overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/40",
         className,
       )}
     >
