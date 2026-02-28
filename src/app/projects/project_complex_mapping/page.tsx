@@ -1,106 +1,73 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import FloatingSection from "@/components/ui/FloatingSection";
-import "@/app/projects/galleryStyle.css";
-import LGComponent, { LGRef } from "@/components/ui/LGComponent";
-import ProjectTitleBar from "@/components/ui/ProjectTitleBar";
+import LGComponent from "@/components/ui/LGComponent";
 import Topic from "@/components/ui/Topic";
-import Footer from "@/components/footer/Footer";
-
-interface GalleryItem {
-  id: number;
-  loc: string;
-  name: string;
-  thumb: string;
-  type: "image" | "video";
-  poster?: string;
-}
+import ProjectPageLayout from "@/components/projects/ProjectPageLayout";
 
 function Project_ComplexMapping() {
-  const lgRef = useRef<LGRef>(null);
-  const [items, setItems] = useState<GalleryItem[]>([]);
-
-  const handleOpen = (id: number) => {
-    // Find the index of the item with the given ID
-    const index = items.findIndex((item) => item.id === id);
-    if (index !== -1) {
-      lgRef.current?.openGallery(index);
-    }
-  };
-
-  // Fetch images and videos
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      fetch("/projects/project_complex_mapping_vibration/files.json")
-        .then((res) => res.json())
-        .then((data) => {
-          setItems(data);
-        })
-        .catch((err) => console.error("Failed to fetch items:", err));
-    }
-  }, []);
-
   return (
-    <div>
-      <div className="relative flex h-screen w-screen flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
-        <ProjectTitleBar title="Complex Mapping and Vibration" />
-        {/* Floating Tiles Content */}
-        <main className="relative z-10 w-full overflow-y-auto overflow-x-hidden h-full">
-          <div className="relative z-10 p-2 sm:p-3 md:p-4 space-y-2 sm:space-y-3">
-            <FloatingSection>
-              <h1 className="text-base sm:text-lg mb-2 sm:mb-3">Overview</h1>
-              <div className="flex flex-col lg:flex-row items-center gap-6">
-                <div className="lg:w-1/2 flex justify-center">
-                  <motion.img
-                    layoutId="Complex Transformations Mapping_img"
-                    style={{
-                      cursor: "pointer",
-                      border: "4px solid gray",
-                      borderRadius: "8px",
-                      maxWidth: "100%", // Limit the width to 80% of the container
-                      height: "auto", // Maintain aspect ratio
-                    }}
-                    onClick={() => handleOpen(items[0].id)}
-                    src="/projects/project_complex_mapping_vibration/images/Complex_Mapping.png"
-                    alt="Landing Menu"
-                    className="border-gray-800 dark:border-gray-200"
-                  />
-                </div>
-                <div className="lg:w-1/2 text-justify text-sm sm:text-base lg:text-xl">
-                  <p className="text-left lg:basis-1/2">
-                    Since complex plane is a 2D space, complex functions
-                    visualization can be difficult because the standard
-                    Cartesian graph only represents 1D functions. Therefore,
-                    coloured points in 2D space were used to represent
-                    differeent complex numbers, and the transformation can be
-                    visualized as an animation of points moving from the Domain
-                    of the function to the Image of the function.
-                  </p>
-                  <p className="text-left lg:basis-1/2">
-                    In this project, I explored various complex transformations
-                    and their effects on different shapes and patterns using
-                    color-coded visualizations. Additionally, I used 2 types of
-                    grids - Polar grid and Cartesian grid, and the colouring of
-                    the polar grid is based on the magnitude of the complext
-                    number while cartesian grid changes the color based on the
-                    real coordinate.
-                  </p>
-                </div>
+    <ProjectPageLayout
+      title="Complex Mapping and Vibration"
+      fetchUrl="/projects/project_complex_mapping_vibration/files.json"
+      projectSlug="projects/project_complex_mapping"
+    >
+      {(items, getItem, handleOpen) => (
+        <>
+          <FloatingSection>
+            <h1 className="text-base sm:text-lg mb-2 sm:mb-3">Overview</h1>
+            <div className="flex flex-col lg:flex-row items-center gap-6">
+              <div className="lg:w-1/2 flex justify-center">
+                <motion.img
+                  layoutId="Complex Transformations Mapping_img"
+                  style={{
+                    cursor: "pointer",
+                    border: "4px solid gray",
+                    borderRadius: "8px",
+                    maxWidth: "100%", // Limit the width to 80% of the container
+                    height: "auto", // Maintain aspect ratio
+                  }}
+                  onClick={() => handleOpen(items[0].id)}
+                  src="/projects/project_complex_mapping_vibration/images/Complex_Mapping.png"
+                  alt="Landing Menu"
+                  className="border-gray-800 dark:border-gray-200"
+                />
               </div>
-            </FloatingSection>
+              <div className="lg:w-1/2 text-justify text-sm sm:text-base lg:text-xl">
+                <p className="text-left lg:basis-1/2">
+                  Since complex plane is a 2D space, complex functions
+                  visualization can be difficult because the standard Cartesian
+                  graph only represents 1D functions. Therefore, coloured points
+                  in 2D space were used to represent differeent complex numbers,
+                  and the transformation can be visualized as an animation of
+                  points moving from the Domain of the function to the Image of
+                  the function.
+                </p>
+                <p className="text-left lg:basis-1/2">
+                  In this project, I explored various complex transformations
+                  and their effects on different shapes and patterns using
+                  color-coded visualizations. Additionally, I used 2 types of
+                  grids - Polar grid and Cartesian grid, and the colouring of
+                  the polar grid is based on the magnitude of the complext
+                  number while cartesian grid changes the color based on the
+                  real coordinate.
+                </p>
+              </div>
+            </div>
+          </FloatingSection>
+
+          {/* Gallery at bottom — hidden on 2xl */}
+          <div className="2xl:hidden">
             <Topic topicName="Gallery" />
             <FloatingSection>
-              <div className="">
-                <LGComponent ref={lgRef} items={items} />
-              </div>
+              <LGComponent items={items} />
             </FloatingSection>
           </div>
-          <Footer />
-        </main>
-      </div>
-    </div>
+        </>
+      )}
+    </ProjectPageLayout>
   );
 }
 
