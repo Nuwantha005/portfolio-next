@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import ProjectCard from "@/components/projects/ProjectCard";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import Link from "next/link";
 import {
   projectCategories,
-  getAllTags,
   type Project,
   type ProjectCategory,
 } from "@/lib/projects-data";
@@ -18,14 +17,30 @@ const ProjectsContent: React.FC = () => {
   const [viewMode, setViewMode] = useState<ViewMode>("categorized");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const tagStripRef = useRef<HTMLDivElement>(null);
 
   // Only render Masonry after mount to prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Get all unique tags from the data
-  const availableTags = useMemo(() => getAllTags(), []);
+  useEffect(() => {
+    const tagStrip = tagStripRef.current;
+    if (!tagStrip) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      // If there's no horizontal overflow, don't interfere
+      if (tagStrip.scrollWidth <= tagStrip.clientWidth) return;
+      // If it's purely a horizontal scroll (e.g. from trackpad), don't interfere
+      if (e.deltaY === 0) return;
+
+      tagStrip.scrollLeft += e.deltaY;
+      e.preventDefault();
+    };
+
+    tagStrip.addEventListener("wheel", handleWheel, { passive: false });
+    return () => tagStrip.removeEventListener("wheel", handleWheel);
+  }, []);
 
   const toggleFilter = (tag: string) => {
     if (filters.includes(tag)) {
@@ -43,15 +58,32 @@ const ProjectsContent: React.FC = () => {
   const filterProjects = (projects: Project[]) => {
     if (filters.length === 0) return projects;
     return projects.filter((project) =>
-      filters.every((tag) => project.tags.includes(tag))
+      filters.every((tag) => project.tags.includes(tag)),
     );
   };
 
   // Sort categories by priority
   const sortedCategories = useMemo(
     () => [...projectCategories].sort((a, b) => a.priority - b.priority),
-    []
+    [],
   );
+
+  // Sort tags by usage count (descending), then alphabetically for stable ordering.
+  const availableTags = useMemo(() => {
+    const tagCounts = new Map<string, number>();
+
+    sortedCategories.forEach((category) => {
+      category.projects.forEach((project) => {
+        project.tags.forEach((tag) => {
+          tagCounts.set(tag, (tagCounts.get(tag) ?? 0) + 1);
+        });
+      });
+    });
+
+    return Array.from(tagCounts.entries())
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .map(([tag]) => tag);
+  }, [sortedCategories]);
 
   // Get all projects flattened (for "all" view mode)
   const allFilteredProjects = useMemo(() => {
@@ -109,14 +141,17 @@ const ProjectsContent: React.FC = () => {
     // Don't render empty categories when filtering
     if (filteredProjects.length === 0) return null;
 
-    const isExpanded = activeCategory === null || activeCategory === category.id;
+    const isExpanded =
+      activeCategory === null || activeCategory === category.id;
 
     return (
       <div key={category.id} className="mb-8">
         {/* Category Header */}
         <button
           onClick={() =>
-            setActiveCategory(activeCategory === category.id ? null : category.id)
+            setActiveCategory(
+              activeCategory === category.id ? null : category.id,
+            )
           }
           className="w-full flex items-center justify-between mb-4 group"
         >
@@ -125,7 +160,8 @@ const ProjectsContent: React.FC = () => {
               {category.name}
             </h2>
             <span className="px-2 py-1 text-sm rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
-              {filteredProjects.length} project{filteredProjects.length !== 1 ? "s" : ""}
+              {filteredProjects.length} project
+              {filteredProjects.length !== 1 ? "s" : ""}
             </span>
           </div>
           <svg
@@ -153,10 +189,12 @@ const ProjectsContent: React.FC = () => {
 
         {/* Projects Grid */}
         {isExpanded && mounted && (
-          <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+          <ResponsiveMasonry
+            columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+          >
             <Masonry gutter="30px">
               {filteredProjects.map((project, index) =>
-                renderProjectCard(project, index)
+                renderProjectCard(project, index),
               )}
             </Masonry>
           </ResponsiveMasonry>
@@ -164,7 +202,7 @@ const ProjectsContent: React.FC = () => {
         {isExpanded && !mounted && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project, index) =>
-              renderProjectCard(project, index)
+              renderProjectCard(project, index),
             )}
           </div>
         )}
@@ -175,29 +213,53 @@ const ProjectsContent: React.FC = () => {
   return (
     <div className="mx-auto px-2">
       {/* View Mode Toggle & Filter Controls */}
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        {/* View Mode Toggle */}
-        <div className="flex items-center gap-1 sm:gap-2 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
-          <button
-            onClick={() => setViewMode("categorized")}
-            className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-all ${
-              viewMode === "categorized"
-                ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
-            }`}
+      <div className="mb-8 space-y-3">
+        <div className="flex items-center gap-3">
+          {/* View Mode Toggle */}
+          <div className="shrink-0 flex items-center gap-1 sm:gap-2 bg-gray-100 dark:bg-gray-800 rounded-lg p-1">
+            <button
+              onClick={() => setViewMode("categorized")}
+              className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-all ${
+                viewMode === "categorized"
+                  ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
+                  : "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+              }`}
+            >
+              By Category
+            </button>
+            <button
+              onClick={() => setViewMode("all")}
+              className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-all ${
+                viewMode === "all"
+                  ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
+                  : "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+              }`}
+            >
+              All Projects
+            </button>
+          </div>
+
+          {/* Horizontal Tag Filters */}
+          <div
+            ref={tagStripRef}
+            className="min-w-0 flex-1 overflow-x-auto overscroll-x-contain"
           >
-            By Category
-          </button>
-          <button
-            onClick={() => setViewMode("all")}
-            className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium transition-all ${
-              viewMode === "all"
-                ? "bg-white dark:bg-gray-700 shadow text-blue-600 dark:text-blue-400"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
-            }`}
-          >
-            All Projects
-          </button>
+            <div className="flex w-max items-center gap-2">
+              {availableTags.map((tag, index) => (
+                <button
+                  key={index}
+                  onClick={() => toggleFilter(tag)}
+                  className={`px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all border-2 whitespace-nowrap ${
+                    filters.includes(tag)
+                      ? "bg-blue-600 text-white border-blue-600 dark:bg-blue-500 dark:border-blue-500"
+                      : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-blue-100 hover:border-blue-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-blue-900/30 dark:hover:border-blue-600"
+                  }`}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Active Filters Count & Clear */}
@@ -206,29 +268,22 @@ const ProjectsContent: React.FC = () => {
             onClick={clearFilters}
             className="flex items-center gap-2 px-3 py-1 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
             Clear {filters.length} filter{filters.length !== 1 ? "s" : ""}
           </button>
         )}
-      </div>
-
-      {/* Filter Buttons */}
-      <div className="mb-8 flex flex-wrap gap-2">
-        {availableTags.map((tag, index) => (
-          <button
-            key={index}
-            onClick={() => toggleFilter(tag)}
-            className={`px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all border-2 ${
-              filters.includes(tag)
-                ? "bg-blue-600 text-white border-blue-600 dark:bg-blue-500 dark:border-blue-500"
-                : "bg-gray-100 text-gray-700 border-gray-300 hover:bg-blue-100 hover:border-blue-300 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-blue-900/30 dark:hover:border-blue-600"
-            }`}
-          >
-            {tag}
-          </button>
-        ))}
       </div>
 
       {/* Projects Display */}
@@ -242,7 +297,7 @@ const ProjectsContent: React.FC = () => {
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
           <Masonry gutter="30px">
             {allFilteredProjects.map((project, index) =>
-              renderProjectCard(project, index)
+              renderProjectCard(project, index),
             )}
           </Masonry>
         </ResponsiveMasonry>
@@ -250,7 +305,7 @@ const ProjectsContent: React.FC = () => {
         // All Projects View - SSR fallback
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {allFilteredProjects.map((project, index) =>
-            renderProjectCard(project, index)
+            renderProjectCard(project, index),
           )}
         </div>
       )}
