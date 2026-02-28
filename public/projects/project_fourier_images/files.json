@@ -1,0 +1,31 @@
+[
+  {
+    "id": 0,
+    "name": "Fourier Drawing Example",
+    "loc": "/projects/project_fourier_images/images/placeholder.png",
+    "thumb": "/projects/project_fourier_images/images/placeholder.png",
+    "type": "image"
+  },
+  {
+    "id": 1,
+    "name": "Epicycle Animation",
+    "loc": "/projects/project_fourier_images/videos/placeholder.mp4",
+    "thumb": "/projects/project_fourier_images/images/placeholder.png",
+    "poster": "/projects/project_fourier_images/images/placeholder.png",
+    "type": "video"
+  },
+  {
+    "id": 2,
+    "name": "Input Image Contours",
+    "loc": "/projects/project_fourier_images/images/placeholder2.png",
+    "thumb": "/projects/project_fourier_images/images/placeholder2.png",
+    "type": "image"
+  },
+  {
+    "id": 3,
+    "name": "DFT Circle Decomposition",
+    "loc": "/projects/project_fourier_images/images/placeholder3.png",
+    "thumb": "/projects/project_fourier_images/images/placeholder3.png",
+    "type": "image"
+  }
+]

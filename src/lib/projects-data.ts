@@ -156,7 +156,7 @@ export const projectCategories: ProjectCategory[] = [
         description:
           "This program takes an input image, extracts its contours using OpenCV, and turns the contours to fourier sums using the DFT algorithm. Then they can be drawn using two sets of rotating circles that represent two fourier sums.",
         tags: ["Processing", "OpenCV", "Visualization"],
-        link: "https://github.com/Nuwantha005/turning_images_to_fourier_sums_and_drawing_them",
+        link: "projects/project_fourier_images",
         year: 2022,
       },
       {
@@ -174,7 +174,7 @@ export const projectCategories: ProjectCategory[] = [
         description:
           "The traveling salesman problem is a popular problem in computer science that deals with finding the shortest path for a given set of points. This program uses two methods: brute force and genetic algorithm to solve this problem, and the processes happening can be seen side by side.",
         tags: ["Processing", "Visualization"],
-        link: "https://github.com/Nuwantha005/TSP_BruteForce_and_Genetic_Comparison",
+        link: "projects/project_tsp",
         year: 2021,
       },
       {
@@ -183,7 +183,7 @@ export const projectCategories: ProjectCategory[] = [
         description:
           "This program is an extension for another program by me that turns images into fourier sums and visualizes them. This program can convert a given string into an image, extract its counters, apply a discrete Fourier transform, and draw it using circles.",
         tags: ["Processing", "Visualization"],
-        link: "https://github.com/Nuwantha005/drawing_texts_using_fourier_series",
+        link: "projects/project_fourier_text",
         year: 2021,
       },
     ],

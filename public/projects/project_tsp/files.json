@@ -1,0 +1,62 @@
+[[
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]  }    "type": "image"    "thumb": "/projects/project_tsp/images/placeholder3.png",    "loc": "/projects/project_tsp/images/placeholder3.png",    "name": "Genetic Algorithm Result",    "id": 3,  {  },    "type": "image"    "thumb": "/projects/project_tsp/images/placeholder2.png",    "loc": "/projects/project_tsp/images/placeholder2.png",    "name": "Brute Force Progress",    "id": 2,  {  },    "type": "video"    "poster": "/projects/project_tsp/images/placeholder.png",    "thumb": "/projects/project_tsp/images/placeholder.png",    "loc": "/projects/project_tsp/videos/placeholder.mp4",    "name": "Algorithm Running",    "id": 1,  {  },    "type": "image"    "thumb": "/projects/project_tsp/images/placeholder.png",    "loc": "/projects/project_tsp/images/placeholder.png",    "name": "Side by Side Comparison",    "id": 0,  {  {
+    "id": 0,
+    "name": "Side by Side Comparison",
+    "loc": "/projects/project_tsp/images/placeholder.png",
+    "thumb": "/projects/project_tsp/images/placeholder.png",
+    "type": "image"
+  },
+  {
+    "id": 1,
+    "name": "Algorithm Running",
+    "loc": "/projects/project_tsp/videos/placeholder.mp4",
+    "thumb": "/projects/project_tsp/images/placeholder.png",
+    "poster": "/projects/project_tsp/images/placeholder.png",
+    "type": "video"
+  },
+  {
+    "id": 2,
+    "name": "Brute Force Progress",
+    "loc": "/projects/project_tsp/images/placeholder2.png",
+    "thumb": "/projects/project_tsp/images/placeholder2.png",
+    "type": "image"
+  },
+  {
+    "id": 3,
+    "name": "Genetic Algorithm Result",
+    "loc": "/projects/project_tsp/images/placeholder3.png",
+    "thumb": "/projects/project_tsp/images/placeholder3.png",
+    "type": "image"
+  }
+]
