@@ -190,6 +190,7 @@ const ProjectsContent: React.FC = () => {
         {/* Projects Grid */}
         {isExpanded && mounted && (
           <ResponsiveMasonry
+            className="relative isolate pt-2"
             columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
           >
             <Masonry gutter="30px">
@@ -200,7 +201,7 @@ const ProjectsContent: React.FC = () => {
           </ResponsiveMasonry>
         )}
         {isExpanded && !mounted && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="relative isolate pt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project, index) =>
               renderProjectCard(project, index),
             )}
@@ -294,7 +295,10 @@ const ProjectsContent: React.FC = () => {
         </div>
       ) : mounted ? (
         // All Projects View - with Masonry
-        <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+        <ResponsiveMasonry
+          className="relative isolate pt-2"
+          columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+        >
           <Masonry gutter="30px">
             {allFilteredProjects.map((project, index) =>
               renderProjectCard(project, index),
@@ -303,7 +307,7 @@ const ProjectsContent: React.FC = () => {
         </ResponsiveMasonry>
       ) : (
         // All Projects View - SSR fallback
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="relative isolate pt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {allFilteredProjects.map((project, index) =>
             renderProjectCard(project, index),
           )}

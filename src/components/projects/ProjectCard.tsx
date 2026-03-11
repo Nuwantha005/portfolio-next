@@ -23,11 +23,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   return (
     <div
-      className={`project-card transition-transform duration-300 ease-in-out transform ${
+      className={`project-card relative transform-gpu origin-top transition-transform duration-300 ease-in-out ${
         hasLink ? "hover:scale-105 cursor-pointer" : "opacity-90"
       }`}
     >
-      <FloatingSection>
+      <FloatingSection className="relative isolate overflow-hidden [backface-visibility:hidden] backdrop-blur-none bg-slate-400/75 dark:bg-slate-900/75 transition-[background-color] duration-300 hover:bg-slate-400/85 hover:dark:bg-slate-900/85">
         <div className="flex flex-col items-center relative">
           {/* Badges Container */}
           <div className="absolute top-2 right-2 z-10 flex flex-col gap-1">
