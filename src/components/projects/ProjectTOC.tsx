@@ -65,6 +65,7 @@ export default function ProjectTOC({ scrollContainerRef }: ProjectTOCProps) {
     Record<string, boolean | null>
   >({});
   const navRef = useRef<HTMLElement | null>(null);
+  const tocScrollRef = useRef<HTMLDivElement | null>(null);
 
   // Scan DOM for [data-topic] elements + their child headings
   useEffect(() => {
@@ -246,15 +247,26 @@ export default function ProjectTOC({ scrollContainerRef }: ProjectTOCProps) {
 
   // Auto-scroll the TOC nav so active item stays visible
   useEffect(() => {
-    if (!activeId || !navRef.current) return;
-    const activeBtn = navRef.current.querySelector(
+    if (!activeId || !tocScrollRef.current) return;
+    const container = tocScrollRef.current;
+    // Only scroll the TOC container if it actually overflows.
+    if (container.scrollHeight <= container.clientHeight) return;
+
+    const activeBtn = container.querySelector(
       `[data-toc-id="${activeId}"]`,
     ) as HTMLElement | null;
-    if (activeBtn) {
-      activeBtn.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
+
+    if (!activeBtn) return;
+
+    const btnTop = activeBtn.offsetTop;
+    const btnBottom = btnTop + activeBtn.offsetHeight;
+    const viewTop = container.scrollTop;
+    const viewBottom = viewTop + container.clientHeight;
+
+    if (btnTop < viewTop) {
+      container.scrollTop = btnTop;
+    } else if (btnBottom > viewBottom) {
+      container.scrollTop = btnBottom - container.clientHeight;
     }
   }, [activeId]);
 
@@ -305,7 +317,10 @@ export default function ProjectTOC({ scrollContainerRef }: ProjectTOCProps) {
     activeId === item.id || item.children.some((c) => c.id === activeId);
 
   return (
-    <div className="sticky top-4 max-h-[calc(100vh-6rem)] overflow-y-auto scrollbar-thin">
+    <div
+      ref={tocScrollRef}
+      className="sticky top-4 max-h-[calc(100vh-6rem)] overflow-y-auto scrollbar-thin"
+    >
       <FloatingSection className="p-3">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-semibold text-xs uppercase tracking-wider text-muted-foreground">

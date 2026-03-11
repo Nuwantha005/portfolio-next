@@ -392,7 +392,7 @@ function Project_MEMS_TEC() {
           {/* ─── Topic 5: Optimization ─── */}
           <Topic topicName="Preliminary Optimization" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-2 sm:gap-3 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-[2fr_2fr] gap-2 sm:gap-3 items-stretch">
             <FloatingSection className="flex flex-col">
               <h2 className="text-base sm:text-lg mb-2 sm:mb-3 font-bold">
                 CTM Temperature Profile
