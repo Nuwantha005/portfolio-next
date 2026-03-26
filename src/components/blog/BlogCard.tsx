@@ -2,10 +2,10 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import FloatingSection from "../ui/FloatingSection";
 import type { BlogPost } from "@/lib/blog";
+import { getBlogThumbPath } from "@/lib/image-paths";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -18,6 +18,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
     month: "long",
     day: "numeric",
   });
+  const coverThumb = post.image ? getBlogThumbPath(post.image) : undefined;
 
   return (
     <motion.div
@@ -31,13 +32,21 @@ export default function BlogCard({ post, index }: BlogCardProps) {
             <div className="flex flex-col gap-4">
               {/* Cover Image */}
               {post.image && (
-                <motion.div 
+                <motion.div
                   layoutId={`blog-image-${post.slug}`}
                   className="relative w-full h-48 rounded-lg overflow-hidden"
                 >
                   <img
-                    src={post.image}
+                    src={coverThumb}
                     alt={post.title}
+                    onError={(event) => {
+                      if (
+                        post.image &&
+                        event.currentTarget.src !== post.image
+                      ) {
+                        event.currentTarget.src = post.image;
+                      }
+                    }}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </motion.div>
@@ -46,7 +55,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
               {/* Content */}
               <div className="space-y-3">
                 {/* Title */}
-                <motion.h2 
+                <motion.h2
                   layoutId={`blog-title-${post.slug}`}
                   className="text-xl font-bold text-gray-800 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
                 >
@@ -54,7 +63,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
                 </motion.h2>
 
                 {/* Meta Info */}
-                <motion.div 
+                <motion.div
                   layoutId={`blog-meta-${post.slug}`}
                   className="flex items-center gap-3 text-sm text-gray-500 dark:text-gray-400"
                 >
@@ -64,7 +73,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
                 </motion.div>
 
                 {/* Description */}
-                <motion.p 
+                <motion.p
                   layoutId={`blog-description-${post.slug}`}
                   className="text-gray-600 dark:text-gray-300 line-clamp-2"
                 >

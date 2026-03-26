@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useBlogGallery } from "./BlogGalleryProvider";
+import { getBlogThumbPath } from "@/lib/image-paths";
 
 interface BlogImageProps {
   src: string;
@@ -11,22 +12,34 @@ interface BlogImageProps {
   height?: string;
 }
 
-export function BlogImage({ src, alt, caption, width, height }: BlogImageProps) {
+export function BlogImage({
+  src,
+  alt,
+  caption,
+  width,
+  height,
+}: BlogImageProps) {
   const { registerItem, openGallery, getItemIndex } = useBlogGallery();
   const [galleryIndex, setGalleryIndex] = useState<number>(-1);
+  const [displaySrc, setDisplaySrc] = useState<string>(getBlogThumbPath(src));
   const registered = useRef(false);
+  const thumbSrc = getBlogThumbPath(src);
+
+  useEffect(() => {
+    setDisplaySrc(thumbSrc);
+  }, [thumbSrc]);
 
   useEffect(() => {
     if (!registered.current && src) {
       registered.current = true;
       const index = registerItem({
         src,
-        thumb: src,
+        thumb: thumbSrc,
         caption: caption || alt,
       });
       setGalleryIndex(index);
     }
-  }, [src, caption, alt, registerItem]);
+  }, [src, thumbSrc, caption, alt, registerItem]);
 
   const handleClick = () => {
     // Get the current index in case it changed
@@ -42,7 +55,7 @@ export function BlogImage({ src, alt, caption, width, height }: BlogImageProps) 
   const style: React.CSSProperties = {
     cursor: "pointer",
     // Set max dimensions as CSS custom properties, will be constrained by max-w-full
-    ...(width && { "--max-width": `${width}px` } as any),
+    ...(width && ({ "--max-width": `${width}px` } as any)),
     maxWidth: width ? `min(${width}px, 100%)` : "100%",
   };
 
@@ -55,9 +68,14 @@ export function BlogImage({ src, alt, caption, width, height }: BlogImageProps) 
   return (
     <figure className="my-6 flex flex-col items-center max-w-full">
       <img
-        src={src}
+        src={displaySrc}
         alt={alt || caption || ""}
         onClick={handleClick}
+        onError={() => {
+          if (displaySrc !== src) {
+            setDisplaySrc(src);
+          }
+        }}
         style={style}
         className="rounded-lg shadow-md hover:shadow-lg transition-shadow cursor-pointer dark:bg-gray-800/50 bg-gray-200/50 p-2 max-w-full w-full h-auto object-contain"
       />
@@ -78,7 +96,13 @@ interface BlogVideoProps {
   poster?: string;
 }
 
-export function BlogVideo({ src, caption, width, height, poster }: BlogVideoProps) {
+export function BlogVideo({
+  src,
+  caption,
+  width,
+  height,
+  poster,
+}: BlogVideoProps) {
   const { registerItem, openGallery, getItemIndex } = useBlogGallery();
   const [galleryIndex, setGalleryIndex] = useState<number>(-1);
   const registered = useRef(false);

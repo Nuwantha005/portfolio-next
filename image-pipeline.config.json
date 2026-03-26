@@ -12,5 +12,10 @@
     "thumbDirName": "thumbs",
     "rewriteThumbWhenSameAsLoc": true,
     "forceRegenerate": false
+  },
+  "blog": {
+    "sourceDir": "public/blog",
+    "thumbDirName": "thumbs",
+    "forceRegenerate": false
   }
 }

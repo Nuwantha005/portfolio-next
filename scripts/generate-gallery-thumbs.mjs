@@ -20,6 +20,11 @@ const defaultConfig = {
     rewriteThumbWhenSameAsLoc: true,
     forceRegenerate: false,
   },
+  blog: {
+    sourceDir: "public/blog",
+    thumbDirName: "thumbs",
+    forceRegenerate: false,
+  },
 };
 
 const imageExtensions = new Set([
@@ -125,6 +130,11 @@ async function generateThumb(sourceAbs, targetAbs, thumbnailConfig) {
   await pipeline.toFile(targetAbs);
 }
 
+function getThumbTargetPath(sourceAbs, thumbDirName, thumbFormat) {
+  const baseName = path.parse(sourceAbs).name;
+  return path.join(path.dirname(sourceAbs), thumbDirName, `${baseName}.${thumbFormat}`);
+}
+
 async function processManifest(manifestPath, config) {
   const raw = await fs.readFile(manifestPath, "utf8");
   const items = JSON.parse(raw);
@@ -151,11 +161,10 @@ async function processManifest(manifestPath, config) {
       continue;
     }
 
-    const baseName = path.parse(sourceAbs).name;
-    const targetAbs = path.join(
-      path.dirname(sourceAbs),
+    const targetAbs = getThumbTargetPath(
+      sourceAbs,
       config.projects.thumbDirName,
-      `${baseName}.${config.thumbnail.format}`,
+      config.thumbnail.format,
     );
     const targetPublic = toPublicPath(targetAbs);
 
@@ -202,6 +211,59 @@ async function processManifest(manifestPath, config) {
   return { changed, generated, skipped };
 }
 
+async function processBlogImages(config) {
+  const blogDir = path.join(rootDir, config.blog.sourceDir);
+
+  let entries = [];
+  try {
+    entries = await fs.readdir(blogDir, { withFileTypes: true });
+  } catch {
+    return { processed: 0, generated: 0, skipped: 0 };
+  }
+
+  let processed = 0;
+  let generated = 0;
+  let skipped = 0;
+
+  for (const entry of entries) {
+    if (!entry.isDirectory()) continue;
+
+    const postDir = path.join(blogDir, entry.name);
+    const files = await fs.readdir(postDir, { withFileTypes: true });
+
+    for (const file of files) {
+      if (!file.isFile()) continue;
+      if (!isImagePath(file.name)) continue;
+
+      const sourceAbs = path.join(postDir, file.name);
+      const targetAbs = getThumbTargetPath(
+        sourceAbs,
+        config.blog.thumbDirName,
+        config.thumbnail.format,
+      );
+
+      const needsGeneration = config.blog.forceRegenerate
+        ? true
+        : await fs
+            .access(targetAbs)
+            .then(() => false)
+            .catch(() => true);
+
+      processed += 1;
+
+      if (!needsGeneration) {
+        skipped += 1;
+        continue;
+      }
+
+      await generateThumb(sourceAbs, targetAbs, config.thumbnail);
+      generated += 1;
+    }
+  }
+
+  return { processed, generated, skipped };
+}
+
 async function main() {
   const config = await loadConfig();
   const projectsDir = path.join(rootDir, config.projects.sourceDir);
@@ -222,8 +284,13 @@ async function main() {
     skippedItems += result.skipped;
   }
 
+  const blogResult = await processBlogImages(config);
+
   console.log(
-    `[thumbs] processed manifests=${manifestFiles.length} changed=${changedFiles} generated=${generatedThumbs} skipped=${skippedItems}`,
+    `[thumbs] projects manifests=${manifestFiles.length} changed=${changedFiles} generated=${generatedThumbs} skipped=${skippedItems}`,
+  );
+  console.log(
+    `[thumbs] blog images processed=${blogResult.processed} generated=${blogResult.generated} skipped=${blogResult.skipped}`,
   );
 }
 
