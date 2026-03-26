@@ -3,36 +3,36 @@
     "id": 0,
     "name": "DialogBox",
     "loc": "/projects/project_movies_and_tv_series_software/images/DialogBox.PNG",
-    "thumb": "/projects/project_movies_and_tv_series_software/images/DialogBox.PNG"
+    "thumb": "/projects/project_movies_and_tv_series_software/images/thumbs/DialogBox.webp"
   },
   {
     "id": 1,
     "name": "ProjectTree",
     "loc": "/projects/project_movies_and_tv_series_software/images/ProjectTree.PNG",
-    "thumb": "/projects/project_movies_and_tv_series_software/images/ProjectTree.PNG"
+    "thumb": "/projects/project_movies_and_tv_series_software/images/thumbs/ProjectTree.webp"
   },
   {
     "id": 2,
     "name": "SceneBuilder",
     "loc": "/projects/project_movies_and_tv_series_software/images/SceneBuilder.PNG",
-    "thumb": "/projects/project_movies_and_tv_series_software/images/SceneBuilder.PNG"
+    "thumb": "/projects/project_movies_and_tv_series_software/images/thumbs/SceneBuilder.webp"
   },
   {
     "id": 3,
     "name": "SceneBuilder2",
     "loc": "/projects/project_movies_and_tv_series_software/images/SceneBuilder2.PNG",
-    "thumb": "/projects/project_movies_and_tv_series_software/images/SceneBuilder2.PNG"
+    "thumb": "/projects/project_movies_and_tv_series_software/images/thumbs/SceneBuilder2.webp"
   },
   {
     "id": 4,
     "name": "SearchMovies",
     "loc": "/projects/project_movies_and_tv_series_software/images/SearchMovies.PNG",
-    "thumb": "/projects/project_movies_and_tv_series_software/images/SearchMovies.PNG"
+    "thumb": "/projects/project_movies_and_tv_series_software/images/thumbs/SearchMovies.webp"
   },
   {
     "id": 5,
     "name": "Window",
     "loc": "/projects/project_movies_and_tv_series_software/images/Window.PNG",
-    "thumb": "/projects/project_movies_and_tv_series_software/images/Window.PNG"
+    "thumb": "/projects/project_movies_and_tv_series_software/images/thumbs/Window.webp"
   }
 ]

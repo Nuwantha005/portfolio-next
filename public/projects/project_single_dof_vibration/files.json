@@ -3,7 +3,7 @@
     "id": 0,
     "name": "1_Hero",
     "loc": "/projects/project_single_dof_vibration/images/1_Hero.png",
-    "thumb": "/projects/project_single_dof_vibration/images/1_Hero.png",
+    "thumb": "/projects/project_single_dof_vibration/images/thumbs/1_Hero.webp",
     "type": "image"
   },
   {
@@ -18,7 +18,7 @@
     "id": 2,
     "name": "2_NoDamping",
     "loc": "/projects/project_single_dof_vibration/images/2_NoDamping.png",
-    "thumb": "/projects/project_single_dof_vibration/images/2_NoDamping.png",
+    "thumb": "/projects/project_single_dof_vibration/images/thumbs/2_NoDamping.webp",
     "type": "image"
   },
   {
@@ -33,7 +33,7 @@
     "id": 4,
     "name": "3_Underdamped",
     "loc": "/projects/project_single_dof_vibration/images/3_Underdamped.png",
-    "thumb": "/projects/project_single_dof_vibration/images/3_Underdamped.png",
+    "thumb": "/projects/project_single_dof_vibration/images/thumbs/3_Underdamped.webp",
     "type": "image"
   },
   {
@@ -48,7 +48,7 @@
     "id": 6,
     "name": "4_Critically_Damped",
     "loc": "/projects/project_single_dof_vibration/images/4_Critically_Damped.png",
-    "thumb": "/projects/project_single_dof_vibration/images/4_Critically_Damped.png",
+    "thumb": "/projects/project_single_dof_vibration/images/thumbs/4_Critically_Damped.webp",
     "type": "image"
   },
   {
@@ -63,7 +63,7 @@
     "id": 8,
     "name": "5_Over_Damped",
     "loc": "/projects/project_single_dof_vibration/images/5_Over_Damped.png",
-    "thumb": "/projects/project_single_dof_vibration/images/5_Over_Damped.png",
+    "thumb": "/projects/project_single_dof_vibration/images/thumbs/5_Over_Damped.webp",
     "type": "image"
   },
   {

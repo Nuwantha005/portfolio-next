@@ -1,0 +1,16 @@
+{
+  "thumbnail": {
+    "format": "webp",
+    "width": 1200,
+    "quality": 86,
+    "fit": "inside",
+    "withoutEnlargement": true
+  },
+  "projects": {
+    "sourceDir": "public/projects",
+    "manifestFiles": ["files.json", "images.json"],
+    "thumbDirName": "thumbs",
+    "rewriteThumbWhenSameAsLoc": true,
+    "forceRegenerate": false
+  }
+}

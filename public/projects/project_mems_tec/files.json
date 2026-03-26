@@ -3,147 +3,147 @@
     "id": 1,
     "loc": "/projects/project_mems_tec/images/radial_tec_design.jpeg",
     "name": "Design of radial TEC unit — full isometric view",
-    "thumb": "/projects/project_mems_tec/images/radial_tec_design.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/radial_tec_design.webp",
     "type": "image"
   },
   {
     "id": 2,
     "loc": "/projects/project_mems_tec/images/complete_12_wedge.jpeg",
     "name": "Complete radial TEC assembly — 12 wedges",
-    "thumb": "/projects/project_mems_tec/images/complete_12_wedge.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/complete_12_wedge.webp",
     "type": "image"
   },
   {
     "id": 3,
     "loc": "/projects/project_mems_tec/images/wedge_isometric.jpeg",
     "name": "TEC wedge isometric view",
-    "thumb": "/projects/project_mems_tec/images/wedge_isometric.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/wedge_isometric.webp",
     "type": "image"
   },
   {
     "id": 4,
     "loc": "/projects/project_mems_tec/images/layer_system_side.jpeg",
     "name": "Three-layer system — side view",
-    "thumb": "/projects/project_mems_tec/images/layer_system_side.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/layer_system_side.webp",
     "type": "image"
   },
   {
     "id": 5,
     "loc": "/projects/project_mems_tec/images/single_tec_element.jpeg",
     "name": "Single TEC element",
-    "thumb": "/projects/project_mems_tec/images/single_tec_element.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/single_tec_element.webp",
     "type": "image"
   },
   {
     "id": 6,
     "loc": "/projects/project_mems_tec/images/3d_chip_stack_temp.jpeg",
     "name": "Temperature distribution of 3D stacked chip",
-    "thumb": "/projects/project_mems_tec/images/3d_chip_stack_temp.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/3d_chip_stack_temp.webp",
     "type": "image"
   },
   {
     "id": 7,
     "loc": "/projects/project_mems_tec/images/basic_tec_structure.jpeg",
     "name": "Basic TEC structure",
-    "thumb": "/projects/project_mems_tec/images/basic_tec_structure.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/basic_tec_structure.webp",
     "type": "image"
   },
   {
     "id": 8,
     "loc": "/projects/project_mems_tec/images/chip_compartmentalization.jpeg",
     "name": "Chip compartmentalization concept",
-    "thumb": "/projects/project_mems_tec/images/chip_compartmentalization.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/chip_compartmentalization.webp",
     "type": "image"
   },
   {
     "id": 9,
     "loc": "/projects/project_mems_tec/images/ctm_temperature_profile.jpeg",
     "name": "CTM temperature profile — MATLAB result",
-    "thumb": "/projects/project_mems_tec/images/ctm_temperature_profile.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/ctm_temperature_profile.webp",
     "type": "image"
   },
   {
     "id": 10,
     "loc": "/projects/project_mems_tec/images/grid_search_matrix.jpeg",
     "name": "Grid search optimization matrix",
-    "thumb": "/projects/project_mems_tec/images/grid_search_matrix.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/grid_search_matrix.webp",
     "type": "image"
   },
   {
     "id": 11,
     "loc": "/projects/project_mems_tec/images/pareto_front.jpeg",
     "name": "Pareto front — multi-objective optimization",
-    "thumb": "/projects/project_mems_tec/images/pareto_front.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/pareto_front.webp",
     "type": "image"
   },
   {
     "id": 12,
     "loc": "/projects/project_mems_tec/images/knee_point_stages.jpeg",
     "name": "Temperature at each stage — knee point solution",
-    "thumb": "/projects/project_mems_tec/images/knee_point_stages.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/knee_point_stages.webp",
     "type": "image"
   },
   {
     "id": 13,
     "loc": "/projects/project_mems_tec/images/final_design_geometry.jpeg",
     "name": "Final optimized design geometry in COMSOL",
-    "thumb": "/projects/project_mems_tec/images/final_design_geometry.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/final_design_geometry.webp",
     "type": "image"
   },
   {
     "id": 14,
     "loc": "/projects/project_mems_tec/images/mesh_coupled_sim.jpeg",
     "name": "Mesh for coupled TEC + MCHS simulation",
-    "thumb": "/projects/project_mems_tec/images/mesh_coupled_sim.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/mesh_coupled_sim.webp",
     "type": "image"
   },
   {
     "id": 15,
     "loc": "/projects/project_mems_tec/images/current_sweep.jpeg",
     "name": "Current sweep results",
-    "thumb": "/projects/project_mems_tec/images/current_sweep.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/current_sweep.webp",
     "type": "image"
   },
   {
     "id": 16,
     "loc": "/projects/project_mems_tec/images/temp_distribution_comsol.jpeg",
     "name": "Temperature distribution — COMSOL at optimum current",
-    "thumb": "/projects/project_mems_tec/images/temp_distribution_comsol.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/temp_distribution_comsol.webp",
     "type": "image"
   },
   {
     "id": 17,
     "loc": "/projects/project_mems_tec/images/coupled_sim_geometry.jpeg",
     "name": "Coupled TEC + micro channel heat sink simulation geometry",
-    "thumb": "/projects/project_mems_tec/images/coupled_sim_geometry.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/coupled_sim_geometry.webp",
     "type": "image"
   },
   {
     "id": 18,
     "loc": "/projects/project_mems_tec/images/temp_near_microchannel.jpeg",
     "name": "Temperature distribution near micro channel",
-    "thumb": "/projects/project_mems_tec/images/temp_near_microchannel.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/temp_near_microchannel.webp",
     "type": "image"
   },
   {
     "id": 19,
     "loc": "/projects/project_mems_tec/images/circular_microchannel.jpeg",
     "name": "Circular micro channel geometry",
-    "thumb": "/projects/project_mems_tec/images/circular_microchannel.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/circular_microchannel.webp",
     "type": "image"
   },
   {
     "id": 20,
     "loc": "/projects/project_mems_tec/images/von_mises_thermal.jpeg",
     "name": "Von Mises stress with thermal expansion",
-    "thumb": "/projects/project_mems_tec/images/von_mises_thermal.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/von_mises_thermal.webp",
     "type": "image"
   },
   {
     "id": 21,
     "loc": "/projects/project_mems_tec/images/mask_cu_interconnects.jpeg",
     "name": "Fabrication mask — copper interconnects",
-    "thumb": "/projects/project_mems_tec/images/mask_cu_interconnects.jpeg",
+    "thumb": "/projects/project_mems_tec/images/thumbs/mask_cu_interconnects.webp",
     "type": "image"
   }
 ]
