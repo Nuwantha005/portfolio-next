@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { BLOG_ENABLED } from "@/lib/features";
 
 export const dynamic = "force-static";
 
@@ -8,8 +9,10 @@ const BASE_URL = "https://nuwanthakumara.com";
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: BASE_URL, lastModified: new Date(), changeFrequency: "monthly", priority: 1 },
-    { url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
     { url: `${BASE_URL}/projects`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    ...(BLOG_ENABLED
+      ? [{ url: `${BASE_URL}/blog`, lastModified: new Date(), changeFrequency: "weekly" as const, priority: 0.8 }]
+      : []),
   ];
 
   // Project pages
@@ -38,18 +41,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Blog posts
   let blogRoutes: MetadataRoute.Sitemap = [];
-  try {
-    const posts = getAllPosts();
-    blogRoutes = posts
-      .filter((post) => post.published)
-      .map((post) => ({
-        url: `${BASE_URL}/blog/${post.slug}`,
-        lastModified: post.date ? new Date(post.date) : new Date(),
-        changeFrequency: "yearly" as const,
-        priority: 0.7,
-      }));
-  } catch {
-    // Blog data may not be available during build in some environments
+  if (BLOG_ENABLED) {
+    try {
+      const posts = getAllPosts();
+      blogRoutes = posts
+        .filter((post) => post.published)
+        .map((post) => ({
+          url: `${BASE_URL}/blog/${post.slug}`,
+          lastModified: post.date ? new Date(post.date) : new Date(),
+          changeFrequency: "yearly" as const,
+          priority: 0.7,
+        }));
+    } catch {
+      // Blog data may not be available during build in some environments
+    }
   }
 
   return [...staticRoutes, ...projectRoutes, ...blogRoutes];

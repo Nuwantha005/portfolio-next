@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useViewTransition } from "@/lib/use-view-transition";
+import { BLOG_ENABLED } from "@/lib/features";
 
 interface TabItem {
   id: string;
@@ -12,18 +13,23 @@ interface TabItem {
 const allTabs: TabItem[] = [
   { id: "home", name: "Home", path: "/" },
   { id: "projects", name: "Projects", path: "/projects" },
-  { id: "blog", name: "Blog", path: "/blog" },
 ];
+
+const tabs: TabItem[] = BLOG_ENABLED
+  ? [...allTabs, { id: "blog", name: "Blog", path: "/blog" }]
+  : allTabs;
 
 interface SlidingNavBarProps {
   currentPath: string;
 }
 
-export const SlidingNavBar: React.FC<SlidingNavBarProps> = ({ currentPath }) => {
+export const SlidingNavBar: React.FC<SlidingNavBarProps> = ({
+  currentPath,
+}) => {
   const { navigateWithTransition } = useViewTransition();
 
   // Get current active tab index based on path
-  const activeTabIndex = allTabs.findIndex((tab) => {
+  const activeTabIndex = tabs.findIndex((tab) => {
     if (tab.path === "/") return currentPath === "/";
     return currentPath.startsWith(tab.path);
   });
@@ -36,7 +42,7 @@ export const SlidingNavBar: React.FC<SlidingNavBarProps> = ({ currentPath }) => 
 
   return (
     <div className="inline-flex gap-1 sm:gap-1.5 p-1 sm:p-1.5 bg-slate-800/50 dark:bg-slate-900/50 backdrop-blur-sm rounded-md border border-slate-700 dark:border-slate-600 shadow-md">
-      {allTabs.map((tab, index) => {
+      {tabs.map((tab, index) => {
         const isActive = activeTabIndex === index;
         return (
           <button

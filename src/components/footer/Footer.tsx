@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { BLOG_ENABLED } from "@/lib/features";
 
 type IconProps = React.SVGProps<SVGSVGElement>;
 
@@ -121,7 +122,7 @@ const quickLinks = [
   { name: "About", href: "/#about" },
   { name: "Skills", href: "/#skills" },
   { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
+  ...(BLOG_ENABLED ? [{ name: "Blog", href: "/blog" }] : []),
 ];
 
 export default function Footer() {
